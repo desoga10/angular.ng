@@ -1,0 +1,307 @@
+<!-- Start site wrapper -->
+<div class="site-wrapper">
+  <div class="header-index">
+    <!-- ====== 1.1. Header section ====== -->
+    <header>
+      <nav class="container navbar">
+        <div class="container-nav flex">
+          <!-- site logo -->
+          <a class="navbar-logo" href="/">
+            <img src="./assets/Images/angular_logo.png" alt="logo" width="93">
+          </a>
+          <!-- menus -->
+          <ul class="navbar-nav flex">
+            <li><a class="nav-link active" href="/">Join Now</a></li>
+          </ul>
+        </div>
+
+        <div class="flex nav-right">
+          <span style="cursor: pointer;">Apps</span>
+        </div>
+      </nav>
+      <!-- Sidebar -->
+      <aside id="mySidepanel" class="sidepanel">
+        <div class="sidebar flex">
+          <a href=""><img src="Images/logo.png" alt="logo"></a>
+          <button class="closebtn btn_hover1" onclick="closeNav()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div>
+          <!-- side menus -->
+          <ul>
+            <li><a class="nav-link active" href="index.html">Home</a></li>
+            <li><a class="nav-link" href="about.html">About</a></li>
+            <li><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="pages"><a href="#">More</a></li>
+            <li class="collapse_btn">
+              <a class="nav-link plus_collapse" data-bs-toggle="collapse" href="javascript:void(0);"
+                onclick="toggleCollapse('pages')" aria-expanded="false" aria-controls="pages">
+                <i class="fa-solid fa-plus"></i>
+              </a>
+              <div class="collapse" id="pages">
+                <ul>
+                  <li><a class="nav-link" href="services.html">Services</a></li>
+                  <li><a class="nav-link" href="pricing.html">Pricing Plan</a></li>
+                  <li><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                  <li><a class="nav-link" href="team.html">Team</a></li>
+                  <li><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+                  <li><a class="nav-link" href="faq.html">FAQ</a></li>
+                  <li><a class="nav-link" href="blog.html">Blog</a></li>
+                  <li><a class="nav-link" href="coming_soon.html">Coming Soon</a></li>
+                  <li><a class="nav-link" href="404.html">404</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- searchbar -->
+      <div id="search-bar">
+        <div class="btn_hover1" onclick="close_search_bar()"><i class="fa-solid fa-xmark"></i></div>
+        <form method="search" action="#">
+          <input type="search" required placeholder="Search...">
+          <button type="submit" class="btn_hover1">Search</button>
+        </form>
+      </div>
+
+      <!-- Right Sidebar -->
+      <section class="header-right-sidebar" id="right_side">
+        <div class="flex flex-sb">
+          <a href="/"><img src="Images/right-side-logo.png" alt="logo"></a>
+          <button class="close_right_sidebar fa-solid fa-xmark" onclick="close_right_sade()"> </button>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua.
+        </p>
+        <a href="/about.html" class="btn_hover1">Discover More</a>
+        <hr>
+        <h4>Connected details:</h4>
+        <ul class="flex">
+          <li>
+            <a href="#"> <i class="fa-solid fa-phone"></i></a>
+            <a href="#" class="text-lowercase">Yourname&#64;.Com</a>
+          </li>
+          <li>
+            <a href="#"> <i class="fa-regular fa-envelope"></i></a>
+            <a href="#">+123-456-7890</a>
+          </li>
+          <li>
+            <a href="#"> <i class="fa-sharp fa-regular fa-clock"></i></a>
+            <a href="#">Office Hours: 8AM - 11PM Sunday -
+              Weekend Day</a>
+          </li>
+        </ul>
+        <span class="flex">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        </span>
+      </section>
+    </header>
+    <!-- ====== End of 1.1. Header section ====== -->
+    <!-- ====== 1.2. hero section ====== -->
+    <section class="hero">
+      <div class="container" data-aos="zoom-in">
+        <div>
+          <div class="hero-social-icon flex">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <hr class="d-md-block d-sm-none d-none">
+          </div>
+          <div class="center-data">
+            <h1>Achieve your best work online</h1>
+            <h3>Gain access to free online tools to enhance your productivity</h3>
+            <div class="center-btn flex">
+              <a href="services.html" class="btn_hover1">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== End of 1.2. hero section ====== -->
+  </div>
+
+
+
+  <!-- ====== 1.7. Services section ====== -->
+  <section class="service">
+    <div class="service-1">
+      <div class="container">
+        <div class="service-data" data-aos="fade-down">
+          <div class="w-66">
+            <div class="flex gap-1">
+              <hr class="service-hr1">
+              <h5>TOOLS</h5>
+            </div>
+            <h2 class="mt-15">Tools we offer</h2>
+            <p class="mt-15">Try out our powerful productivity tools for free.
+            </p>
+          </div>
+          <div class="w-33 mt-15 flex flex-end">
+            <a href="services.html" class="btn_hover2">View All Services</a>
+          </div>
+          <hr class="mt-15 mb-15">
+        </div>
+        <div class="flex gap-1 mt-15 s-card">
+          <div class="service-card" data-aos="fade-down">
+            <figure><img src="./assets/Images/icon/slider1.png" alt="slider1"></figure>
+            <h3>UI/UX Design</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+              has been the industry's standard dummy text ever.
+            </p>
+            <a href="services.html">Read more <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="service-card" data-aos="fade-up">
+            <figure><img src="./assets/Images/icon/slider2.png" alt="slider2"></figure>
+            <h3>DEVELOPMENT</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+              has been the industry's standard dummy text ever.
+            </p>
+            <a href="/services.html">Read more <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="service-card" data-aos="fade-down">
+            <figure><img src="./assets/Images/icon/slider3.png" alt="slider3"></figure>
+            <h3>Visual Design</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+              has been the industry's standard dummy text ever.
+            </p>
+            <a href="services.html">Read more <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ====== End of 1.7. Services section ====== -->
+
+  <!-- ====== 1.11. Pricing section ====== -->
+  <!-- <section class="pricing p-relative">
+    <span> </span>
+    <div class="pricing-hr flex gap-1">
+      <hr>
+      <h6>Pricing Plans</h6>
+    </div>
+    <div class="container">
+      <div class="text-center" data-aos="fade-down">
+        <h5>PRICING</h5>
+        <h2 class="mt-1">Pricing Plans</h2>
+        <p class="mt-1 mb-15">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been
+          the industry's standard dummy text ever.
+        </p>
+      </div>
+      <div class="pricing-card flex gap-1 mt-3 text-center">
+        <div class="flex flex-col gap-2" data-aos="fade-up">
+          <h3>BASIC</h3>
+          <h2>$24</h2>
+          <h6>SEO Audits</h6>
+          <h6>SEO Managements</h6>
+          <h6>Digital Marketing</h6>
+          <h6>Site Managment</h6>
+          <a href="pricing.html" class="btn_hover1">Get Started</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h3>STANDARD</h3>
+          <h2>$594</h2>
+          <h6>SEO Audits</h6>
+          <h6>SEO Managements</h6>
+          <h6>Digital Marketing</h6>
+          <h6>Site Managment</h6>
+          <a href="pricing.html" class="btn_hover2">Get Started</a>
+        </div>
+        <div class="flex flex-col gap-2" data-aos="fade-down">
+          <h3>PREMIUM</h3>
+          <h2>$99</h2>
+          <h6>SEO Audits</h6>
+          <h6>SEO Managements</h6>
+          <h6>Digital Marketing</h6>
+          <h6>Site Managment</h6>
+          <a href="pricing.html" class="btn_hover1">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- ====== End of 1.11. Pricing section ====== -->
+
+
+  <!-- ====== 1.15. Footer section ====== -->
+  <footer>
+    <div class="container">
+      <div class="footer-hr flex flex-col">
+        <div class="flex gap-1" data-aos="fade-left">
+          <hr>
+          <h6>Newsletter</h6>
+        </div>
+        <h3>JOIN OUR MAILING LIST</h3>
+        <p class="text-center">Be the first to know any time we add a new productivity tool to our platform.
+        </p>
+      </div>
+      <form id="footer-form" class="flex flex-sb gap-2" data-aos="zoom-in" data-aos-delay="400">
+        <div id="footer-message"></div>
+        <input type="email" required placeholder="Enter your mail">
+        <button type="submit" class="btn_hover1">Get Started</button>
+      </form>
+    </div>
+    <div class="footer-menu">
+      <div class="container">
+        <div class="flex flex-start footer-center">
+          <div class="w-33 flex flex-col gap-2 flex-start">
+            <a href="index.html">
+              <img src="./assets/Images/angular_logo.png" alt="footer-logo">
+            </a>
+            <span class="flex gap-2">
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </span>
+          </div>
+          <div class="w-16 mt-1">
+            <h4>Quick Links</h4>
+            <ul class="flex flex-col gap-2 flex-start">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Portfolio</a></li>
+              <li><a href="#">Blogs</a></li>
+            </ul>
+          </div>
+          <div class="w-16 mt-45 flex-end">
+            <ul class="flex flex-col gap-2 flex-start">
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+          <div class="w-33 mt-1 flex flex-col flex-start">
+            <h4>Get Connected</h4>
+            <ul class="flex flex-col gap-2 flex-start">
+              <li>
+                <a href="#"> <i class="fa-solid fa-phone"></i></a>
+                <a href="#" class="text-lowercase">thecodeangle&#64;gmail.com</a>
+              </li>
+              <!-- <li>
+                <a href="#"> <i class="fa-regular fa-envelope"></i></a>
+              </li> -->
+              <li>
+                <a href="#"> <i class="fa-sharp fa-regular fa-clock"></i></a>
+                <a href="#">Office Hours: Infinity</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container flex flex-sb gap-2 flex-wrap">
+        <h6>Copyright © 2025 Angular.ng By <a href="https://www.youtube.com/@TheCodeAngle" class="p-0" target="_blank">
+            Thecodeangle. </a> All Rights Reserved.
+        </h6>
+        <h6>Powered By <b> Thecodeangle </b></h6>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- end site wrapper -->

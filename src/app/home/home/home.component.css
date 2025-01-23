@@ -1305,7 +1305,7 @@ aside .pages {
     background: linear-gradient(11deg, #7436bb 0.01%, #b520a3 100%);
     box-shadow: 8px 18px 30px 0px rgba(0, 0, 0, 0.2);
     padding: 40px 40px 30px 40px;
-    width: 100%;
+    width: 90%;
 }
 
 .service-card:hover {
@@ -1343,7 +1343,7 @@ aside .pages {
     box-shadow: 10px 17px 28px 0px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     padding: 12px;
-    width: 124px;
+    width: 76px;
     height: 85px;
     display: flex;
 }
@@ -2355,4 +2355,8 @@ footer form button:hover {
 
 .d-block {
   display: block;
+}
+
+.fa-solid {
+    font-size: 58px !important;
 }

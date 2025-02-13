@@ -1,0 +1,70 @@
+@use "../variables" as *;
+
+html .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  height: $header-height;
+
+  i-tabler {
+    stroke-width: 1.5px;
+  }
+}
+
+.topbar-dd {
+  min-width: 360px !important;
+}
+
+.apps-dd {
+  min-width: 830px !important;
+  overflow: unset !important;
+
+  .mat-mdc-menu-content {
+    padding: 0;
+    overflow: hidden;
+    border-radius: var(--mat-sys-corner-small);
+  }
+}
+
+.text-hover-primary:hover {
+  .hover-text {
+    color: $primary;
+  }
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.dark-theme {
+  .topbar {
+    .mat-mdc-icon-button {
+      color: $dark-text-secondary !important;
+    }
+
+    .mdc-button {
+      --mdc-text-button-label-text-color: $dark-text-secondary !important;
+    }
+  }
+}
+
+.mega-dd-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  max-width: 100%;
+}
+
+
+.profile-btn.mat-mdc-button {
+  background-color: transparent;
+  &:hover {
+    background-color: transparent;
+    box-shadow: unset;
+    .mat-mdc-button-persistent-ripple::before {
+      background-color: transparent;
+    }
+  }
+}

@@ -1,0 +1,189 @@
+@use "variables" as *;
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  line-height: 1.334rem;
+  overflow-x: hidden;
+  color: var(--mat-sys-on-background);
+}
+
+.mainWrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  flex: 1;
+  height: 100%;
+}
+
+.body-wrapper {
+  border-radius: 20px;
+  background-color: $layout-bg;
+  margin-bottom: 30px;
+  min-height: calc(100% - 102px);
+  // margin-top: $header-height;
+}
+
+@media (min-width: 1024px) {
+  .body-wrapper {
+    margin-right: 15px;
+  }
+
+  .sidebarNav-mini {
+    .body-wrapper {
+      margin-left: 15px;
+    }
+  }
+}
+@media (max-width: 1023px) {
+  .body-wrapper {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .sidebarNav-horizontal {
+    .body-wrapper {
+      margin-top: 30px;
+    }
+  }
+}
+
+.sidebarNav-horizontal {
+  .body-wrapper {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+.pageWrapper {
+  padding: 30px;
+  min-height: calc(100vh - 100px);
+  margin: 0 auto;
+  &.maxWidth {
+    max-width: $boxedWidth;
+  }
+}
+
+.container {
+  max-width: $boxedWidth;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin: 0 auto;
+  &.full-width {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.hstack {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.filter-sidebar {
+  width: 290px !important;
+}
+
+.rounded {
+  border-radius: $border-radius !important;
+}
+
+.rounded-circle {
+  border-radius: 100% !important;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+a {
+  color: var(--mat-sys-on-background);
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+pre {
+  margin: 0;
+  white-space: nowrap;
+}
+
+td.hljs-ln-line.hljs-ln-numbers {
+  padding-right: 10px;
+}
+
+@media (min-width: 768px) {
+  html .flex-sm-row {
+    flex-direction: row !important;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+
+  td,
+  mat-cell {
+    white-space: nowrap;
+    padding: 16px;
+  }
+}
+
+.op-5 {
+  opacity: 0.5;
+}
+
+.op-75 {
+  opacity: 0.75;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.avatar-group {
+  img {
+    border: 2px solid $white;
+    margin-right: -5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.text-muted {
+  color: var(--mat-sys-surface-container-low);
+}
+
+.position-relative {
+  position: relative;
+}

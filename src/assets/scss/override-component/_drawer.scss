@@ -1,0 +1,9 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@include mat.sidenav-overrides(
+  (
+    container-shape: 0,
+    container-elevation-shadow: var(--mat-sys-level4)
+  )
+);

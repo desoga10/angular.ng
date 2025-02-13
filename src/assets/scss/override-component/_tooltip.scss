@@ -1,0 +1,8 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@include mat.tooltip-overrides(
+  (
+    container-shape: var( --mat-sys-corner-full),
+  )
+);

@@ -6,17 +6,17 @@
       <nav class="container navbar">
         <div class="container-nav flex">
           <!-- site logo -->
-          <a class="navbar-logo" href="/">
+          <a class="navbar-logo" [routerLink]="['/register']">
             <img src="./assets/Images/angular_logo.png" alt="logo" width="93">
           </a>
           <!-- menus -->
           <ul class="navbar-nav flex">
-            <li><a class="nav-link active" href="/">Join</a></li>
+            <li><a class="nav-link active" [routerLink]="['/register']">Join</a></li>
           </ul>
         </div>
 
         <div class="flex nav-right">
-          <span style="cursor: pointer;">Apps</span>
+          <a href="#service-tools">Apps</a>
         </div>
       </nav>
     </header>
@@ -29,7 +29,7 @@
             <h1>Achieve your best work online</h1>
             <h3>Gain access to free online tools to enhance your productivity</h3>
             <div class="center-btn flex">
-              <a href="services.html" class="btn_hover1">Get Started</a>
+              <a [routerLink]="['/register']" class="btn_hover1">Get Started</a>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
 
 
   <!-- ====== 1.7. Services section ====== -->
-  <section class="service">
+  <section class="service" id="service-tools">
     <div class="service-1">
       <div class="container">
         <div class="service-data" data-aos="fade-down">

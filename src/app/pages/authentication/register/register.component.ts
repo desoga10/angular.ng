@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material.module';
-import { SettingsService } from '../../../services/settings.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,15 +17,22 @@ import { SettingsService } from '../../../services/settings.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  private settings = inject(SettingsService);
+  private auth = inject(AuthService);
   private router = inject(Router);
 
-  options = this.settings.getOptions();
-
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    uname: new FormControl('', [Validators.required]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.pattern(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      ),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(7),
+    ]),
   });
 
   get f() {
@@ -33,7 +40,22 @@ export class RegisterComponent {
   }
 
   submit() {
-    // console.log(this.form.value);
-    this.router.navigate(['/']);
+    console.log(this.form.value);
+
+    this.auth
+      .signUp(
+        this.form.value.email as string,
+        this.form.value.password as string
+      )
+      .then((res) => {
+        console.log(res.data.user.role);
+        if (res.data.user.role === 'authenticated') {
+          this.router.navigate(['/dashboard']);
+        }
+      })
+      .catch((err) => {
+        alert('error signing up');
+        console.log(err);
+      });
   }
 }

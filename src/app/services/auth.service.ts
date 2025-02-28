@@ -36,10 +36,15 @@ export class AuthService {
   }
 
   //Register
-  signUp(email: string, password: string): Promise<any> {
+  signUp(email: string, password: string, username: string): Promise<any> {
     return this.supabase_client.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username,
+        },
+      },
     });
   }
 

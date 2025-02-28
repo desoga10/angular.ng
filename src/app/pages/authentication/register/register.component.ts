@@ -19,9 +19,10 @@ import { AuthService } from '../../../services/auth.service';
 export class RegisterComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
+  errorMessage: string | null = null;
 
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
     email: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
@@ -40,22 +41,21 @@ export class RegisterComponent {
   }
 
   submit() {
-    console.log(this.form.value);
-
     this.auth
       .signUp(
         this.form.value.email as string,
-        this.form.value.password as string
+        this.form.value.password as string,
+        this.form.value.username as string
       )
       .then((res) => {
-        console.log(res.data.user.role);
         if (res.data.user.role === 'authenticated') {
           this.router.navigate(['/dashboard']);
         }
       })
       .catch((err) => {
-        alert('error signing up');
-        console.log(err);
+        this.errorMessage = err;
+        // console.log(this.errorMessage);
+        // alert(this.errorMessage);
       });
   }
 }

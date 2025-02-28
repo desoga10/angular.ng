@@ -1,11 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { SettingsService } from '../../../services/settings.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material.module';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,18 +17,42 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  private settings = inject(SettingsService);
+  private auth = inject(AuthService);
   private router = inject(Router);
-
-  options = this.settings.getOptions();
-  msg = '';
+  errorMessage: string | null = null;
 
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.pattern(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      ),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(7),
+    ]),
   });
 
   get f() {
     return this.form.controls;
+  }
+
+  submit() {
+    this.auth
+      .signIn(
+        this.form.value.email as string,
+        this.form.value.password as string
+      )
+      .then((res) => {
+        if (res.data.user.role === 'authenticated') {
+          this.router.navigate(['/dashboard']);
+        }
+      })
+      .catch((err) => {
+        this.errorMessage = err;
+        // alert('error signing up');
+      });
   }
 }

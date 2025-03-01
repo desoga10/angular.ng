@@ -14,13 +14,17 @@ export class AuthService {
   constructor() {
     this.supabase_client = createClient(
       environment.supabaseUrl,
-      environment.supabaseKey
+      environment.supabaseKey,
+      {
+        auth: {
+          persistSession: true, // Ensure sessions are saved
+          autoRefreshToken: true, // Auto-refresh expired tokens
+          detectSessionInUrl: true, // Detect OAuth callback
+        },
+      }
     );
 
     this.supabase_client.auth.onAuthStateChange((event, session) => {
-      console.log('event', event);
-      console.log('session', session);
-
       localStorage.setItem('session', JSON.stringify(session?.user));
 
       if (session?.user) {
@@ -29,9 +33,25 @@ export class AuthService {
     });
   }
 
+  async handleOAuthCallback() {
+    // Process OAuth callback from URL
+    const { data, error } = await this.supabase_client.auth.getSession();
+
+    if (data.session?.user) {
+      this.router.navigate(['/dashboard']); // Redirect on success
+    } else if (error) {
+      alert('Error retrieving session: ' + error.message);
+      this.router.navigate(['/home']);
+    }
+  }
+
+  async getSession() {
+    const { data } = await this.supabase_client.auth.getSession();
+    return data.session;
+  }
+
   get isLoggedIn(): boolean {
     const user = localStorage.getItem('session') as string;
-    console.log(user);
     return user === 'undefined' ? false : true;
   }
 
@@ -55,6 +75,19 @@ export class AuthService {
       email,
       password,
     });
+  }
+
+  //Google Sign up
+  async signInWithGoogle() {
+    const { data, error } = await this.supabase_client.auth.signInWithOAuth({
+      provider: 'google',
+    });
+
+    if (error) {
+      alert('Error during Google Sign-In: ' + error.message);
+    }
+
+    return data;
   }
 
   //SignOut

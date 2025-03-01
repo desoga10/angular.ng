@@ -9,12 +9,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
+  private auth = inject(AuthService);
+
   constructor() {
-    if (inject(AuthService).isLoggedIn === false) {
-      inject(Router).navigate(['/login']);
-      return false;
-    } else {
-      return true;
-    }
+    this.auth.handleOAuthCallback();
   }
 }

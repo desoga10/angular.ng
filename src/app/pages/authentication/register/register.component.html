@@ -4,31 +4,31 @@
       <div class="d-flex align-items-start align-items-lg-center justify-content-center h-100">
         <div class="row justify-content-center w-100 h-100 align-items-center">
           <div class="col-lg-9 max-width-form">
-            <a [routerLink]="['/']">
-              <!-- <img src="./assets/Images/logos/logo-icon.svg" class="align-middle m-2" alt="logo" /> -->
+            <a [routerLink]="['/home']">
+              <img src="./assets/Images/logos/logo-icon.svg" class="align-middle m-2" alt="logo" />
               <img src="./assets/Images/angular_logo.png" alt="logo" width="93">
             </a>
             <h4 class="f-w-700 f-s-24 m-t-24 m-b-8">Sign Up</h4>
-            <!-- <div class="row m-t-24"> -->
-            <!-- <div class="col-6">
+            <div class="row m-t-24">
+              <div class="col-12">
                 <button (click)="handleAuth()" mat-stroked-button class="w-100">
                   <div class="d-flex align-items-center">
                     <img src="/assets/Images/svgs/google-icon.svg" alt="google" width="16" class="m-r-8" />
                     Google
                   </div>
                 </button>
-              </div> -->
-            <!-- <div class="col-6">
-                <button mat-stroked-button class="w-100 d-flex align-items-center">
+              </div>
+              <div class="col-6">
+                <!-- <button mat-stroked-button class="w-100 d-flex align-items-center">
                   <div class="d-flex align-items-center">
                     <img src="/assets/Images/svgs/facebook-icon.svg" alt="facebook" width="40" class="m-r-4" />
                     Facebook
                   </div>
-                </button>
-              </div> -->
-            <!-- </div> -->
+                </button> -->
+              </div>
+            </div>
 
-            <!-- <div class="or-border m-t-30">or Sign Up with</div> -->
+            <div class="or-border m-t-30">or Sign Up with</div>
 
             <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
               <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Name</mat-label>

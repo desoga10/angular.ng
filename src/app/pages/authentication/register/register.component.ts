@@ -36,6 +36,11 @@ export class RegisterComponent {
     ]),
   });
 
+  ngOnInit() {
+    // Handle OAuth callback once the app loads
+    this.auth.handleOAuthCallback();
+  }
+
   get f() {
     return this.form.controls;
   }
@@ -54,8 +59,10 @@ export class RegisterComponent {
       })
       .catch((err) => {
         this.errorMessage = err;
-        // console.log(this.errorMessage);
-        // alert(this.errorMessage);
       });
+  }
+
+  async handleAuth() {
+    await this.auth.signInWithGoogle();
   }
 }

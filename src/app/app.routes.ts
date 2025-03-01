@@ -25,8 +25,15 @@ export const routes: Routes = [
       ),
   },
   {
-    path: '',
+    path: 'home',
     loadComponent: () =>
       import('./home/home/home.component').then((com) => com.HomeComponent),
+  },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(
+        (com) => com.DashboardComponent
+      ),
   },
 ];

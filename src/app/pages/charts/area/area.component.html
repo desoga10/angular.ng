@@ -1,0 +1,21 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Area Chart</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <apx-chart
+      [series]="areaChartOptions.series"
+      [chart]="areaChartOptions.chart"
+      [xaxis]="areaChartOptions.xaxis"
+      [yaxis]="areaChartOptions.yaxis"
+      [grid]="areaChartOptions.grid"
+      [stroke]="areaChartOptions.stroke"
+      [tooltip]="areaChartOptions.tooltip"
+      [dataLabels]="areaChartOptions.dataLabels"
+      [legend]="areaChartOptions.legend"
+      [colors]="areaChartOptions.colors"
+      [markers]="areaChartOptions.markers"
+    >
+    </apx-chart>
+  </mat-card-content>
+</mat-card>

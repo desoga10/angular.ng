@@ -1,0 +1,37 @@
+@if(!item.navCap) {
+<a
+  class="cursor-pointer menuLink"
+  (click)="onItemSelected(item)"
+  [ngClass]="{
+    activeMenu: item.route ? router.isActive(item.route, true) : false
+  }"
+>
+@if(item.subItemIcon){
+  <span
+    class="iconify routeIcon sub-item-icon"
+    matListItemIcon
+    [attr.data-icon]="item.iconName"
+  ></span>
+  } @else {
+  <span
+    class="iconify routeIcon"
+    matListItemIcon
+    [attr.data-icon]="item.iconName"
+  ></span>
+  }
+  <!-- <i-tabler class="routeIcon " name="{{ item.iconName }}"></i-tabler> -->
+  {{ item.displayName }}
+  @if(item.children && item.children.length) {
+  <span class="down-icon d-flex m-l-auto">
+    <mat-icon> expand_more </mat-icon>
+  </span>
+  }
+</a>
+} @if(item.children){
+<div class="childBox">
+  @for(child of item.children; track child) {
+  <app-horizontal-nav-item [item]="child" class="ddmenu">
+  </app-horizontal-nav-item>
+  }
+</div>
+}

@@ -1,0 +1,146 @@
+<h2 class="f-w-500 m-b-24" mat-dialog-title><strong>{{action}}</strong></h2>
+
+@if(action !== 'Delete') {
+<mat-dialog-content style="max-width: 600px">
+  <form #userForm="ngForm">
+    <div class="d-flex align-items-center m-b-16">
+      <img
+        class="mat-card-avatar"
+        [src]="local_data.imagePath"
+        class="rounded-circle"
+        width="50"
+      />
+      <button mat-flat-button color="primary" class="m-l-16 input-file-button">
+        <input type="file" (change)="selectFile($event)" #fileInput />
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+            id="name"
+            name="name"
+            [(ngModel)]="local_data.Name"
+            placeholder="Name"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+            id="position"
+            name="position"
+            [(ngModel)]="local_data.Position"
+            placeholder="Position"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+            id="email"
+            name="email"
+            [(ngModel)]="local_data.Email"
+            placeholder="Email"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+            id="mobile"
+            name="mobile"
+            [(ngModel)]="local_data.Mobile"
+            placeholder="Mobile"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <input placeholder="Date of Joining" [matDatepicker]="picker" matInput required id="doj" name="doj"
+            [(ngModel)]="local_data.DateOfJoining" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="date"
+            placeholder="Date of Birth"
+            matInput
+            required
+            id="doj"
+            name="doj"
+            [(ngModel)]="joiningDate"
+          />
+        </mat-form-field> -->
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+            id="salary"
+            name="salary"
+            [(ngModel)]="local_data.Salary"
+            placeholder="Salary"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            type="text"
+            matInput
+            required
+            id="projects"
+            name="projects"
+            [(ngModel)]="local_data.Projects"
+            placeholder="Projects"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <button
+      mat-flat-button
+      (click)="doAction()"
+      mat-flat-button
+      color="primary"
+      [disabled]="!userForm.valid"
+    >
+      {{action}}
+    </button>
+    <button
+      mat-stroked-button
+      color="warn"
+      class="m-l-8"
+      (click)="closeDialog()"
+    >
+      Cancel
+    </button>
+  </form>
+</mat-dialog-content>
+} @else {
+<div class="p-x-24">
+  <p>Sure to delete <span class="f-w-600">{{local_data.Name}}</span> ?</p>
+</div>
+<div mat-dialog-actions class="p-x-24 p-b-24">
+  <button mat-button (click)="doAction()" mat-flat-button color="warn">
+    {{action}}
+  </button>
+  <button mat-button (click)="closeDialog()" class="m-l-8">Cancel</button>
+</div>
+}

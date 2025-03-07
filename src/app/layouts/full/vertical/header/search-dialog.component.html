@@ -1,0 +1,39 @@
+<div class="p-x-24 p-y-20">
+  <div class="row">
+    <div class="col-10">
+      <mat-form-field
+        appearance="outline"
+        color="primary"
+        class="hide-hint w-100"
+      >
+        <input matInput placeholder="Search here" [(ngModel)]="searchText" />
+      </mat-form-field>
+    </div>
+    <div class="col-2 d-flex justify-content-end">
+      <button
+        mat-icon-button
+        mat-dialog-close
+        class="d-flex justify-content-center"
+      >
+        <i-tabler name="x" class="icon-18 d-flex"></i-tabler>
+      </button>
+    </div>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography search-dialog">
+  <h4 class="f-s-18 f-w-600 mat-subtitle-1 m-b-16">Quick Page Links</h4>
+
+  @for(item of navItemsData; track item.displayName) {
+  <a
+    [routerLink]="[item.route]"
+    mat-dialog-close
+    class="p-y-12 text-decoration-none d-block text-hover-primary"
+  >
+    <h5 class="f-s-14 f-w-500 d-block mat-subtitle-1 hover-text m-0">
+      {{ item.displayName }}
+    </h5>
+    <span class="f-s-12 mat-body-2">{{ item.route }}</span>
+  </a>
+  }
+</mat-dialog-content>

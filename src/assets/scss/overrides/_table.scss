@@ -1,0 +1,26 @@
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+  padding: 16px;
+}
+
+.mdc-data-table__cell,
+.mdc-data-table__header-cell,
+.mat-mdc-cell {
+  border-bottom-color: $bordertableColor !important;
+}
+
+.table-responsive {
+  overflow-x: auto;
+
+  td,
+  mat-cell {
+    white-space: nowrap;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .table-xs-responsive {
+    overflow-x: auto;
+  }
+}

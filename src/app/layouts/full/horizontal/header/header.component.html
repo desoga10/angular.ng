@@ -1,0 +1,277 @@
+<mat-toolbar class="topbar horizontal-topbar">
+  <div class="container">
+    <div class="d-none d-sm-flex">
+      <app-branding></app-branding>
+    </div>
+
+    <!-- Mobile Menu -->
+    <button
+      mat-mini-fab
+      color="inherit"
+      (click)="toggleMobileNav.emit()"
+      class="d-block d-lg-none"
+    >
+      <i
+        class="iconify icon-20 d-flex"
+        data-icon="solar:hamburger-menu-line-duotone"
+      ></i>
+    </button>
+    <!-- --------------------------------------------------------------- -->
+
+    <!-- --------------------------------------------------------------- -->
+    <!--  Search -->
+    <!-- --------------------------------------------------------------- -->
+    <button mat-mini-fab color="inherit" (click)="openDialog()" class="d-flex">
+      <i class="iconify icon-20 d-flex" data-icon="solar:magnifer-outline"></i>
+    </button>
+
+    <div class="d-none d-lg-flex">
+      <!-- --------------------------------------------------------------- -->
+      <!--  Links -->
+      <!-- --------------------------------------------------------------- -->
+      <button
+        mat-mini-fab
+        color="inherit"
+        [matMenuTriggerFor]="appsmenu"
+        aria-label="Notifications"
+        class="d-flex justify-content-center"
+      >
+        <i
+          class="iconify icon-20 d-flex"
+          data-icon="solar:widget-3-line-duotone"
+        ></i>
+      </button>
+      <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">
+        <div class="row">
+          <div class="col-sm-8 p-r-0">
+            <div class="p-32 p-b-0">
+              <div class="row">
+                @for(appdd of apps; track appdd.title) {
+                <div class="col-sm-6 text-hover-primary">
+                  <a
+                    [routerLink]="[appdd.link]"
+                    class="d-flex align-items-center text-decoration-none m-b-24"
+                  >
+                    <span
+                      class="text-{{ appdd.color }} bg-light-{{
+                        appdd.color
+                      }} rounded icon-48 d-flex align-items-center justify-content-center"
+                    >
+                      <span
+                        class="iconify icon-20"
+                        [attr.data-icon]="appdd.icon"
+                      ></span>
+                    </span>
+
+                    <div class="m-l-16">
+                      <h5
+                        class="f-s-15 f-w-600 m-0 textprimary mat-subtitle-1 hover-text"
+                      >
+                        {{ appdd.title }}
+                      </h5>
+                      <span class="mat-body-1 f-s-13">{{
+                        appdd.subtitle
+                      }}</span>
+                    </div>
+                  </a>
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <img
+              src="/assets/images/backgrounds/mega-dd-bg.jpg"
+              alt="mega-dd-bg"
+              class="mega-dd-bg"
+            />
+          </div>
+        </div>
+      </mat-menu>
+    </div>
+
+    <span class="flex-1-auto"></span>
+
+    <button
+      mat-mini-fab
+      color="inherit"
+      aria-label="lightdark"
+      class="d-flex justify-content-center"
+      (click)="setDark()"
+    >
+      <i-tabler
+        class="d-flex icon-22"
+        [name]="options.theme === 'dark' ? 'sun' : 'moon'"
+      ></i-tabler>
+    </button>
+
+    <!-- Mobile Menu -->
+    <button
+      mat-mini-fab
+      color="inherit"
+      (click)="toggleMobileFilterNav.emit()"
+      class="d-flex d-lg-none justify-content-center"
+    >
+      <i
+        class="iconify icon-20 d-flex"
+        data-icon="solar:widget-3-line-duotone"
+      ></i>
+    </button>
+
+    <!-- --------------------------------------------------------------- -->
+    <!-- langugage Dropdown -->
+    <!-- --------------------------------------------------------------- -->
+    <button [matMenuTriggerFor]="flags" mat-mini-fab color="inherit">
+      <img
+        [src]="selectedLanguage.icon"
+        class="rounded-circle object-cover icon-20 m-t-4"
+      />
+    </button>
+    <mat-menu #flags="matMenu" class="cardWithShadow" xPosition="before">
+      @for(lang of languages; track lang.icon) {
+      <button mat-menu-item (click)="changeLanguage(lang)">
+        <div class="d-flex align-items-center">
+          <img
+            [src]="lang.icon"
+            class="rounded-circle object-cover m-r-8 icon-20"
+          />
+          <span class="mat-subtitle-1 f-s-14">{{ lang.language }}</span>
+        </div>
+      </button>
+      }
+    </mat-menu>
+
+    <!-- --------------------------------------------------------------- -->
+    <!-- Notification Dropdown -->
+    <!-- --------------------------------------------------------------- -->
+    <button
+      mat-mini-fab
+      color="inherit"
+      [matMenuTriggerFor]="notificationmenu"
+      aria-label="Notifications"
+      class="d-flex justify-content-center"
+    >
+      <i class="iconify icon-20 d-flex" data-icon="solar:bell-line-duotone"></i>
+    </button>
+    <mat-menu
+      #notificationmenu="matMenu"
+      class="topbar-dd cardWithShadow"
+      xPosition="before"
+    >
+      <div class="d-flex align-items-center p-x-32 p-y-16">
+        <h6 class="f-s-16 f-w-600 m-0 mat-subtitle-1">Notifications</h6>
+        <span class="m-l-auto">
+          <span class="bg-primary text-white p-x-8 p-y-4 f-w-500 rounded f-s-12"
+            >5 new</span
+          >
+        </span>
+      </div>
+
+      @for(notification of notifications; track notification.title) {
+      <button mat-menu-item class="p-x-30 p-y-12">
+        <div class="d-flex align-items-center">
+          <span
+            class="flex-shrink-0 text-{{ notification.color }} bg-light-{{
+              notification.color
+            }} rounded-circle icon-48 d-flex align-items-center justify-content-center"
+          >
+            <i-tabler
+              name="{{ notification.icon }}"
+              class="icon-20 d-flex"
+            ></i-tabler>
+          </span>
+          <div class="m-l-16 w-100">
+            <div
+              class="d-flex align-items-center justify-content-between w-100"
+            >
+              <h5 class="f-s-14 f-w-600 m-0 mat-subtitle-1">
+                {{ notification.title }}
+              </h5>
+              <span class="d-block f-s-12 m-l-auto">
+                {{ notification.time }}</span
+              >
+            </div>
+            <span class="d-block text-truncate f-s-12 w-75">{{
+              notification.subtitle
+            }}</span>
+          </div>
+        </div>
+      </button>
+      }
+
+      <div class="p-y-12 p-x-32">
+        <button mat-flat-button color="primary" class="w-100">
+          See all notifications
+        </button>
+      </div>
+    </mat-menu>
+
+    <!-- --------------------------------------------------------------- -->
+    <!-- profile Dropdown -->
+    <!-- --------------------------------------------------------------- -->
+    <button
+      mat-fab
+      extended
+      color="inherit"
+      [matMenuTriggerFor]="profilemenu"
+      aria-label="Notifications"
+      class="d-flex justify-content-center profile-btn-dd"
+    >
+      <div class="d-flex align-items-center gap-4">
+        <img
+          src="/assets/images/profile/user-1.jpg"
+          class="rounded-circle object-cover icon-35 profile-dd"
+          width="35"
+        />
+
+        <i data-icon="solar:alt-arrow-down-bold" class="iconify f-s-8"></i>
+      </div>
+    </button>
+    <mat-menu
+      #profilemenu="matMenu"
+      class="topbar-dd cardWithShadow"
+      xPosition="before"
+    >
+      <div class="p-x-32 p-y-16">
+        <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
+          <img
+            src="/assets/images/profile/user-1.jpg"
+            class="rounded-circle"
+            width="56"
+          />
+          <div class="m-l-16">
+            <h6
+              class="f-s-14 f-w-600 m-0 mat-subtitle-1 d-flex align-items-center"
+            >
+              David McMichael
+              <span class="f-s-14 d-block text-success m-l-4">Pro</span>
+            </h6>
+            <span> david&#64;wrappixel.com </span>
+          </div>
+        </div>
+      </div>
+      <div class="p-x-32 p-b-16">
+        @for(profile of profiledd; track profile.title) {
+        <a
+          class="p-8 text-decoration-none d-block text-hover-primary"
+          [routerLink]="[profile.link]"
+        >
+          <div class="d-flex align-items-center">
+            <h5
+              class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text"
+            >
+              {{ profile.title }}
+            </h5>
+            @if(profile.new) {
+            <span
+              class="bg-light-error text-error rounded-sm p-x-8 p-y-4 f-w-500 f-s-12 m-l-4"
+              >5</span
+            >
+            }
+          </div>
+        </a>
+        }
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>

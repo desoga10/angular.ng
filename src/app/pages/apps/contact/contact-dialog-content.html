@@ -1,0 +1,94 @@
+<h2 mat-dialog-title class="m-b-24">Add New Contact</h2>
+<mat-dialog-content class="mat-typography" style="max-width: 600px">
+  <form #userForm="ngForm">
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        type="text"
+        matInput
+        required
+        id="contactname"
+        name="name"
+        [(ngModel)]="local_data.txtContactname"
+        placeholder="Name here"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        type="text"
+        matInput
+        required
+        id="contactpost"
+        name="post"
+        [(ngModel)]="local_data.txtContactPost"
+        placeholder="Post here"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        type="text"
+        matInput
+        required
+        id="contactadd"
+        name="address"
+        [(ngModel)]="local_data.txtContactadd"
+        placeholder="Address here"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        type="text"
+        matInput
+        required
+        id="contactno"
+        name="contact"
+        [(ngModel)]="local_data.txtContactno"
+        placeholder="Number here"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        type="text"
+        matInput
+        required
+        id="contactinsta"
+        name="insta"
+        [(ngModel)]="local_data.txtContactinstagram"
+        placeholder="Instagram Follower here"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        type="text"
+        matInput
+        required
+        id="contactlinked"
+        name="linkedin"
+        [(ngModel)]="local_data.txtContactlinkedin"
+        placeholder="Linkedin Follower here"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <input
+        type="text"
+        matInput
+        required
+        id="contactfacebook"
+        name="facebook"
+        [(ngModel)]="local_data.txtContactfacebook"
+        placeholder="Facebook Follower here"
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions class="p-24">
+  <button mat-stroked-button color="warn" mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    [mat-dialog-close]="true"
+    [disabled]="!userForm.form.valid" color="primary"
+    (click)="doAction();"
+  >
+    Add Contact
+  </button>
+</mat-dialog-actions>

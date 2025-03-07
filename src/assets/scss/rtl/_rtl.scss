@@ -1,0 +1,126 @@
+[dir="rtl"] {
+  // ------------------------------------------------------
+  // header
+  // ------------------------------------------------------
+  .upgrade-bg {
+    left: 0;
+    right: unset;
+    transform: scaleX(-1);
+  }
+
+  .body-wrapper {
+    margin: 0 0 30px 15px;
+  }
+
+  // customizer
+  .customizerBtn {
+    left: 30px;
+    right: unset;
+  }
+
+  //   logo flip
+  .branding img {
+    transform: scaleX(-1);
+  }
+
+  .breadcrumb-icon {
+    left: 19px;
+    right: unset;
+  }
+
+  .breadcrumb-item {
+    &:first-child {
+      margin-left: 0;
+      margin-right: -20px;
+    }
+    &.active {
+      margin-left: 0;
+      margin-right: 20px;
+    }
+  }
+
+  // sidebar
+  .sidebar-list.mdc-list .menu-list-item .mdc-list-item__start {
+    margin-right: 0 !important;
+    margin-left: 10px !important;
+  }
+
+  // minisidebar
+  &.sidebarNav-mini {
+    .contentWrapper {
+      margin-right: $sidenav-mini !important;
+      margin-left: 0 !important;
+      transition: swift-ease-out(width);
+    }
+    .sidebarNav {
+      // sidebar
+      .sidebar-list {
+        .menu-list-item {
+          .mdc-list-item__start {
+            margin-right: 8px !important;
+            margin-left: 7px !important;
+          }
+        }
+      }
+      &:hover {
+        .sidebar-list {
+          .menu-list-item {
+            .mdc-list-item__start {
+              margin-right: 0 !important;
+              margin-left: 16px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // dashboard 1
+  .bg-primary-gt:after {
+    content: "";
+    left: 0;
+    right: unset;
+    transform: scaleX(-1);
+  }
+
+  .border-white-50 {
+    border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-right: 0 !important;
+  }
+
+  .social-chips img:first-child,
+  .social-chips span:first-child {
+    margin-left: -20px;
+    margin-right: 0;
+  }
+
+  // rtl + minisidebar
+  @media (min-width: 1024px) {
+    .sidebarNav-mini {
+      .sidebarNav {
+        .sidebar-list {
+          .menu-list-item {
+            .mdc-list-item__start {
+              margin-left: 8px !important;
+              margin-right: 6px !important;
+            }
+          }
+        }
+
+        &:hover {
+          .sidebar-list {
+            &.mdc-list {
+              .mdc-list-group__subheader {
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+      .contentWrapper {
+        margin-right: $sidenav-mini !important;
+        margin-left: 0 !important;
+      }
+    }
+  }
+}

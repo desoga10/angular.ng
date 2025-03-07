@@ -1,0 +1,32 @@
+.card-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 225px;
+}
+
+.user-category {
+  margin-top: -45px;
+  z-index: 1;
+  position: relative;
+}
+
+.featured-card {
+  height: 400px;
+  &:before {
+    content: "";
+    position: absolute;
+    background: rgba(33, 33, 33, 0.6);
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .featured-overlay {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

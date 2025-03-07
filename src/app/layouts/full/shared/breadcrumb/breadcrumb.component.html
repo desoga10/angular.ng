@@ -1,0 +1,39 @@
+@if(pageInfo.breadcrumb){
+<div class="bg-white rounded p-20 m-b-30">
+  <div class="row">
+    <div class="col-sm-8">
+      <h4 class="page-title m-0 f-s-18 f-w-600">
+        {{ pageInfo?.['title'] }}
+      </h4>
+    </div>
+    <div class="col-sm-4 text-right">
+      <div
+        class="d-flex align-items-center justify-content-start justify-content-lg-end"
+      >
+        <ul class="breadcrumb">
+          @for (url of pageInfo?.['urls']; track url.url;let index = $index,last
+          = $last ) { @if(!last){
+
+          <li class="breadcrumb-item" [routerLink]="url.url">
+            <a [routerLink]="url.url" class="text-body-color">{{
+              url.title
+            }}</a>
+          </li>
+          }@else {
+          <li class="breadcrumb-item">
+            <i-tabler name="circle-filled" class="icon-8"></i-tabler>
+          </li>
+          <li class="breadcrumb-item active">
+            <span
+              class="rounded-sm p-x-8 p-y-4 text-primary bg-light-primary f-s-12 f-w-500"
+            >
+              {{ url.title }}
+            </span>
+          </li>
+          } }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+}

@@ -1,0 +1,32 @@
+.mail-sidebar {
+  width: 240px;
+}
+
+.mail-detail-sidebar {
+  width: 200px;
+  flex: 1 1 auto;
+}
+
+@media (max-width: 991px) {
+  .detail-part {
+    display: none;
+  }
+}
+
+@media (max-width: 1279px) {
+  .detail-part.movetodetail {
+    display: block;
+    position: absolute;
+    z-index: 9;
+    left: 0;
+    // width: 100%;
+    //height: 100%;
+    background: #fff;
+  }
+}
+
+@media (max-width: 1279px) {
+  .welcome-app {
+    display: none;
+  }
+}

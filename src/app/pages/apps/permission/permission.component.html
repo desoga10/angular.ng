@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-12">
+    <mat-card class="cardWithShadow">
+      <mat-card-content>
+        <mat-card-title>Rollbase Access</mat-card-title>
+        <mat-card-subtitle class="mat-body-1 m-b-16">
+          You can find more detail about this from here :
+          <a
+            href="https://github.com/AlexKhymenko/ngx-permissions"
+            target="_blank"
+          >
+            ngx-permissions
+          </a>
+        </mat-card-subtitle>
+        
+        <mat-button-toggle-group
+          [(ngModel)]="currentRole"
+          (change)="onPermissionChange()"
+        >
+          <mat-button-toggle value="ADMIN">Admin</mat-button-toggle>
+          <mat-button-toggle value="MANAGER">Manager</mat-button-toggle>
+          <mat-button-toggle value="GUEST">Guest</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <p class="mat-body-1 m-t-24">
+          Your current role: <code>{{ currentRole | json }}</code>
+        </p>
+
+        <p class="mat-body-1 m-t-16">
+          Your current permissions: <code>{{ currentPermissions | json }}</code>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

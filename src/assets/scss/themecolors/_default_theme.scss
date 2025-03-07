@@ -1,0 +1,160 @@
+$mat-primary: (
+  100: white,
+  500: #635bff,
+  700: #635bff,
+  contrast: (
+    100: white,
+    500: white,
+    700: white,
+  ),
+);
+$mat-secondary: (
+  100: white,
+  500: #16cdc7,
+  700: #16cdc7,
+  contrast: (
+    100: white,
+    500: white,
+    700: white,
+  ),
+);
+
+$mat-warn: (
+  100: #ffccdb,
+  500: #ff6692,
+  700: #fc5080,
+  contrast: (
+    100: white,
+    500: white,
+    700: white,
+  ),
+);
+
+$theme-primary: mat.m2-define-palette($mat-primary, 500);
+$theme-accent: mat.m2-define-palette($mat-secondary, 500);
+$theme-warn: mat.m2-define-palette($mat-warn, 500);
+
+$bluetheme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $theme-primary,
+      accent: $theme-accent,
+      warn: $theme-warn,
+    ),
+    typography:
+      mat.m2-define-typography-config(
+        $font-family: "Manrope",
+        $subtitle-2: mat.m2-define-typography-level(14px, 14px, 400),
+        $subtitle-1: mat.m2-define-typography-level(21px, 26px, 500),
+        $headline-6: mat.m2-define-typography-level(18px, 26px, 600),
+        $headline-5: mat.m2-define-typography-level(24px, 30px, 700),
+        $button: mat.m2-define-typography-level(14px, 14px, 400),
+        $body-1: mat.m2-define-typography-level(14px, 20px, 400),
+        $body-2: mat.m2-define-typography-level(16px, 22px, 400),
+      ),
+  )
+);
+
+$darkbluetheme: mat.m2-define-dark-theme(
+  (
+    color: (
+      primary: $theme-primary,
+      accent: $theme-accent,
+      warn: $theme-warn,
+    ),
+    typography:
+      mat.m2-define-typography-config(
+        $font-family: "Manrope",
+        $subtitle-2: mat.m2-define-typography-level(14px, 14px, 400),
+        $subtitle-1: mat.m2-define-typography-level(21px, 26px, 500),
+        $headline-6: mat.m2-define-typography-level(18px, 26px, 600),
+        $headline-5: mat.m2-define-typography-level(24px, 30px, 700),
+        $button: mat.m2-define-typography-level(14px, 14px, 400),
+        $body-1: mat.m2-define-typography-level(14px, 20px, 400),
+        $body-2: mat.m2-define-typography-level(16px, 22px, 400),
+      ),
+  )
+);
+
+.mdc-list-item:hover::before {
+  --mdc-list-list-item-hover-state-layer-color: #635bff;
+  --mdc-list-list-item-focus-state-layer-color:#635bff;
+}
+
+.bg-primary,
+.mdc-switch:enabled .mdc-switch__track::after,
+.mdc-switch .mdc-switch__handle::before {
+  background: mat.m2-get-color-from-palette($theme-primary, 500) !important;
+}
+
+.bg-primary-gt {
+  background: linear-gradient(
+    261.23deg,
+    mat.m2-get-color-from-palette($theme-primary, 500) 0.42%,
+    #5a52ff 100%
+  );
+}
+
+.primary-gt {
+  background: linear-gradient(
+    180deg,
+    rgba(mat.m2-get-color-from-palette($theme-primary, 500), 0.12) 0,
+    rgba(mat.m2-get-color-from-palette($theme-primary, 500), 0.03) 100%
+  );
+}
+
+.accent-gt {
+  background: linear-gradient(
+    180deg,
+    rgba(mat.m2-get-color-from-palette($theme-accent, 500), 0.12) 0,
+    rgba(mat.m2-get-color-from-palette($theme-accent, 500), 0.03) 100%
+  );
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__trailing {
+  border-color: mat.m2-get-color-from-palette($theme-primary, 500) !important;
+}
+
+.mat-mdc-mini-fab .mat-mdc-button-persistent-ripple::before {
+  background-color: mat.m2-get-color-from-palette(
+    $theme-primary,
+    500
+  ) !important;
+}
+
+.mat-mdc-mini-fab.mat-inherit:hover {
+  color: mat.m2-get-color-from-palette($theme-primary, 500) !important;
+}
+
+.horizontal-navbar .parentBox.pactive > a,
+.horizontal-navbar .parentBox.pactive > a:hover,
+.horizontal-navbar .parentBox.pactive:hover > a {
+  background-color: mat.m2-get-color-from-palette(
+    $theme-primary,
+    500
+  ) !important;
+}
+
+.activeMenu {
+  background-color: mat.m2-get-color-from-palette(
+    $theme-primary,
+    500
+  ) !important;
+}
+
+.mat-mdc-outlined-button {
+  &.mat-primary {
+    border-color: mat.m2-get-color-from-palette($theme-primary, 500) !important;
+  }
+  &.mat-accent {
+    border-color: mat.m2-get-color-from-palette($theme-accent, 500) !important;
+  }
+  &.mat-warn {
+    border-color: mat.m2-get-color-from-palette($theme-warn, 500) !important;
+  }
+}

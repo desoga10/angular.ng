@@ -1,0 +1,36 @@
+<mat-card class="shadow-none bg-light-accent overflow-hidden">
+  <mat-card-content class="m-b-10">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <mat-card-subtitle class="mat-body-1 p-b-4 text-dark f-s-15 f-w-600"
+          >Users</mat-card-subtitle
+        >
+        <h5
+          class="mat-subtitle-1 m-t-4 f-w-600 f-s-24 d-flex align-items-center"
+        >
+          14,872
+          <div class="mat-body-1 text-dark f-w-600 m-l-12">+6.4%</div>
+        </h5>
+      </div>
+      <div
+        class="bg-white rounded icon-48 d-flex align-items-center justify-content-center m-l-auto"
+      >
+        <i
+          class="iconify f-s-24 d-flex text-accent"
+          data-icon="solar:pie-chart-3-line-duotone"
+        ></i>
+      </div>
+    </div>
+  </mat-card-content>
+  <apx-chart
+    [series]="usersChart.series"
+    [dataLabels]="usersChart.dataLabels"
+    [chart]="usersChart.chart"
+    [legend]="usersChart.legend"
+    [colors]="usersChart.colors"
+    [stroke]="usersChart.stroke"
+    [tooltip]="usersChart.tooltip"
+    [plotOptions]="usersChart.plotOptions"
+    [responsive]="usersChart.responsive"
+  ></apx-chart>
+</mat-card>

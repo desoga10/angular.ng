@@ -1,0 +1,126 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Slider</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Configuration</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div class="row">
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Value</mat-label>
+              <input matInput type="number" [(ngModel)]="value" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Min value</mat-label>
+              <input matInput type="number" [(ngModel)]="min" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Max value</mat-label>
+              <input matInput type="number" [(ngModel)]="max" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Step size</mat-label>
+              <input matInput type="number" [(ngModel)]="step" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <section class="example-section">
+          <mat-checkbox [(ngModel)]="showTicks" color="primary"
+            >Show ticks</mat-checkbox
+          >
+        </section>
+
+        <section class="example-section">
+          <mat-checkbox [(ngModel)]="thumbLabel" color="primary"
+            >Show thumb label</mat-checkbox
+          >
+        </section>
+
+        <section class="example-section">
+          <mat-checkbox [(ngModel)]="disabled" color="primary"
+            >Disabled</mat-checkbox
+          >
+        </section>
+
+        <div class="p-24 rounded bg-light-primary m-t-16">
+          <h2 class="mat-body-2 f-w-600 m-b-16">Result</h2>
+
+          <div>
+            <label id="example-name-label" class="f-w-600 mat-body-1"
+              >Value :
+            </label>
+            <label class="f-w-500 mat-body-1">{{ value }}</label>
+          </div>
+          <mat-slider
+            class="example-margin"
+            [disabled]="disabled"
+            [max]="max"
+            [min]="min"
+            [step]="step"
+            [discrete]="thumbLabel"
+            [showTickMarks]="showTicks"
+          >
+            <input matSliderThumb [(ngModel)]="value" />
+          </mat-slider>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <div class="row">
+      <div class="col-lg-4">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Custom thumb label</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <mat-slider
+              min="0"
+              max="100000"
+              step="1000"
+              showTickMarks
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb />
+            </mat-slider>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-lg-4">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Basic</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <mat-slider>
+              <input matSliderThumb />
+            </mat-slider>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-lg-4">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Range slider</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <mat-slider min="200" max="500">
+              <input value="300" matSliderStartThumb />
+              <input value="400" matSliderEndThumb />
+            </mat-slider>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

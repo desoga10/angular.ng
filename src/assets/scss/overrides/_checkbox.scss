@@ -1,0 +1,35 @@
+.mdc-checkbox__background {
+  border: 1.25px solid $bordercheckboxColor !important;
+  width: 19px;
+  height: 19px;
+  border-radius: 3.5px;
+}
+
+.mat-mdc-checkbox
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled
+  ~ .mdc-checkbox__background
+  .mdc-checkbox__checkmark {
+  color: $white !important;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 11px !important;
+  height: 11px !important;
+  top: unset;
+  bottom: unset;
+}
+
+.mat-mdc-checkbox
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled
+  ~ .mdc-checkbox__background
+  .mdc-checkbox__mixedmark {
+  border-color: $white !important;
+}
+
+.mat-mdc-checkbox-checked {
+  .mdc-checkbox__background {
+    border: 0 !important;
+  }
+}

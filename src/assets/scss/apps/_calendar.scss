@@ -1,0 +1,91 @@
+.cal-event-action {
+  text-decoration: none;
+  margin-left: 5px;
+  color: $white;
+}
+
+.cal-month-view {
+  background-color: transparent !important;
+}
+
+.cal-month-view .cal-open-day-events {
+  background-color: $darkhoverbgcolor !important;
+}
+
+.cal-month-view .cal-day-badge {
+  background-color: $primary !important;
+}
+
+.cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
+  color: $primary !important;
+}
+
+// ticket
+.max-text {
+  max-width: 250px;
+  line-height: 1.57;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// email
+.ngx-pagination {
+  margin-bottom: 15px !important;
+  .current {
+    background: $primary !important;
+    border-radius: $border-radius;
+  }
+  a {
+    border-radius: $border-radius !important;
+  }
+  button {
+    border-radius: $border-radius !important;
+  }
+}
+
+// chat app
+.chat-app {
+  .ng-scroll-content {
+    display: block !important;
+  }
+}
+
+// notes app
+.notes-icon {
+  .iconify {
+    display: none;
+  }
+  &.selected {
+    .iconify {
+      display: block;
+    }
+  }
+}
+
+// dropzone
+html dropzone > .dropzone.dz-wrapper .dz-message {
+  background-color: $light-primary;
+  border: 1px dashed $primary;
+  min-height: 250px;
+  border-radius: $border-radius;
+}
+
+html dropzone > .dropzone.dz-wrapper.dz-single .dz-preview {
+  width: 150px;
+  height: 150px;
+}
+
+html .dropzone .dz-preview {
+  min-height: 100%;
+}
+
+html dropzone > .dropzone.dz-wrapper.dz-single .dz-preview .dz-image {
+  border-radius: $border-radius;
+  border: 1px solid var(--mat-divider-color);
+}
+
+html dropzone > .dropzone.dz-wrapper.dz-single .dz-preview .dz-image {
+  height: auto;
+  width: auto;
+}

@@ -1,0 +1,74 @@
+.notes-app {
+  height: calc(100vh - 200px);
+}
+
+.note {
+  position: relative;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.notes-item {
+  transition: all 0.1s ease-in 0s;
+  transform: scale(0.95);
+  &.mdc-list-item:hover::before {
+    background-color: inherit !important;
+  }
+}
+
+.notes-item.selected {
+  transition: all 0.1s ease-in 0s;
+  transform: scale(1);
+  &.mdc-list-item:hover::before {
+    background-color: inherit !important;
+  }
+}
+
+.note-title {
+  width: 175px;
+  height: 35px;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-title,
+.note-time {
+  display: block;
+}
+
+.note-content {
+  border: none;
+  resize: none;
+  padding: 15px;
+}
+
+.remove-note {
+  margin-left: auto;
+}
+
+.remove-note,
+.notes-item {
+  cursor: pointer;
+}
+
+.notes-app {
+  .color-button {
+    min-width: 20px !important;
+    padding: 0 !important;
+  }
+
+  .mat-list-base .mat-list-item,
+  .mat-list-base .mat-list-option {
+    height: auto !important;
+  }
+
+  .mat-list-base {
+    padding-top: 0 !important;
+  }
+
+  .mat-input-element {
+    box-sizing: border-box;
+  }
+}

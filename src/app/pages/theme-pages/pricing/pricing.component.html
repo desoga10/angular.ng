@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <h4 class="f-s-30 f-w-600 text-center mat-subtitle-1 lh-lg m-b-16">
+      Flexible Plans Tailored to Fit Your Community's Unique Needs!
+    </h4>
+    <div class="d-flex align-items-center justify-content-center">
+      <span class="f-s-14 m-r-8">Monthly</span>
+      <mat-slide-toggle (click)="show = !show" color="primary">Yearly</mat-slide-toggle>
+    </div>
+  </div>
+</div>
+
+<div class="row m-t-32 p-t-32">
+  @for(pricecard of pricecards; track pricecard.plan) {
+  <div class="col-sm-6 col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-y-24">
+        @if(pricecard.popular) {
+        <span
+          class="popular-badge text-uppercase bg-light-warning text-warning p-x-8 p-y-4 f-s-12 f-w-500 rounded">Popular</span>
+        }
+
+        <span class="d-block text-uppercase f-s-12 m-b-16">{{
+          pricecard.plan
+          }}</span>
+        <img src="{{ pricecard.imgSrc }}" alt="badge" width="90" />
+
+        @if(pricecard.free) {
+        <h2 class="mat-headline-6 plan-title m-b-24">Free</h2>
+        } @else {
+        <div>
+          @if(show) {
+          <div>
+            <div class="d-flex">
+              <span class="f-s-16 dollar-sign">$</span>
+              <h2 class="mat-headline-6 plan-title m-b-24">
+                {{ yearlyPrice(pricecard.planPrice) }}
+              </h2>
+              <span class="f-s-16 per-month">/mo</span>
+            </div>
+          </div>
+          } @else {
+          <div class="d-flex">
+            <span class="f-s-16 dollar-sign">$</span>
+            <h2 class="mat-headline-6 plan-title m-b-24">
+              {{ pricecard.planPrice }}
+            </h2>
+            <span class="f-s-16 per-month">/mo</span>
+          </div>
+          }
+        </div>
+        }
+        @for(rule of pricecard.rules; track rule){
+          <div class="d-flex align-items-center p-y-12">
+            @if(rule.limit) {
+            <div class="d-flex align-items-center">
+              <i-tabler name="check" class="icon-16 m-r-12 text-primary d-flex"></i-tabler>
+              <span class="f-s-14 f-w-500">{{ rule.title }}</span>
+            </div>
+  
+            } @else {
+            <i-tabler name="x" class="icon-16 m-r-12 op-5 d-flex"></i-tabler>
+            <span class="op-5 f-w-500 f-s-14">{{ rule.title }}</span>
+            }
+          </div>
+        }
+        <button mat-flat-button color="primary" class="w-100 m-t-24">
+          {{ pricecard.btnText }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  }
+</div>

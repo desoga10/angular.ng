@@ -1,0 +1,123 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Checkbox</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Basic</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div>
+          <mat-checkbox color="primary">Check me!</mat-checkbox>
+          <mat-checkbox [disabled]="true">Disabled</mat-checkbox>
+        </div>
+
+        <div>
+          <span>
+            <mat-checkbox
+              [checked]="allComplete"
+              [color]="task.color"
+              [indeterminate]="someComplete()"
+              (change)="setAll($event.checked)"
+            >
+              {{ task.name }}
+            </mat-checkbox>
+          </span>
+          <span>
+            <div class="m-l-16">
+              @for(subtask of task.subtasks; track subtask.color) {
+              <div>
+                <mat-checkbox
+                  [(ngModel)]="subtask.completed"
+                  [color]="subtask.color"
+                  (ngModelChange)="updateAllComplete()"
+                >
+                  {{ subtask.name }}
+                </mat-checkbox>
+              </div>
+              }
+            </div>
+          </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Configuration</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div>
+          <label class="f-w-600">Align:</label>
+          <mat-radio-group [(ngModel)]="labelPosition">
+            <mat-radio-button value="after" color="primary"
+              >After</mat-radio-button
+            >
+            <mat-radio-button value="before" color="primary"
+              >Before</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+        <div>
+          <mat-checkbox [(ngModel)]="checked" color="primary"
+            >Checked</mat-checkbox
+          >
+          <mat-checkbox [(ngModel)]="indeterminate" color="primary"
+            >Indeterminate</mat-checkbox
+          >
+          <mat-checkbox [(ngModel)]="disabled" color="primary"
+            >Disabled</mat-checkbox
+          >
+        </div>
+
+        <div class="p-24 rounded bg-light-primary m-t-16">
+          <h2 class="mat-body-2 f-w-600 m-b-16">Result</h2>
+          <mat-checkbox
+            [(ngModel)]="checked"
+            color="primary"
+            [(indeterminate)]="indeterminate"
+            [labelPosition]="labelPosition"
+            [disabled]="disabled"
+          >
+            I'm a checkbox
+          </mat-checkbox>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Reactive Form</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div [formGroup]="toppings">
+          <h4 class="mat-subtitle-2 f-w-600">Select your toppings:</h4>
+          <p>
+            <mat-checkbox formControlName="pepperoni" color="primary"
+              >Pepperoni</mat-checkbox
+            >
+          </p>
+          <p>
+            <mat-checkbox formControlName="extracheese" color="primary"
+              >Extra Cheese</mat-checkbox
+            >
+          </p>
+          <p>
+            <mat-checkbox formControlName="mushroom" color="primary"
+              >Mushroom</mat-checkbox
+            >
+          </p>
+        </div>
+        <div
+          class="p-24 rounded bg-light-primary m-t-16"
+          [formGroup]="toppings"
+        >
+          <h2 class="mat-body-2 f-w-600 m-b-16">You chose:</h2>
+          {{ toppings.value | json }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

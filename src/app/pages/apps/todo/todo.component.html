@@ -1,0 +1,217 @@
+<div class="row">
+  <div class="col-12">
+    <mat-card
+      class="mat-card-top cardWithShadow position-relative overflow-hidden"
+    >
+      <mat-sidenav-container
+        [ngClass]="{
+          'side-panel-opened': sidePanelOpened,
+          'side-panel-closed': !sidePanelOpened
+        }"
+        style="min-height: 80vh"
+      >
+        <!-- --------------------------------------------------------------------------- -->
+        <!-- Sidebar -->
+        <!-- --------------------------------------------------------------------------- -->
+        <mat-sidenav
+          #chatnav
+          right
+          class="app-left-sidebar"
+          [mode]="isOver() ? 'over' : 'side'"
+          [opened]="!isOver()"
+          (open)="sidePanelOpened = true"
+          (close)="sidePanelOpened = false"
+          position="start"
+        >
+          <mat-toolbar class="bg-white">
+            <div class="row">
+              <div class="col-12">
+                <p class="f-w-500 f-s-18 m-0 mat-subtitle-1">Todo App</p>
+              </div>
+            </div>
+          </mat-toolbar>
+          <mat-nav-list class="p-x-16">
+            <mat-list-item
+              (click)="selectionlblClick('all')"
+              class="all"
+              [class.bg-light]="selectedCategory === 'all'"
+            >
+              <div class="d-flex align-items-center">
+                <span class="mat-subtitle-2">All</span>
+                <div class="m-l-auto">
+                  <span
+                    class="icon-22 bg-primary text-white rounded d-flex align-items-center justify-content-center"
+                    >{{ todos.length }}</span
+                  >
+                </div>
+              </div>
+            </mat-list-item>
+            <mat-list-item
+              [class.bg-light]="selectedCategory === 'uncomplete'"
+              class="incomplete font-normal"
+              (click)="selectionlblClick('uncomplete')"
+            >
+              <div class="d-flex align-items-center">
+                <span class="mat-subtitle-2">Incompleted</span>
+                <div class="m-l-auto">
+                  <span
+                    class="icon-22 bg-error text-white rounded d-flex align-items-center justify-content-center"
+                    >{{ remainingList() }}</span
+                  >
+                </div>
+              </div>
+            </mat-list-item>
+            <mat-list-item
+              [class.bg-light]="selectedCategory === 'complete'"
+              class="complete font-normal"
+              (click)="selectionlblClick('complete')"
+            >
+              <div class="d-flex align-items-center">
+                <span class="mat-subtitle-2">Completed</span>
+                <div class="m-l-auto">
+                  <span
+                    class="icon-22 bg-success text-white rounded d-flex align-items-center justify-content-center"
+                    >{{ todos.length - remainingList() }}</span
+                  >
+                </div>
+              </div>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-sidenav>
+        <!-- --------------------------------------------------------------------------- -->
+        <!-- Detail View -->
+        <!-- --------------------------------------------------------------------------- -->
+        <mat-toolbar class="bg-white">
+          <div class="d-flex align-items-center w-100">
+            <div class="d-flex align-items-center">
+              <button
+                mat-icon-button
+                (click)="chatnav.toggle()"
+                class="ml-1 shadow-none"
+              >
+                <i-tabler name="align-left" class="icon-20"></i-tabler>
+              </button>
+              <mat-checkbox (change)="allTodos()" color="primary"
+                >Mark All
+              </mat-checkbox>
+            </div>
+            <!-- <label for="all">Mark All</label> -->
+            <div class="m-l-auto">
+              <span class="bg-primary text-white p-8 rounded f-s-14"
+                >{{ remainingList() }} Tasks left</span
+              >
+            </div>
+          </div>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+        <div class="p-16 bg-white">
+          <form [formGroup]="inputFg">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-sm-6 col-lg-5">
+                <mat-form-field appearance="outline" class="w-100 hide-hint">
+                  <input
+                    matInput
+                    #inputData
+                    [(ngModel)]="searchText"
+                    formControlName="mess"
+                    (keyup.enter)="addTodo(inputData.value)"
+                    placeholder="Add todo"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-3 col-lg-2 mt-xs-12 mt-lg-0">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  [disabled]="!searchText"
+                  class="w-100"
+                  id="btnAddTodo"
+                  (click)="addTodo(inputData.value)"
+                >
+                  Add Todo
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-card-content class="p-x-0" style="min-height: 70vh">
+          @for(todo of copyTodos; track todo.message; let i = $index) {
+          <div class="todo-item p-y-12 p-x-8 b-b-1">
+            <div class="d-flex align-items-center w-100">
+              <div class="flex-shrink-0">
+                <mat-checkbox
+                  class="mat-subheading-1 m-b-0"
+                  [(ngModel)]="todo.completionStatus"
+                  color="primary"
+                  ><span class="f-s-16 f-w-500">{{
+                    todo.message
+                  }}</span></mat-checkbox
+                >
+                <p class="m-t-0 f-s-14 m-l-24 p-l-20">
+                  {{ todo.date | date }}
+                </p>
+              </div>
+              <div class="w-100">
+                @if(!todo.edit) {
+                <span
+                  class="d-flex align-items-start"
+                  (click)="editTodo(todo.id, 'edit')"
+                >
+                  <div class="m-l-auto px-3 mr-2 d-flex">
+                    <a
+                      mat-icon-button
+                      class="d-flex justify-content-center"
+                      href="javascript: void(0);"
+                      (click)="editTodo(todo.id, 'edit')"
+                    >
+                      <i-tabler name="pencil" class="icon-18 d-flex"></i-tabler>
+                    </a>
+                    <a
+                      mat-icon-button
+                      class="d-flex justify-content-center"
+                      href="javascript: void(0);"
+                      (click)="deleteTodo(i)"
+                    >
+                      <i-tabler name="trash" class="icon-18 d-flex"></i-tabler>
+                    </a>
+                  </div>
+                </span>
+                }
+
+                <!-- Edit View -->
+                @if(todo.edit) {
+                <span class="d-flex align-items-center edit-view">
+                  <mat-form-field appearance="outline" class="hide-hint">
+                    <input matInput [(ngModel)]="todo.message" />
+                  </mat-form-field>
+
+                  <div class="m-l-auto d-flex align-items-center">
+                    <a
+                      mat-icon-button
+                      class="d-flex"
+                      href="javascript: void(0);"
+                      (click)="editTodo(todo.id, 'save')"
+                    >
+                      <i-tabler name="checks" class="icon-18 d-flex"></i-tabler>
+                    </a>
+                    <a
+                      mat-icon-button
+                      class="d-flex"
+                      href="javascript: void(0);"
+                      (click)="deleteTodo(i)"
+                    >
+                      <i-tabler name="trash" class="icon-18 d-flex"></i-tabler>
+                    </a>
+                  </div>
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+        </mat-card-content>
+      </mat-sidenav-container>
+    </mat-card>
+  </div>
+</div>

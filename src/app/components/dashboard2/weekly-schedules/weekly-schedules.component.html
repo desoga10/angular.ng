@@ -1,0 +1,18 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>Weekly Schedules</mat-card-title>
+
+    <!-- chart -->
+    <apx-chart
+      [series]="weeklyChart.series"
+      [chart]="weeklyChart.chart"
+      [plotOptions]="weeklyChart.plotOptions"
+      [dataLabels]="weeklyChart.dataLabels"
+      [xaxis]="weeklyChart.xaxis"
+      [yaxis]="weeklyChart.yaxis"
+      [grid]="weeklyChart.grid"
+      [tooltip]="weeklyChart.tooltip"
+      class="rounded-pill-bars"
+    ></apx-chart>
+  </mat-card-content>
+</mat-card>

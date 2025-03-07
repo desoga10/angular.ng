@@ -1,0 +1,122 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Dialog</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <div class="row">
+      <!-- columns -->
+      <div class="col-lg-8">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Animations</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <div class="row">
+              <div class="col-sm-6">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  (click)="openDialog('0ms', '0ms')"
+                  class="w-100"
+                >
+                  Open Dialog without animation
+                </button>
+              </div>
+              <div class="col-sm-6">
+                <button
+                  mat-flat-button
+                  color="accent"
+                  class="m-l-8"
+                  (click)="openDialog('3000ms', '1500ms')"
+                  class="w-100"
+                >
+                  Open Dialog slowly
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- column -->
+      <div class="col-lg-4">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Scrollable content and actions</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="openHeaderDialog()"
+              class="w-100"
+            >
+              Open Scrollable Dialog
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- column -->
+      <div class="col-lg-4">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Injecting data on Open</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <button
+              mat-flat-button
+              color="accent"
+              (click)="openInjectDialog()"
+              class="w-100"
+            >
+              Open dialog
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- column -->
+      <div class="col-lg-4">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Dialog launched from a menu</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <button
+              mat-flat-button
+              class="w-100"
+              color="primary"
+              [matMenuTriggerFor]="menu"
+              #menuTrigger
+            >
+              Menu
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openMenuDialog()">
+                Open dialog
+              </button>
+            </mat-menu>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <!-- column -->
+      <div class="col-lg-4">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Dialog Overview</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>What's your name?</mat-label>
+              <input matInput [(ngModel)]="name" />
+            </mat-form-field>
+            <button mat-raised-button color="accent" class="w-100" (click)="openDialogEx()">Pick one</button>
+            @if (animal()) {
+            <span class="m-t-12 d-block">
+              You chose: <span class="f-w-600">{{ animal() }}</span>
+            </span>
+            }
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

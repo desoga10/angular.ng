@@ -1,0 +1,104 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Snackbar</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Basic</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div class="row">
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Message</mat-label>
+              <input matInput value="Disco party!" #message />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Action</mat-label>
+              <input matInput value="Dance" #action />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="openSnackBar(message.value, action.value)"
+            >
+              Show snack-bar
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Custom Component</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div class="row">
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Snack bar duration (seconds)</mat-label>
+              <input type="number" [(ngModel)]="durationInSeconds" matInput />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <button
+              mat-flat-button
+              color="accent"
+              (click)="openCustomSnackBar()"
+              aria-label="Show an example snack-bar"
+            >
+              Pizza party
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Configurable </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div class="row">
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Horizontal position</mat-label>
+              <mat-select [(value)]="horizontalPosition">
+                <mat-option value="start">Start</mat-option>
+                <mat-option value="center">Center</mat-option>
+                <mat-option value="end">End</mat-option>
+                <mat-option value="left">Left</mat-option>
+                <mat-option value="right">Right</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Vertical position</mat-label>
+              <mat-select [(value)]="verticalPosition">
+                <mat-option value="top">Top</mat-option>
+                <mat-option value="bottom">Bottom</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="openConfigSnackBar()"
+              aria-label="Show an example snack-bar"
+            >
+              Pool party!
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

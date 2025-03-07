@@ -1,0 +1,58 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="hstack align-items-center flex-column flex-lg-row">
+      <div class="hstack w-100">
+        <div
+          class="bg-light-primary rounded icon-48 d-flex align-items-center justify-content-center"
+        >
+          <i
+            class="iconify f-s-24 d-flex text-primary"
+            data-icon="solar:layers-linear"
+          ></i>
+        </div>
+        <div>
+          <mat-card-title>Revenue Forecast</mat-card-title>
+          <mat-card-subtitle>Overview of Profit</mat-card-subtitle>
+        </div>
+      </div>
+      <div class="m-l-auto hstack">
+        <div class="d-flex">
+          <i-tabler name="circle-filled" class="text-primary icon-8"></i-tabler>
+          <div class="m-l-8">
+            <span class="mat-subtitle-2">2024</span>
+          </div>
+        </div>
+        <div class="d-flex">
+          <i-tabler name="circle-filled" class="text-error icon-8"></i-tabler>
+          <div class="m-l-8">
+            <span class="mat-subtitle-2">2023</span>
+          </div>
+        </div>
+        <div class="d-flex">
+          <i-tabler name="circle-filled" class="text-accent icon-8"></i-tabler>
+          <div class="m-l-8">
+            <span class="mat-subtitle-2">2022</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- chart -->
+    <div class="m-t-16" style="height: 300px">
+      <apx-chart
+        [series]="revenueForecastChart.series"
+        [dataLabels]="revenueForecastChart.dataLabels"
+        [chart]="revenueForecastChart.chart"
+        [legend]="revenueForecastChart.legend"
+        [colors]="revenueForecastChart.colors"
+        [grid]="revenueForecastChart.grid"
+        [fill]="revenueForecastChart.fill"
+        [stroke]="revenueForecastChart.stroke"
+        [tooltip]="revenueForecastChart.tooltip"
+        [markers]="revenueForecastChart.markers"
+        [xaxis]="revenueForecastChart.xaxis"
+        [responsive]="revenueForecastChart.responsive"
+      ></apx-chart>
+    </div>
+  </mat-card-content>
+</mat-card>

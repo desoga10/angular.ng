@@ -1,0 +1,399 @@
+<!-- --------------------------------------------------------------------- -->
+<!-- card 2 -->
+<!-- --------------------------------------------------------------------- -->
+<div class="row justify-content-center">
+  @for(cardimg of cardimgs; track cardimg.imgSrc) {
+  <div class="col-sm-6 col-lg-4">
+    <mat-card class="cardWithShadow card2 position-relative card-hover">
+      <img
+        mat-card-image
+        src="{{ cardimg.imgSrc }}"
+        alt="Photo of a Shiba Inu"
+      />
+      <div
+        class="card-overlay h-100 d-flex align-items-end justify-content-end"
+      >
+        <span class="f-s-12 f-w-600 m-y-16 m-r-16 p-y-4 p-x-8 rounded-pill bg-white">{{
+          cardimg.time
+        }}</span>
+      </div>
+
+      <mat-card-content class="p-y-24">
+        <div class="user-category">
+          <div class="m-b-20">
+            <img src="{{ cardimg.user }}" class="rounded-circle" width="40" />
+          </div>
+          <span class="f-s-12 m-y-16 f-w-600 p-x-8 p-y-4 bg-light rounded-pill">{{
+            cardimg.category
+          }}</span>
+        </div>
+        <mat-card-title class="m-t-20">{{ cardimg.title }}</mat-card-title>
+        <div class="d-flex align-items-center justify-content-center m-t-24">
+          <div class="d-flex align-items-center">
+            <span class="m-r-12 f-s-14 d-flex align-items-center"
+              ><i-tabler name="eye" class="icon-18 m-r-4"></i-tabler
+              >{{ cardimg.views }}</span
+            >
+            <span class="f-s-14 d-flex align-items-center"
+              ><i-tabler name="message-2" class="icon-18 m-r-4"></i-tabler
+              >{{ cardimg.comments }}</span
+            >
+          </div>
+          <span class="m-l-auto f-s-14 d-flex align-items-center">
+            <i-tabler name="point" class="icon-14 m-r-4 d-flex"></i-tabler>
+            {{ cardimg.date }}
+          </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  }
+</div>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- card 3 -->
+<!-- --------------------------------------------------------------------- -->
+<div class="row">
+  @for(productcard of productcards; track productcard.title) {
+  <div class="col-sm-6 col-lg-3">
+    <mat-card class="cardWithShadow productcard overflow-hidden">
+      <a routerLink="/widgets/cards">
+        <img
+          src="{{ productcard.imgSrc }}"
+          alt="imgSrc"
+          class="w-100"
+          mat-card-image
+        />
+      </a>
+      <mat-card-content class="p-b-24 p-t-12 position-relative">
+        <button
+          mat-mini-fab
+          color="primary"
+          class="icon-30 cart-btn"
+          matTooltip="Add to Cart"
+        >
+          <i-tabler name="basket" class="icon-16"></i-tabler>
+        </button>
+        <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
+          productcard.title
+        }}</mat-card-title>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <h6 class="mat-body-2 f-w-600">${{ productcard.price }}</h6>
+            <span class="f-s-14 m-l-4 text-decoration-line-through"
+              >${{ productcard.rprice }}</span
+            >
+          </div>
+          <div class="m-l-auto d-flex gap-4">
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+            <span
+              ><i-tabler name="star" class="fill-warning icon-18"></i-tabler
+            ></span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  }
+</div>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- card 4 -->
+<!-- --------------------------------------------------------------------- -->
+<div class="row">
+  @for(musiccard of musiccards; track musiccard.title) {
+  <div class="col-lg-4">
+    <mat-card class="cardWithShadow overflow-hidden">
+      <div class="row m-0">
+        <div class="col-6 p-24">
+          <h5 class="f-w-600 f-s-18 m-0">{{ musiccard.title }}</h5>
+          <span class="f-s-14">{{ musiccard.subtext }}</span>
+
+          <div class="d-flex align-items-center justify-content-between m-t-24">
+            <button mat-icon-button class="d-flex justify-content-center">
+              <i-tabler
+                name="player-skip-back"
+                class="icon-16 d-flex"
+              ></i-tabler>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              class="d-flex justify-content-center"
+            >
+              <i-tabler name="player-play" class="icon-16 d-flex"></i-tabler>
+            </button>
+            <button mat-icon-button class="d-flex justify-content-center">
+              <i-tabler
+                name="player-skip-forward"
+                class="icon-16 d-flex"
+              ></i-tabler>
+            </button>
+          </div>
+        </div>
+        <div class="col-6">
+          <img
+            src="{{ musiccard.imgSrc }}"
+            width="240"
+            height="180"
+            class="h-100"
+            alt="blog"
+          />
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  }
+</div>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- card 5 -->
+<!-- --------------------------------------------------------------------- -->
+<div class="row">
+  @for(followercard of followercards; track followercard.title) {
+  <div class="col-sm-6 col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content>
+        <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center">
+            <img
+              src="{{ followercard.imgSrc }}"
+              width="40"
+              alt="user"
+              class="rounded-circle"
+            />
+            <div class="m-l-16">
+              <h6 class="m-0 f-w-600 f-s-16">{{ followercard.title }}</h6>
+              <span class="d-flex align-items-center f-s-14"
+                ><i-tabler name="map-pin" class="icon-14 m-r-4"></i-tabler
+                >{{ followercard.subtext }}</span
+              >
+            </div>
+          </div>
+          <button mat-flat-button color="primary" class="m-l-auto">
+            Follow
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  }
+</div>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- card 6 -->
+<!-- --------------------------------------------------------------------- -->
+<div class="row">
+  @for(friendcard of friendcards; track friendcard.title) {
+  <div class="col-sm-6 col-lg-3">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-y-24">
+        <img
+          src="{{ friendcard.imgSrc }}"
+          alt="user"
+          width="80"
+          class="rounded-circle"
+        />
+        <mat-card-title class="m-t-16">{{ friendcard.title }}</mat-card-title>
+        <div class="d-flex align-items-center">
+          <div class="avatar-group m-r-8">
+            <img
+              src="/assets/images/profile/user-1.jpg"
+              alt="user"
+              class="rounded-circle"
+              width="28"
+            />
+            <img
+              src="/assets/images/profile/user-2.jpg"
+              alt="user"
+              class="rounded-circle"
+              width="28"
+            />
+            <img
+              src="/assets/images/profile/user-3.jpg"
+              alt="user"
+              class="rounded-circle"
+              width="28"
+            />
+          </div>
+          <span class="f-s-14">3 mutual friends</span>
+        </div>
+        <button mat-flat-button color="primary" class="w-100 m-t-24">
+          Add Friend
+        </button>
+        <button mat-stroked-button color="warn" class="w-100 m-t-8">
+          Remove
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  }
+</div>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- card 7 -->
+<!-- --------------------------------------------------------------------- -->
+<div class="row">
+  @for(socialcard of socialcards; track socialcard.username) {
+  <div class="col-sm-6 col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="text-center p-y-24">
+        <img src="{{ socialcard.imgSrc }}" class="rounded-circle" width="80" />
+        <mat-card-title class="f-s-18 m-b-0 m-t-16">{{
+          socialcard.username
+        }}</mat-card-title>
+        <mat-card-subtitle class="f-s-12 mat-body-1">{{
+          socialcard.post
+        }}</mat-card-subtitle>
+      </mat-card-content>
+      <mat-card-actions
+        class="b-t-1 p-y-0 d-flex justify-content-center "
+      >
+        <button mat-icon-button class="d-flex justify-content-center">
+          <i-tabler
+            name="brand-facebook"
+            class="icon-20 d-flex text-primary"
+          ></i-tabler>
+        </button>
+        <button mat-icon-button class="d-flex justify-content-center">
+          <i-tabler
+            name="brand-instagram"
+            class="icon-20 d-flex text-error"
+          ></i-tabler>
+        </button>
+        <button mat-icon-button class="d-flex justify-content-center">
+          <i-tabler
+            name="brand-github"
+            class="icon-20 d-flex text-success"
+          ></i-tabler>
+        </button>
+        <button mat-icon-button class="d-flex justify-content-center">
+          <i-tabler
+            name="brand-twitter"
+            class="icon-20 d-flex text-accent"
+          ></i-tabler>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  }
+</div>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- card 8 -->
+<!-- --------------------------------------------------------------------- -->
+<div class="row">
+  @for(giftcard of giftcards; track giftcard.username) {
+  <div class="col-sm-6 col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-y-24">
+        <div class="d-flex justify-content-between align-items-center">
+          <mat-card-title class="f-s-16">{{
+            giftcard.username
+          }}</mat-card-title>
+          <i-tabler name="gift" class="icon-18 text-primary"></i-tabler>
+        </div>
+
+        <img
+          src="{{ giftcard.imgSrc }}"
+          alt="user"
+          class="rounded w-100 m-t-8"
+        />
+
+        <button mat-flat-button color="primary" class="w-100 m-t-8">
+          Gift to Friend ($50.00)
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  }
+</div>
+
+<div class="row">
+  <!-- column -->
+  <div class="col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-y-24">
+        <mat-card-title>Payment Gateways</mat-card-title>
+        <mat-card-subtitle class="mat-body-1 p-b-16"
+          >Platform For Income</mat-card-subtitle
+        >
+
+        @for(stat of stats; track stat.title) {
+        <div class="m-t-20">
+          <div class="d-flex align-items-center m-b-24">
+            <span
+              class="text-{{ stat.color }} bg-light-{{
+                stat.color
+              }} rounded icon-48 d-flex align-items-center justify-content-center"
+            >
+              <img [src]="stat.img" alt="icon" />
+            </span>
+
+            <div class="m-l-16 m-r-auto">
+              <h6 class="mat-body-2 text-dark f-s-14 f-w-600">{{ stat.title }}</h6>
+              <span class="mat-body-1">{{ stat.subtitle }}</span>
+            </div>
+            <span class="f-w-600 f-s-14"> +${{ stat.percent }} </span>
+          </div>
+        </div>
+        }
+
+        <button mat-stroked-button color="primary" class="w-100 m-t-8">
+          View all Transctions
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- column -->
+  <div class="col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-t-24">
+        <mat-card-title>Upcoming Activity</mat-card-title>
+        <mat-card-subtitle class="mat-body-1 p-b-16"
+          >In New year</mat-card-subtitle
+        >
+
+        @for(activity of activities; track activity.title) {
+        <div>
+          <div class="d-flex align-items-center p-y-12">
+            <span
+              class="text-{{ activity.color }} bg-light-{{
+                activity.color
+              }} rounded icon-48 d-flex align-items-center justify-content-center"
+            >
+              <i-tabler
+                name="{{ activity.icon }}"
+                class="icon-20 d-flex"
+              ></i-tabler>
+            </span>
+
+            <div class="m-l-16 m-r-auto">
+              <h6 class="mat-body-2 f-w-600 f-s-14 text-dark">{{ activity.title }}</h6>
+              <span class="mat-body-1">{{ activity.subtitle }}</span>
+            </div>
+            <span class="f-s-12 text-muted">{{ activity.time }} </span>
+          </div>
+        </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- column -->
+  <div class="col-lg-4">
+    <app-daily-activities></app-daily-activities>
+  </div>
+</div>

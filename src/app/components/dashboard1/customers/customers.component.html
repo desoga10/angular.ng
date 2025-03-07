@@ -1,0 +1,17 @@
+<mat-card class="shadow-none bg-light-accent overflow-hidden">
+  <mat-card-content class="p-24">
+    <mat-card-subtitle class="mat-body-1 p-b-4 text-dark">Customers</mat-card-subtitle>
+    <h5 class="mat-subtitle-1 m-t-4 f-w-600 f-s-24 d-flex align-items-center">36,358  <div class="mat-body-1 text-dark f-w-600 m-l-12">-12%</div></h5>
+  </mat-card-content>
+  <apx-chart
+    [series]="customerChart.series"
+    [dataLabels]="customerChart.dataLabels"
+    [chart]="customerChart.chart"
+    [legend]="customerChart.legend"
+    [colors]="customerChart.colors"
+    [stroke]="customerChart.stroke"
+    [tooltip]="customerChart.tooltip"
+    [plotOptions]="customerChart.plotOptions"
+    [responsive]="customerChart.responsive"
+  ></apx-chart>
+</mat-card>

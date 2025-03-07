@@ -1,0 +1,247 @@
+<div class="w-100 position-relative">
+  @if(ms.selectedMail) {
+  <div class="d-flex align-items-center p-x-16 p-y-8">
+    <button mat-icon-button (click)="removeClass()" class="d-block d-lg-none">
+      <mat-icon class="f-s-18">arrow_back</mat-icon>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <i-tabler name="arrow-badge-right" class="icon-18"></i-tabler>
+    </button>
+
+    <mat-menu #menu="matMenu" class="cardWithShadow">
+      <button mat-menu-item class="p-l-0">
+        @if(ms.selectedMail.label.indexOf('Personal') !== -1) {
+        <span>
+          <mat-checkbox
+            color="primary"
+            (click)="labelClick('Personal')"
+            [checked]="true"
+            >Personal</mat-checkbox
+          >
+        </span>
+        } @if(ms.selectedMail.label.indexOf('Personal') === -1) {
+        <span>
+          <mat-checkbox (click)="labelClick('Personal')">Personal</mat-checkbox>
+        </span>
+        }
+      </button>
+      <button mat-menu-item class="p-l-0">
+        @if(ms.selectedMail.label.indexOf('Work') !== -1) {
+        <span>
+          <mat-checkbox
+            color="primary"
+            (click)="labelClick('Work')"
+            [checked]="true"
+            >Work</mat-checkbox
+          >
+        </span>
+        } @if(ms.selectedMail.label.indexOf('Work') === -1) {
+
+        <span>
+          <mat-checkbox color="primary" (click)="labelClick('Work')"
+            >Work</mat-checkbox
+          >
+        </span>
+        }
+      </button>
+      <button mat-menu-item class="p-l-0">
+        @if(ms.selectedMail.label.indexOf('Payments') !== -1) {
+        <span>
+          <mat-checkbox
+            color="primary"
+            (click)="labelClick('Payment')"
+            [checked]="true"
+            >Payments</mat-checkbox
+          >
+        </span>
+        } @if(ms.selectedMail.label.indexOf('Payments') === -1) {
+        <span>
+          <mat-checkbox color="primary" (click)="labelClick('Payment')"
+            >Payments</mat-checkbox
+          >
+        </span>
+        }
+      </button>
+      <button mat-menu-item class="p-l-0">
+        @if(ms.selectedMail.label.indexOf('Accounts') !== -1) {
+        <span>
+          <mat-checkbox
+            color="primary"
+            (click)="labelClick('Account')"
+            [checked]="true"
+            >Accounts</mat-checkbox
+          >
+        </span>
+        } @if(ms.selectedMail.label.indexOf('Accounts') === -1) {
+        <span>
+          <mat-checkbox color="primary" (click)="labelClick('Account')"
+            >Accounts</mat-checkbox
+          >
+        </span>
+        }
+      </button>
+    </mat-menu>
+
+    <div class="m-l-10 d-flex cursor-pointer">
+      <i-tabler
+        name="alert-circle"
+        class="icon-18"
+        [ngStyle]="{
+          fill:
+            ms.selectedMail.filter.indexOf('Important') !== -1 ? '#FDEDE8' : ''
+        }"
+        (click)="iconsClick('Important')"
+      >
+      </i-tabler>
+    </div>
+
+    <div class="m-l-20 d-flex cursor-pointer">
+      <i-tabler
+        class="icon-18"
+        name="star"
+        [ngStyle]="{
+          color: ms.selectedMail.filter.indexOf('Star') !== -1 ? '#ffb22b' : ''
+        }"
+        (click)="iconsClick('Star')"
+      >
+      </i-tabler>
+    </div>
+
+    <div class="m-l-auto d-flex">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu1"
+        class="d-flex justify-content-center"
+      >
+        <i-tabler name="dots-vertical" class="icon-18 d-flex"></i-tabler>
+      </button>
+      <mat-menu #menu1="matMenu" class="cardWithShadow">
+        <button mat-menu-item (click)="ddlRemoveClick('Read')">
+          <div class="d-flex align-items-center">
+            <i-tabler name="mail" class="icon-18 m-r-4"></i-tabler>
+            @if(ms.selectedMail.seen) {
+            <span>Mark as unread</span>
+            } @if(!ms.selectedMail.seen) {
+            <span>Mark as read</span>
+            }
+          </div>
+        </button>
+        <button mat-menu-item (click)="ddlRemoveClick('Spam')">
+          <div class="d-flex align-items-center">
+            <i-tabler name="alert-triangle" class="icon-18 m-r-4"></i-tabler>
+            Spam
+          </div>
+        </button>
+        <button mat-menu-item (click)="ddlRemoveClick('Trash')">
+          <div class="d-flex align-items-center">
+            <i-tabler name="trash" class="icon-18 m-r-4"></i-tabler>Trash
+          </div>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  }
+
+  <mat-divider></mat-divider>
+
+  @if(ms.selectedMail) {
+  <div class="position-relative" style="height: calc(100vh - 255px)">
+    <div class="p-24">
+      <div class="d-flex align-items-center">
+        <img
+          [src]="ms.selectedUser.imagePath"
+          class="rounded-circle"
+          alt="userimg"
+          width="48px"
+          height="48px"
+        />
+        <div class="m-l-10">
+          <h5 class="m-0 f-w-600 f-s-16 mat-subtitle-1">
+            {{ ms.selectedUser.name }}
+          </h5>
+          <span class="f-s-14 mat-body-1"> {{ ms.selectedUser.email }}</span>
+        </div>
+        <div class="m-l-auto d-none d-sm-flex align-items-center gap-4">
+          @for(l of ms.selectedMail.label; track l) {
+          <span class="d-flex align-items-center gap-4">
+            @if(l === 'Personal') {
+            <span
+              class="bg-primary rounded-sm f-s-12 p-x-8 p-y-2 text-white f-w-500"
+            >
+              Personal
+            </span>
+            } @if(l === 'Work') {
+            <span
+              class="bg-accent rounded-sm f-s-12 p-x-8 p-y-2 text-white f-w-500"
+            >
+              Work
+            </span>
+            } @if(l === 'Payments') {
+            <span
+              class="bg-error rounded-sm f-s-12 p-x-8 p-y-2 text-white f-w-500"
+            >
+              Payment
+            </span>
+            } @if(l === 'Accounts') {
+            <span
+              class="bg-warning rounded-sm f-s-12 p-x-8 p-y-2 text-white f-w-500"
+            >
+              Account
+            </span>
+            }
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="p-20">
+      <div class="mat-subtitle-1">
+        {{ ms.selectedMail.Subject }}
+      </div>
+    </div>
+    <div class="p-t-10 p-x-20 p-b-20 m-b-32">
+      {{ ms.selectedMail.Message }}
+    </div>
+    <div class="p-20">
+      <div class="m-t-10">
+        @if(ms.replyShow) {
+        <div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Type your reply here</mat-label>
+            <textarea matInput rows="5"></textarea>
+          </mat-form-field>
+          <button mat-stroked-button color="warn" (click)="sendButtonClick()">
+            Discard
+          </button>
+          <button
+            mat-flat-button
+            color="primary"
+            class="m-l-10"
+            (click)="sendButtonClick()"
+          >
+            Send
+          </button>
+        </div>
+        } @if(!ms.replyShow) {
+        <div>
+          <div>
+            <button mat-flat-button color="primary" (click)="reply()">
+              Reply
+            </button>
+            <button
+              mat-stroked-button
+              color="primary"
+              class="m-l-8"
+              (click)="reply()"
+            >
+              Forward
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

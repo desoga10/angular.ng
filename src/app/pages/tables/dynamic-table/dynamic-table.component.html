@@ -1,0 +1,55 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <mat-card-title
+      >Table dynamically changing the columns displayed
+      <span class="label label-primary">new</span></mat-card-title
+    >
+    <mat-card-subtitle class="mat-body-1"
+      >add column dynamically</mat-card-subtitle
+    >
+
+    <div class="d-flex d-sm-block align-items-center gap-1 m-b-16 m-t-16">
+      <button
+        mat-flat-button
+        class="m-r-8"
+        color="primary"
+        (click)="addColumn()"
+      >
+        Add column
+      </button>
+      <button
+        mat-flat-button
+        class="m-r-8"
+        color="warn"
+        (click)="removeColumn()"
+      >
+        Remove column
+      </button>
+      <button mat-flat-button color="accent" (click)="shuffle()">
+        Shuffle
+      </button>
+    </div>
+
+    <div class="table-responsive m-t-20">
+      <table mat-table [dataSource]="data" class="w-100">
+        @for(column of displayedColumns; track column) {
+        <ng-container [matColumnDef]="column">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-w-600 mat-subtitle-1 f-s-14 p-l-0"
+          >
+            {{ column | titlecase }}
+          </th>
+          <td mat-cell *matCellDef="let element" class="p-l-0 f-s-14">
+            {{ element[column] }}
+          </td>
+        </ng-container>
+        }
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

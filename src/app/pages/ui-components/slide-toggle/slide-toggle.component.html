@@ -1,0 +1,115 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Slide Toggle</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Basic</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <mat-slide-toggle color="primary">Slide me!</mat-slide-toggle>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Forms</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <p>Slide Toggle using a simple NgModel.</p>
+
+        <mat-slide-toggle [(ngModel)]="isChecked"
+          >Slide Toggle Checked: {{ isChecked }}</mat-slide-toggle
+        >
+
+        <p>Slide Toggle inside of a Template-driven form</p>
+
+        <form
+          class="example-form"
+          #form="ngForm"
+          (ngSubmit)="alertFormValues(form.form)"
+        >
+          <mat-slide-toggle ngModel name="enableWifi"
+            >Enable Wifi</mat-slide-toggle
+          >
+          <mat-slide-toggle ngModel name="acceptTerms" required class="m-l-8"
+            >Accept Terms of Service</mat-slide-toggle
+          >
+
+          <button mat-flat-button color="primary" type="submit" class="m-l-8">
+            Save Settings
+          </button>
+        </form>
+
+        <p>Slide Toggle inside of a Reactive form</p>
+
+        <form
+          class="example-form"
+          [formGroup]="formGroup"
+          (ngSubmit)="alertFormValues(formGroup)"
+          ngNativeValidate
+        >
+          <mat-slide-toggle formControlName="enableWifi"
+            >Enable Wifi</mat-slide-toggle
+          >
+          <mat-slide-toggle formControlName="acceptTerms" class="m-l-8"
+            >Accept Terms of Service</mat-slide-toggle
+          >
+
+          <p>Form Group Status: {{ formGroup.status }}</p>
+
+          <button mat-flat-button color="primary" type="submit">
+            Save Settings
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Configuration</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <div>
+          <label class="mat-body-2 f-w-600">Color:</label>
+          <mat-radio-group [(ngModel)]="color">
+            <mat-radio-button  value="primary">
+              Primary
+            </mat-radio-button>
+            <mat-radio-button  value="accent">
+              Accent
+            </mat-radio-button>
+            <mat-radio-button  value="warn">
+              Warn
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div>
+          <mat-checkbox  [(ngModel)]="checked"
+            >Checked</mat-checkbox
+          >
+        </div>
+
+        <div>
+          <mat-checkbox  [(ngModel)]="disabled"
+            >Disabled</mat-checkbox
+          >
+        </div>
+
+        <div class="p-24 rounded bg-light-primary m-t-16">
+          <h2 class="mat-body-2 f-w-600 m-b-16">Result</h2>
+
+          <mat-slide-toggle
+            [color]="color"
+            [checked]="checked"
+            [disabled]="disabled"
+          >
+            Slide me!
+          </mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

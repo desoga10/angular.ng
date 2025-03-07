@@ -1,0 +1,68 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+@import "variables";
+@import "layouts/transitions";
+@import "helpers/color";
+@import "helpers/icon-size";
+
+//Theme colors
+
+@import "themecolors/default_theme";
+@include mat.all-component-themes($bluetheme);
+
+.dark-theme {
+  @include mat.all-component-colors($darkbluetheme);
+}
+
+// .dark-theme .aqua_theme {
+//   @include mat.all-component-colors($darkaquatheme);
+// }
+
+.orange_theme {
+  @import "themecolors/orange_theme";
+  @include mat.all-component-colors($orangetheme);
+}
+
+.aqua_theme {
+  @import "themecolors/aqua_theme";
+  @include mat.all-component-colors($aquatheme);
+}
+
+.purple_theme {
+  @import "themecolors/purple_theme";
+  @include mat.all-component-colors($purpletheme);
+}
+
+.green_theme {
+  @import "themecolors/green_theme";
+  @include mat.all-component-colors($greentheme);
+}
+
+.cyan_theme {
+  @import "themecolors/cyan_theme";
+  @include mat.all-component-colors($cyantheme);
+}
+
+//container layout
+@import "overrides/materialoverrides";
+@import "dark/dark";
+@import "container";
+@import "layouts/layouts";
+@import "grid/grid";
+@import "helpers/custom-flex";
+@import "helpers/index";
+
+// horizontal
+@import "horizontal/horizontal";
+
+// apps
+@import "apps/calendar";
+
+// pages
+@import "pages/dashboard";
+@import "pages/auth";
+@import "pages/landingpage";
+
+// RTL Theme
+@import "rtl/rtl";

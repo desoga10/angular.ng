@@ -1,0 +1,30 @@
+.chat-list {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 1rem;
+  //padding: 0 2rem;
+  display: flex;
+
+  &.even {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    -moz-justify-content: flex-end;
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+
+.chat-app {
+  .mat-drawer {
+    width: 320px;
+  }
+}
+
+.chat-listing {
+  .mdc-list-item {
+    height: 75px;
+    display: flex;
+    align-items: center;
+  }
+}

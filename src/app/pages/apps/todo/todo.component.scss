@@ -1,0 +1,17 @@
+.todo-item {
+  position: relative;
+  .edit-view {
+    position: absolute;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    top: 20px;
+    padding: 0 13px;
+  }
+}
+
+.app-left-sidebar {
+  &.mat-sidenav {
+    width: 240px;
+  }
+}

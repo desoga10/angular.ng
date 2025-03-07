@@ -1,0 +1,249 @@
+<mat-card class="cardWithShadow overflow-hidden">
+  <!-- ------------------------------------------------------ -->
+  <!-- Toggle mobile -->
+  <!-- ------------------------------------------------------ -->
+  <mat-card-header class="bg-primary text-white p-10 d-block d-lg-none">
+    <mat-card-title class="m-b-0">
+      <div class="d-flex align-items-center">
+        <button (click)="mailnav.toggle()" mat-icon-button>
+          <mat-icon>short_text</mat-icon>
+        </button>
+        <div class="mat-subheading-1 m-b-0 m-l-16">Inbox</div>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <!-- ------------------------------------------------------ -->
+  <!-- Desktop App -->
+  <!-- ------------------------------------------------------ -->
+  <mat-sidenav-container
+    class="email-box"
+    style="height: calc(100vh - 190px)"
+    [ngClass]="{
+      'side-panel-opened': sidePanelOpened,
+      'side-panel-closed': !sidePanelOpened
+    }"
+  >
+    <!-- ------------------------------------------------------ -->
+    <!-- Sidebar Email -->
+    <!-- ------------------------------------------------------ -->
+    <mat-sidenav
+      #mailnav
+      [mode]="isOver() ? 'over' : 'side'"
+      [opened]="!isOver()"
+      (open)="sidePanelOpened = true"
+      (close)="sidePanelOpened = false"
+      class="mail-sidebar"
+    >
+      <ng-scrollbar style="height: calc(100% - 10px)" class="position-relative">
+        <div class="p-16 p-b-0">
+          <button
+            mat-flat-button
+            (click)="openDialog()"
+            color="primary"
+            class="w-100 btn-block"
+          >
+            Compose
+          </button>
+        </div>
+        <div class="p-16">
+          @for(mail of mailboxes; track mail.name) {
+          <div (click)="mailboxesChanged(mail.name)">
+            <div
+              class="d-flex align-items-center inbox-list rounded p-16 cursor-pointer"
+              [class.bg-light]="mail.active"
+            >
+              <i-tabler
+                name="{{ mail.icon }}"
+                class="m-r-12 icon-18"
+              ></i-tabler>
+              <span class="f-w-400 f-s-14">{{ mail.name }}</span>
+            </div>
+          </div>
+          }
+        </div>
+        <h5 class="m-0 p-t-16 p-x-32 mat-subtitle-1 f-s-14 f-w-600 b-t-1">
+          Sort By
+        </h5>
+        <div class="p-16">
+          @for(fil of filters; track fil.name) {
+          <div (click)="filtersClick(fil.name)">
+            <div
+              class="d-flex align-items-center inbox-list p-16 rounded cursor-pointer"
+              [class.bg-light-primary]="fil.active"
+            >
+              <i-tabler name="{{ fil.icon }}" class="m-r-12 icon-18"></i-tabler>
+              <span class="f-w-400 f-s-14">{{ fil.name }}</span>
+            </div>
+          </div>
+          }
+        </div>
+        <h5 class="m-0 p-t-16 p-x-32 mat-subtitle-1 f-s-14 f-w-600 b-t-1">
+          Labels
+        </h5>
+        <div class="p-16">
+          @for(lab of labels; track lab.name) {
+          <div (click)="labelChange(lab.name)">
+            <div
+              class="d-flex align-items-center inbox-list p-16 rounded cursor-pointer"
+              [class.bg-light]="lab.active"
+            >
+              <i-tabler
+                [style.color]="lab.color"
+                name="{{ lab.icon }}"
+                class="m-r-12 icon-18"
+              ></i-tabler>
+              <span class="f-w-400 f-s-14">{{ lab.name }}</span>
+            </div>
+          </div>
+          }
+        </div>
+      </ng-scrollbar>
+    </mat-sidenav>
+    <!-- ------------------------------------------------------ -->
+    <!-- Email Listing and Details-->
+    <!-- ------------------------------------------------------ -->
+    <div class="p-x-15 w-100 h-100">
+      <div class="row h-100">
+        <!-- ------------------------------------------------------ -->
+        <!-- Listing -->
+        <!-- ------------------------------------------------------ -->
+        <div class="col-lg-4 b-r-1 p-0">
+          <div class="p-x-20 p-y-4 d-flex align-items-center">
+            <h5 class="f-w-500 mat-subtitle-1 f-s-16 m-0">{{ ms.topLable }}</h5>
+            <div class="m-l-auto">
+              <pagination-controls
+                (pageChange)="p = $event"
+                previousLabel=""
+                nextLabel=""
+                class="mail-pagination"
+              >
+              </pagination-controls>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <ng-scrollbar style="height: calc(100% - 70px)" class="position-relative">
+            @for(mail of ms.mailList | paginate : { itemsPerPage: 6,
+            currentPage: p }; track mail; let i = $index) {
+            <div (click)="mailSelected(mail)">
+              <div
+                class="mail-list p-16 p-l-10 cursor-pointer"
+                [class.bg-light]="mail.MailId == selectedIndex"
+              >
+                <div class="d-flex align-items-start w-100">
+                  <mat-checkbox></mat-checkbox>
+                  <div class="m-l-10 w-100">
+                    <div>
+                      <div class="d-flex align-items-center w-100">
+                        <h5 class="m-0 f-w-600 mat-subtitle-1 f-s-14">
+                          {{ ms.users[i].name }}
+                        </h5>
+                        @if(mail.label[0] == 'Accounts') {
+                        <span class="m-l-auto">
+                          <span
+                            class="bg-warning rounded-sm p-x-8 f-w-600 text-white f-s-12 p-y-2"
+                          >
+                            {{ mail.label[0] }}</span
+                          >
+                        </span>
+                        } @if(mail.label[0] == 'Personal') {
+                        <span class="m-l-auto">
+                          <span
+                            class="bg-primary rounded-sm p-x-8 f-w-600 text-white f-s-12 p-y-2"
+                          >
+                            {{ mail.label[0] }}</span
+                          >
+                        </span>
+                        } @if(mail.label[0] == 'Work') {
+                        <span class="m-l-auto">
+                          <span
+                            class="bg-accent rounded-sm p-x-8 f-w-600 text-white f-s-12 p-y-2"
+                          >
+                            {{ mail.label[0] }}</span
+                          >
+                        </span>
+                        } @if(mail.label[0] == 'Payments') {
+                        <span class="m-l-auto">
+                          <span
+                            class="bg-error rounded-sm p-x-8 f-w-600 text-white f-s-12 p-y-2"
+                          >
+                            {{ mail.label[0] }}</span
+                          >
+                        </span>
+                        }
+                      </div>
+                      <span class="mat-body-1">
+                        {{ mail.Subject | slice : 0 : 24 }}..
+                      </span>
+                      <!-- icons -->
+                      <div class="d-flex justify-content-center m-t-8">
+                        <!-- star icon -->
+                        @if(mail.filter.indexOf('Star') !== -1) {
+                        <span class="m-r-8 d-flex">
+                          <i-tabler
+                            name="star"
+                            class="icon-18 fill-warning"
+                          ></i-tabler> </span
+                        >} @else {
+                        <i-tabler name="star" class="icon-18 m-r-8"></i-tabler>
+                        }
+
+                        <!-- inform icon -->
+                        @if(mail.filter.indexOf('Important') !== -1) {
+                        <span class="d-flex">
+                          <i-tabler
+                            name="alert-circle-filled"
+                            class="icon-18 text-light-error"
+                          ></i-tabler> </span
+                        >} @else {
+                        <i-tabler
+                          name="alert-circle"
+                          class="icon-18"
+                        ></i-tabler>
+                        }
+
+                        <div class="m-l-auto text-end">
+                          <span class="f-s-12 text-nowrap">{{
+                            mail.date | date : "dd-MMM"
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+            }
+          </ng-scrollbar>
+        </div>
+        <!-- ------------------------------------------------------ -->
+        <!-- Details of Email -->
+        <!-- ------------------------------------------------------ -->
+        <div
+          class="col-lg-8 detail-part p-0"
+          [class.movetodetail]="ms.addClass"
+        >
+          @if(ms.selectedMail === null) {
+          <div class="h-100 welcome-app">
+            <div
+              class="d-flex align-items-center justify-content-center h-100 w-100"
+            >
+              <div class="text-center">
+                <h3 class="mat-subtitle-1 f-w-600">Please Select a Mail</h3>
+                <img
+                  src="/assets/images/backgrounds/emailSv.png"
+                  width="200px"
+                />
+              </div>
+            </div>
+          </div>
+          } @if(ms.selectedMail !== null) {
+          <div class="w-100">
+            <app-maildetail></app-maildetail>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-container>
+</mat-card>

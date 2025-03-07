@@ -1,0 +1,42 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="table-xs-responsive">
+      <div class="row flex-nowrap">
+        @for(topcard of topcards; track topcard.title) {
+        <div class="col">
+          <mat-card
+            class="shadow-none text-center {{
+              topcard.color
+            }}-gt  shadow-none m-b-0"
+          >
+            <mat-card-content class="p-32">
+              <span
+                class="icon-48 m-auto m-b-16 d-flex align-items-center justify-content-center rounded bg-{{
+                  topcard.color
+                }}"
+              >
+                <span
+                  class="iconify text-white icon-27"
+                  [attr.data-icon]="topcard.icon"
+                ></span>
+              </span>
+              <span class="mat-subtitle-2 f-s-14 f-w-400 text-dark text-nowrap">
+                {{ topcard.title }}
+              </span>
+              <h6 class="m-t-4 mat-subtitle-1 f-s-22 f-w-600 m-b-16">
+                {{ topcard.subtitle }}
+              </h6>
+              <button
+                mat-raised-button
+                class="f-w-500 f-s-12 btn-shadow text-nowrap"
+              >
+                View Details
+              </button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        }
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

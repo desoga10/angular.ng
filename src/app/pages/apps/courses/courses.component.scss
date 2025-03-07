@@ -1,0 +1,38 @@
+.course-header {
+  padding: 12px !important;
+  color: #fff;
+  .mat-card-header-text {
+    width: 100% !important;
+  }
+  &.Angular {
+    background-color: #fc4b6c;
+  }
+
+  &.Web {
+    background-color: #1e88e5;
+  }
+
+  &.Design {
+    background-color: #26c6da;
+  }
+
+  &.Android {
+    background-color: #ffb22b;
+  }
+
+  .mat-card-title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    .course-duration {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.mat-card-actions {
+  border-top: 1px solid rgba(120, 130, 140, 0.13);
+  padding: 8px 0 !important;
+}

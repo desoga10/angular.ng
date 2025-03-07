@@ -1,0 +1,20 @@
+<mat-card class="shadow-none bg-light-error overflow-hidden">
+  <mat-card-content class="p-24">
+    <mat-card-subtitle class="mat-body-1 p-b-4 text-dark"
+      >Projects</mat-card-subtitle
+    >
+    <h5 class="mat-subtitle-1 m-t-4 f-w-600 f-s-24 d-flex align-items-center">
+      78,298
+      <div class="mat-body-1 text-dark f-w-600 m-l-12">+31.8%</div>
+    </h5>
+    <div class="m-t-24">
+      <apx-chart
+        [series]="projectsChart.series"
+        [chart]="projectsChart.chart"
+        [colors]="projectsChart.colors"
+        [tooltip]="projectsChart.tooltip"
+        [plotOptions]="projectsChart.plotOptions"
+      ></apx-chart>
+    </div>
+  </mat-card-content>
+</mat-card>

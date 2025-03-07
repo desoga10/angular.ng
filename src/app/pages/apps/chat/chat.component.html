@@ -1,0 +1,140 @@
+<mat-card class="mat-card-top chat-app cardWithShadow overflow-hidden">
+  <mat-sidenav-container [ngClass]="{
+      'side-panel-opened': sidePanelOpened,
+      'side-panel-closed': !sidePanelOpened
+    }">
+    <!-- ---------------------------------------------------- -->
+    <!-- sidebar -->
+    <!-- ---------------------------------------------------- -->
+    <mat-sidenav #chatnav [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" (open)="sidePanelOpened = true"
+      (close)="sidePanelOpened = false">
+      <ng-scrollbar class="position-relative" style="height: 100%">
+        <div class="d-flex align-items-center p-24">
+          <img src="assets/images/profile/user-1.jpg" class="rounded-circle" width="54" />
+
+          <div class="m-l-16">
+            <h4 class="mat-subtitle-1 f-s-16 f-w-600">Julia Roberts</h4>
+            <span class="f-s-12">Marketing Manager</span>
+          </div>
+        </div>
+
+        <div class="p-x-24">
+          <!-- search -->
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput placeholder="Search Contacts" />
+            <mat-icon matSuffix>
+              <i-tabler name="search" class="icon-20"></i-tabler>
+            </mat-icon>
+          </mat-form-field>
+          <!-- dropdown -->
+          <button mat-button [matMenuTriggerFor]="menu">
+            <div class="d-flex align-items-center">
+              Recent Chats
+              <i-tabler name="chevron-down" class="icon-20 m-l-4"></i-tabler>
+            </div>
+          </button>
+          <mat-menu #menu="matMenu" class="cardWithShadow">
+            <button mat-menu-item>
+              <span>Sort by Time</span>
+            </button>
+            <button mat-menu-item>
+              <span>Sort by Unread</span>
+            </button>
+            <button mat-menu-item>
+              <span>Mark as all Read</span>
+            </button>
+          </mat-menu>
+        </div>
+
+        <mat-nav-list class="chat-listing">
+          @for(message of messages; track message.from) {
+          <mat-list-item role="listitem" (click)="onSelect(message)"
+            [class.bg-light]="message === selectedMessage" lines="2" class="rounded-0">
+            <div class="d-flex align-items-center p-x-16 p-b-4 h-100" matListItemTitle>
+              <img src="{{ message.photo }}" alt="" width="42" class="rounded-circle" />
+              <div class="m-l-16">
+                <h3 class="f-w-600 mat-subtitle-1 f-s-16 lh-sm">
+                  {{ message.from }}
+                </h3>
+                <p class="f-s-14 m-t-4 m-b-0">{{ message.subject }}</p>
+              </div>
+            </div>
+          </mat-list-item>
+          }
+        </mat-nav-list>
+      </ng-scrollbar>
+    </mat-sidenav>
+    <!-- ------------------------------------------- -->
+    <!-- details -->
+    <!-- ------------------------------------------- -->
+    <mat-toolbar class="no-shadow chat-right-panel bg-white d-flex align-items-center p-y-8 b-b-1">
+      <button (click)="chatnav.toggle()" class="m-r-10" mat-icon-button>
+        <mat-icon>short_text</mat-icon>
+      </button>
+      <div class="d-flex align-items-center">
+        <img src="{{ selectedMessage.photo }}" width="40" class="rounded-circle" />
+        <div class="mat-subtitle-1 f-s-16 f-w-600 m-b-0 m-l-16">
+          {{ selectedMessage.from }}
+        </div>
+      </div>
+      <button [matMenuTriggerFor]="moredd" class="m-l-auto" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #moredd="matMenu" x-position="before" class="cardWithShadow">
+        <button mat-menu-item>Contact info</button>
+        <button mat-menu-item>Mute</button>
+        <button mat-menu-item>Delete chat</button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!-- ------------------------------------------- -->
+    <!-- chat content -->
+    <!-- ------------------------------------------- -->
+    <ng-scrollbar style="height: calc(100vh - 345px)" class="position-relative">
+      <mat-card-content class="chat-middle-box p-24">
+        @for(c of selectedMessage.chat; track c) {
+        @if(c.type === 'odd') {
+        <div class="chat-list odd">
+          <div class="chat-message m-b-15">
+            <div class="chat-block bg-light p-10 rounded d-flex align-items-center">
+              <span>
+                <img src="{{ selectedMessage.photo }}" class="rounded-circle" width="40" />
+              </span>
+              <span class="m-l-16 mat-subheading-1 m-b-0 f-w-400 lh-md">{{
+                c.msg
+                }}</span>
+            </div>
+            <p class="chat-date text-muted mat-h5 f-s-12 m-t-5 m-b-0">
+              {{ c.date | date }}
+            </p>
+          </div>
+        </div>
+        } @else {
+        <div class="chat-list even">
+          <div class="chat-message m-b-15">
+            <div
+              class="chat-block bg-light-accent lh-md p-10 rounded d-flex align-items-center mat-subheading-1 f-w-400 m-b-0">
+              {{ c.msg }}
+            </div>
+            <p class="chat-date text-muted mat-h5 m-0">
+              {{ c.date | date }}
+            </p>
+          </div>
+        </div>
+        }
+        }
+      </mat-card-content>
+    </ng-scrollbar>
+    <mat-divider></mat-divider>
+    <div class="p-t-20 p-l-30 p-r-30">
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+       
+          <input matInput  placeholder="Send message"  [(ngModel)]="msg" #myInput (keyup.enter)="OnAddMsg()" />
+        
+        <button mat-icon-button matSuffix color="primary" (click)="OnAddMsg()" [disabled]="!msg">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </mat-sidenav-container>
+</mat-card>

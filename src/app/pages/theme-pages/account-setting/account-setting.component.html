@@ -1,0 +1,693 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-0">
+    <mat-tab-group
+      mat-stretch-tabs="false"
+      animationDuration="0ms"
+      class="theme-tab label-padding"
+    >
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="d-flex align-items-center">
+            <mat-icon>
+              <i-tabler name="user-circle" class="icon-20 m-r-8"></i-tabler>
+            </mat-icon>
+          </div>
+          Account
+        </ng-template>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="b-1 rounded p-30">
+                <mat-card-title>Change Profile</mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >Change your profile picture from here</mat-card-subtitle
+                >
+                <div class="text-center m-t-24">
+                  <img
+                    src="/assets/images/profile/user-1.jpg"
+                    class="rounded-circle"
+                    width="120"
+                  />
+                  <div class="m-t-24">
+                    <button mat-flat-button color="primary" class="m-r-8">
+                      Upload
+                    </button>
+                    <button mat-stroked-button color="warn">Reset</button>
+                  </div>
+                  <span class="f-s-14 m-t-24 d-block"
+                    >Allowed JPG, GIF or PNG. Max size of 800K</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-30 b-1 rounded">
+                <mat-card-title>Change Password</mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >To change your password please confirm
+                  here</mat-card-subtitle
+                >
+                <form class="m-t-24">
+                  <!-- input -->
+                  <mat-label class="f-w-600 m-b-8 d-block"
+                    >Current Password</mat-label
+                  >
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    color="primary"
+                  >
+                    <input matInput type="password" value="password" />
+                  </mat-form-field>
+                  <!-- input -->
+                  <mat-label class="f-w-600 m-b-8 d-block"
+                    >New Password</mat-label
+                  >
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    color="primary"
+                  >
+                    <input matInput type="password" value="password" />
+                  </mat-form-field>
+                  <!-- input -->
+                  <mat-label class="f-w-600 m-b-8 d-block"
+                    >Confirm Password</mat-label
+                  >
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100 hide-hint"
+                    color="primary"
+                  >
+                    <input matInput type="password" value="password" />
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="b-1 rounded p-30">
+                <mat-card-title>Personal Details</mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >To change your personal detail , edit and save from
+                  here</mat-card-subtitle
+                >
+
+                <div class="row m-t-24">
+                  <div class="col-sm-6">
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Your Name</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" value="Mathew Anderson" />
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Location</mat-label
+                    >
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select value="in">
+                        <mat-option value="in">India</mat-option>
+                        <mat-option value="us">United States</mat-option>
+                        <mat-option value="uk">United Kingdom</mat-option>
+                        <mat-option value="ru">Russia</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Email</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="email" value="info@modernize.com" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Store Name</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" value="Maxima Studio" />
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Currency</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <mat-select value="in">
+                        <mat-option value="in">India (INR)</mat-option>
+                        <mat-option value="us">Us Dollar ($)</mat-option>
+                        <mat-option value="uk"
+                          >United Kingdom(Pound)</mat-option
+                        >
+                        <mat-option value="ru">Russia (Ruble)</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Phone</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" value="+91 12345 65478" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12">
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Address</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input
+                        matInput
+                        type="text"
+                        value="814 Howard Street, 120065, India"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="d-flex align-items-center">
+            <mat-icon>
+              <i-tabler name="bell" class="icon-20 m-r-8"></i-tabler>
+            </mat-icon>
+          </div>
+          Notifications
+        </ng-template>
+        <mat-card-content>
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="b-1 p-30 rounded">
+                <mat-card-title>Notification Preferences</mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >Select the notificaitons ou would like to receive via email.
+                  Please note that you cannot opt out of receving service
+                  messages, such as payment, security or legal
+                  notifications.</mat-card-subtitle
+                >
+
+                <!-- input -->
+                <mat-label class="f-w-600 m-b-8 d-block m-t-24"
+                  >Email Address*</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput type="email" />
+                  <mat-hint> Required for notificaitons.</mat-hint>
+                </mat-form-field>
+
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="article"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">Our newsletter</h5>
+                    <div
+                      class="d-flex align-items-center justify-content-center w-100"
+                    >
+                      <span class="f-s-14"
+                        >We'll always let you know about important changes</span
+                      >
+                      <mat-slide-toggle class="m-l-auto"></mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="checkbox"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">Order Confirmation</h5>
+                    <div
+                      class="d-flex align-items-center justify-content-center w-100"
+                    >
+                      <span class="f-s-14"
+                        >You will be notified when customer order any
+                        product</span
+                      >
+                      <mat-slide-toggle class="m-l-auto"></mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="clock"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">
+                      Order Status Changed
+                    </h5>
+                    <div
+                      class="d-flex align-items-center justify-content-center w-100"
+                    >
+                      <span class="f-s-14"
+                        >You will be notified when customer make changes to the
+                        order</span
+                      >
+                      <mat-slide-toggle class="m-l-auto"></mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="truck-delivery"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">Order Delivered</h5>
+                    <div
+                      class="d-flex align-items-center justify-content-center w-100"
+                    >
+                      <span class="f-s-14"
+                        >You will be notified once the order is delivered</span
+                      >
+                      <mat-slide-toggle class="m-l-auto"></mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="mail"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">Email Notification</h5>
+                    <div
+                      class="d-flex align-items-center justify-content-center w-100"
+                    >
+                      <span class="f-s-14"
+                        >Turn on email notificaiton to get updates through
+                        email</span
+                      >
+                      <mat-slide-toggle class="m-l-auto"></mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2 -->
+                <mat-card-title class="m-t-30">Date & Time</mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >Time zones and calendar display settings.</mat-card-subtitle
+                >
+
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="clock"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <span class="f-s-14 d-block m-b-4">Time zone</span>
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">
+                      (UTC + 02:00) Athens, Bucharet
+                    </h5>
+                  </div>
+                  <span class="m-l-auto">
+                    <i-tabler name="download" class="icon-20"></i-tabler>
+                  </span>
+                </div>
+
+                <!-- 3 -->
+                <mat-card-title class="m-t-30">Ignore Tracking</mat-card-title>
+
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="clock"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">
+                      Ignore Browser Tracking
+                    </h5>
+                    <span class="f-s-14">Browser Cookie</span>
+                  </div>
+                  <mat-slide-toggle class="m-l-auto"></mat-slide-toggle>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="d-flex align-items-center">
+            <mat-icon>
+              <i-tabler name="receipt" class="icon-20 m-r-8"></i-tabler>
+            </mat-icon>
+          </div>
+          Bills
+        </ng-template>
+        <mat-card-content>
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="b-1 rounded p-30">
+                <mat-card-title class="m-b-24"
+                  >Billing Information</mat-card-title
+                >
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Business Name*</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" value="Visitor Analytics" />
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Business Address*</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" />
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >First Name*</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Business Sector*</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input
+                        matInput
+                        type="text"
+                        value="Arts, Media & Entertainment"
+                      />
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Country*</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" value="Romania" />
+                    </mat-form-field>
+                    <!-- input -->
+                    <mat-label class="f-w-600 m-b-8 d-block"
+                      >Last Name*</mat-label
+                    >
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      color="primary"
+                    >
+                      <input matInput type="text" />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <!-- 2 -->
+              <div class="m-t-30 b-1 rounded p-30">
+                <mat-card-title
+                  >Current Plan : <span class="text-success">Execusive</span>
+                </mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >Thanks for being a premium member and supporting our
+                  development.</mat-card-subtitle
+                >
+
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="box"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <span class="f-s-14 d-block m-b-4">Current Plan</span>
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">
+                      750.000 Monthly Visits
+                    </h5>
+                  </div>
+                  <span class="m-l-auto">
+                    <i-tabler name="circle-plus" class="icon-20"></i-tabler>
+                  </span>
+                </div>
+
+                <div class="m-t-24">
+                  <button mat-flat-button color="primary">Change Plan</button>
+                  <button mat-stroked-button class="m-l-8" color="warn">
+                    Reset Plan
+                  </button>
+                </div>
+              </div>
+
+              <!-- 3 -->
+              <div class="p-30 m-t-30 b-1 rounded">
+                <mat-card-title>Payment Method </mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >On 26 December, 2023</mat-card-subtitle
+                >
+
+                <div class="d-flex align-items-center m-t-24">
+                  <button
+                    mat-mini-fab
+                    class="bg-light-primary shadow-none rounded icon-48"
+                  >
+                    <i-tabler
+                      name="credit-card"
+                      class="icon-20 d-flex text-primary"
+                    ></i-tabler>
+                  </button>
+                  <div class="m-l-16 w-100">
+                    <span class="f-s-14 d-block m-b-4">Visa</span>
+                    <h5 class="f-s-16 f-w-600 m-0 m-b-4">*****2102</h5>
+                  </div>
+                  <span class="m-l-auto">
+                    <i-tabler name="pencil-minus" class="icon-20"></i-tabler>
+                  </span>
+                </div>
+
+                <div class="m-t-24">
+                  <button mat-stroked-button class="m-l-8" color="warn">
+                    Cancel Subscription
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="d-flex align-items-center">
+            <mat-icon>
+              <i-tabler name="lock" class="icon-20 m-r-8"></i-tabler>
+            </mat-icon>
+          </div>
+          Security
+        </ng-template>
+        <mat-card-content class="p-y-24">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="p-30 rounded b-1">
+                <mat-card-title>Two-factor Authentication</mat-card-title>
+                <div class="d-flex align-items-center p-b-30 b-b-1">
+                  <mat-card-subtitle class="mat-body-1"
+                    >Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Corporis sapiente sunt earum officiis laboriosam
+                    ut.</mat-card-subtitle
+                  >
+                  <button mat-flat-button color="primary" class="m-l-auto">
+                    Enable
+                  </button>
+                </div>
+                <div class="d-flex align-items-center p-y-24 b-b-1">
+                  <div>
+                    <h5 class="f-s-16 f-w-600 m-0">Authentication App</h5>
+                    <mat-card-subtitle class="mat-body-1"
+                      >Google auth app</mat-card-subtitle
+                    >
+                  </div>
+
+                  <button mat-stroked-button color="primary" class="m-l-auto">
+                    Setup
+                  </button>
+                </div>
+                <div class="d-flex align-items-center p-y-24 b-b-1">
+                  <div>
+                    <h5 class="f-s-16 f-w-600 m-0">Another e-mail</h5>
+                    <mat-card-subtitle class="mat-body-1"
+                      >E-mail to send verification link</mat-card-subtitle
+                    >
+                  </div>
+
+                  <button mat-stroked-button color="primary" class="m-l-auto">
+                    Setup
+                  </button>
+                </div>
+                <div class="d-flex align-items-center p-y-24 b-b-1">
+                  <div>
+                    <h5 class="f-s-16 f-w-600 m-0">SMS Recovery</h5>
+                    <mat-card-subtitle class="mat-body-1"
+                      >Your phone number or something</mat-card-subtitle
+                    >
+                  </div>
+
+                  <button mat-stroked-button color="primary" class="m-l-auto">
+                    Setup
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="b-1 rounded p-30">
+                <button
+                  mat-mini-fab
+                  class="bg-light-primary shadow-none rounded icon-48"
+                >
+                  <i-tabler
+                    name="device-laptop"
+                    class="icon-22 d-flex text-primary"
+                  ></i-tabler>
+                </button>
+                <mat-card-title class="m-t-16">Devices</mat-card-title>
+                <mat-card-subtitle class="mat-body-1"
+                  >Lorem ipsum dolor sit amet consectetur adipisicing elit
+                  Rem.</mat-card-subtitle
+                >
+                <button mat-flat-button color="primary" class="m-t-24">
+                  Sign out from all devices
+                </button>
+
+                <div class="d-flex align-items-center p-y-24 b-b-1">
+                  <span>
+                    <i-tabler name="device-mobile" class="icon-22"></i-tabler>
+                  </span>
+                  <div class="m-l-16">
+                    <mat-card-title class="m-b-0">iPhone 14</mat-card-title>
+                    <mat-card-subtitle class="mat-body-1"
+                      >London UK, Oct 23 at 1:15 AM
+                    </mat-card-subtitle>
+                  </div>
+                  <button mat-icon-button class="m-l-auto">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                </div>
+                <div class="d-flex align-items-center p-t-24">
+                  <span>
+                    <i-tabler name="device-laptop" class="icon-22"></i-tabler>
+                  </span>
+                  <div class="m-l-16">
+                    <mat-card-title class="m-b-0">Macbook Air</mat-card-title>
+                    <mat-card-subtitle class="mat-body-1"
+                      >Gujarat India, Oct 24 at 3:15 AM
+                    </mat-card-subtitle>
+                  </div>
+                  <button mat-icon-button class="m-l-auto">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                </div>
+                <button mat-stroked-button color="primary" class="m-t-16 w-100">
+                  Need Help?
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="text-right p-24 p-t-0">
+      <button mat-flat-button color="primary" class="m-r-8">Save</button>
+      <button mat-stroked-button color="warn">Cancel</button>
+    </div>
+  </mat-card-content>
+</mat-card>

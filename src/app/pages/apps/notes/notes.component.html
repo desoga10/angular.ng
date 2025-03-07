@@ -1,0 +1,113 @@
+<mat-card class="mat-card-top notes-app cardWithShadow overflow-hidden">
+  <mat-sidenav-container
+    [ngClass]="{
+      'side-panel-opened': sidePanelOpened,
+      'side-panel-closed': !sidePanelOpened
+    }"
+    class="h-100"
+  >
+    <mat-sidenav
+      #noteslist
+      [mode]="isOver() ? 'over' : 'side'"
+      [opened]="!isOver()"
+      (open)="sidePanelOpened = true"
+      (close)="sidePanelOpened = false"
+      style="width: 290px"
+    >
+      <ng-scrollbar class="position-relative" style="height: 100%">
+        <mat-toolbar class="bg-white">
+          <div class="row m-t-24">
+            <div class="col-12">
+              <mat-form-field appearance="outline" class="w-100 hide-hint">
+                <input
+                  matInput
+                  type="text"
+                  (keyup)="applyFilter($event)"
+                  placeholder="Search Notes"
+                />
+                <mat-icon matSuffix>
+                  <i-tabler name="search" class="icon-20"></i-tabler>
+                </mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-toolbar>
+        <h4 class="mat-subtitle-1 f-s-16 f-w-600 p-16 m-t-16">All Notes</h4>
+
+        <mat-nav-list class="p-x-16">
+          @if(notes.length > 0) { @for(note of notes; track note.title) {
+          <mat-list-item
+            class="notes-item rounded m-b-8 bg-light-{{ note.color }}"
+            (click)="onSelect(note)"
+            [class.selected]="note === selectedNote"
+            lines="3"
+          >
+            <span
+              class="note-title mat-subtitle-1 f-w-500 text-{{ note.color }}"
+              matListItemTitle
+              >{{ note.title }}</span
+            >
+            <div class="d-flex justify-content-between">
+              <span class="note-time f-s-12 f-w-500">{{
+                note.datef | date
+              }}</span>
+              <span
+                (click)="removenote(note)"
+                class="remove-note"
+                matTooltip="Delete"
+              >
+                <i-tabler name="trash" class="icon-16"></i-tabler>
+              </span>
+            </div>
+          </mat-list-item>
+          } } @else {
+          <p class="m-b-0 text-center font-18 font-bold m-t-40">
+            No Notes Found
+          </p>
+          }
+        </mat-nav-list>
+      </ng-scrollbar>
+    </mat-sidenav>
+    <mat-toolbar class="bg-white b-b-1">
+      <div class="d-flex align-items-center justify-content-between w-100">
+        <button (click)="noteslist.toggle()" class="d-flex" mat-icon-button>
+          <i-tabler name="menu-2" class="icon-20"></i-tabler>
+        </button>
+
+        <button mat-flat-button color="primary" (click)="addNoteClick()">
+          Add Notes
+        </button>
+      </div>
+    </mat-toolbar>
+    <mat-card-content class="p-24">
+      @if(notes.length > 0) {
+      <div>
+        <h4 class="mat-subtitle-1 f-s-16 f-w-600 m-y-16">Edit Note</h4>
+        <mat-form-field appearance="outline" class="w-100">
+          <textarea
+            matInput
+            [(ngModel)]="selectedNote.title"
+            rows="5"
+            class="note-content"
+          ></textarea>
+        </mat-form-field>
+        <h4 class="mat-subtitle-1 f-s-16 f-w-600 m-y-16">Change Note Color</h4>
+        <div class="d-flex align-items-center">
+          @for(c of colors; track c.colorName) {
+          <div>
+            <button
+              mat-mini-fab
+              class="bg-{{ c.colorName }} rounded-circle icon-28 m-r-8 notes-icon"
+              (click)="onSelectColor(c.colorName)"
+              [class.selected]="c.colorName === clrName"
+            >
+            <i class="iconify f-s-18" data-icon="solar:check-circle-bold-duotone"></i>
+          </button>
+          </div>
+          }
+        </div>
+      </div>
+      }
+    </mat-card-content>
+  </mat-sidenav-container>
+</mat-card>

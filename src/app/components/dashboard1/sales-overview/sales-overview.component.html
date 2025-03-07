@@ -1,0 +1,22 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>Sales Overview</mat-card-title>
+    <mat-card-subtitle>Last 7 days</mat-card-subtitle>
+
+    <div class="position-relative labels-chart m-t-12">
+      <span class="f-s-13 mat-body-2 label-1">0%</span>
+      <span class="f-s-13 mat-body-2 label-2">25%</span>
+      <span class="f-s-13 mat-body-2 label-3">50%</span>
+      <span class="f-s-13 mat-body-2 label-4">75%</span>
+      <apx-chart
+        [series]="salesoverviewChart.series"
+        [chart]="salesoverviewChart.chart"
+        [plotOptions]="salesoverviewChart.plotOptions"
+        [legend]="salesoverviewChart.legend"
+        [stroke]="salesoverviewChart.stroke"
+        [colors]="salesoverviewChart.colors"
+        [tooltip]="salesoverviewChart.tooltip"
+      ></apx-chart>
+    </div>
+  </mat-card-content>
+</mat-card>

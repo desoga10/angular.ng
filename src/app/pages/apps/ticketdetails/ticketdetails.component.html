@@ -1,0 +1,143 @@
+<div fxLayout="row wrap">
+  <div fxFlex.gt-lg="75" fxFlex.gt-md="60" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Ticket</mat-card-title>
+        <p class="lh-md">
+          Hi There, i was wondering, do you provide a service to build custom
+          pages. I need some pages for a ticket system similar to the one you
+          have. Please advise if you provide this service and i will send
+          through my requirements. Regards.
+        </p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Ticket Replies</mat-card-title>
+        <div class="hstack gap-2 align-items-center m-t-25 p-b-20 p-t-20">
+          <img
+            class="m-r-16 shrink-none rounded-circle"
+            src="assets/images/users/2.jpg"
+            width="60"
+            alt="Generic placeholder image"
+          />
+          <div>
+            <h5 class="m-t-0 m-b-0 mat-subheading-1 f-w-500">User Name</h5>
+            <p class="m-b-0 text-muted lh-md">
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+              scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+              nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </p>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="hstack gap-2 align-items-center m-t-25 p-b-20 p-t-20">
+          <img
+            class="m-r-16 shrink-none rounded-circle"
+            src="assets/images/users/1.jpg"
+            width="60"
+            alt="Generic placeholder image"
+          />
+          <div>
+            <h5 class="m-t-0 m-b-0 mat-subheading-1 f-w-500">User Name</h5>
+            <p class="m-b-0 text-muted lh-md">
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+              scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+              nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </p>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="hstack gap-2 align-items-center m-t-25 p-b-20 p-t-20">
+          <img
+            class="m-r-16 shrink-none rounded-circle"
+            src="assets/images/users/3.jpg"
+            width="60"
+            alt="Generic placeholder image"
+          />
+          <div>
+            <h5 class="m-t-0 m-b-0 mat-subheading-1 f-w-500">User Name</h5>
+            <p class="m-b-0 text-muted lh-md">
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+              scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+              nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title class="m-b-20">Write a reply</mat-card-title>
+        <form method="post">
+          <angular-editor id="editor1" [(ngModel)]="htmlContent1" [config]="config1" (ngModelChange)="onChange($event)"
+                  (blur)="onBlur($event)"></angular-editor>
+          <button mat-flat-button class="m-t-20 m-r-5" color="primary">
+            Reply
+          </button>
+          <button mat-flat-button class="m-t-20" color="accent">
+            Reply & close
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-lg="25" fxFlex.gt-md="40" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title class="m-b-0">Ticket Info</mat-card-title>
+      </mat-card-content>
+      <mat-card-content class="bg-light-inverse">
+        <mat-chip selected color="accent">In Progress</mat-chip>
+      </mat-card-content>
+      <mat-card-content>
+        <h5 class="mat-subheading-1 m-b-5">Ticket Creator</h5>
+        <span class="text-muted">User Name</span>
+        <h5 class="mat-subheading-1 m-t-30 m-b-5">Support Staff</h5>
+        <span class="text-muted">Agent Name</span>
+        <br />
+        <button mat-flat-button class="m-t-20" color="primary">
+          Update
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content class="text-center">
+        <mat-card-title>User Info</mat-card-title>
+        <div class="profile-pic m-b-20 m-t-20">
+          <img
+            src="assets/images/users/5.jpg"
+            width="150"
+            class="rounded-circle"
+            alt="user"
+          />
+          <h4 class="m-t-20 mat-subheading-1 m-b-0">Daniel Kristeen</h4>
+          <a href="mailto:danielkristeen@gmail.com" class="link">danielkristeen@gmail.com</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Ticket Statestics</mat-card-title>
+        <div id="ticket-chart">
+          <apx-chart
+            [series]="ticketstatus.series"
+            [chart]="ticketstatus.chart"
+            [labels]="ticketstatus.labels"
+            [responsive]="ticketstatus.responsive"
+            [tooltip]="ticketstatus.tooltip"
+            [legend]="ticketstatus.legend"
+            [colors]="ticketstatus.colors"
+            [dataLabels]="ticketstatus.dataLabels"
+            [plotOptions]="ticketstatus.plotOptions"
+            [stroke]="ticketstatus.stroke"
+          >
+          </apx-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

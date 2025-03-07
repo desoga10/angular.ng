@@ -1,0 +1,50 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>Your Performance</mat-card-title>
+    <mat-card-subtitle>Last check on 25 february</mat-card-subtitle>
+    <div class="row m-t-12">
+      <div class="col-sm-6 m-t-4">
+        @for(performanceList of performanceLists; track performanceList.title) {
+        <div class="hstack align-items-center m-t-20">
+          <div
+            class="rounded icon-48 bg-light-{{
+              performanceList.color
+            }} d-flex align-items-center flex-shrink-0 justify-content-center"
+          >
+            <span
+              class="iconify f-s-24 text-{{ performanceList.color }}"
+              [attr.data-icon]="performanceList.icon"
+            ></span>
+          </div>
+          <div>
+            <h6 class="mat-subtitle-1 f-s-15 f-w-600 text-nowrap">
+              {{ performanceList.title }}
+            </h6>
+            <span class="mat-body-1">{{ performanceList.subtext }}</span>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="col-sm-6 text-center">
+        <div style="height: 105px">
+          <apx-chart
+            [series]="yourperformanceChart.series"
+            [labels]="yourperformanceChart.labels"
+            [chart]="yourperformanceChart.chart"
+            [plotOptions]="yourperformanceChart.plotOptions"
+            [legend]="yourperformanceChart.legend"
+            [dataLabels]="yourperformanceChart.dataLabels"
+            [stroke]="yourperformanceChart.stroke"
+            [colors]="yourperformanceChart.colors"
+            [tooltip]="yourperformanceChart.tooltip"
+            [responsive]="yourperformanceChart.responsive"
+          ></apx-chart>
+        </div>
+        <h2 class="f-s-30 f-w-600 mat-subtitle-1">275</h2>
+        <p class="m-b-0 mat-body-1 f-s-14 m-t-4">
+          Learn insigs how to manage all aspects of your startup.
+        </p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

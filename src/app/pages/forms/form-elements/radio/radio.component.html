@@ -1,0 +1,55 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Radio</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>Basic</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="1" color="primary"
+            >Option 1</mat-radio-button
+          >
+          <mat-radio-button value="2" color="primary"
+            >Option 2</mat-radio-button
+          >
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title>ngModel</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <label
+          id="example-radio-group-label"
+          class="f-w-600 d-block mat-subtitle-2"
+          >Pick your favorite season</label
+        >
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="favoriteSeason"
+        >
+          @for(season of seasons; track season) {
+          <mat-radio-button
+            class="example-radio-button"
+            color="primary"
+            [value]="season"
+          >
+            {{ season }}
+          </mat-radio-button>
+          }
+        </mat-radio-group>
+        <div class="p-24 rounded bg-light-primary m-t-16">
+          <div class="f-w-600 mat-subtitle-2">
+            Your favorite season is: {{ favoriteSeason }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,23 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">Column Chart</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <apx-chart
+          [series]="columnChartOptions.series"
+          [chart]="columnChartOptions.chart"
+          [xaxis]="columnChartOptions.xaxis"
+          [yaxis]="columnChartOptions.yaxis"
+          [grid]="columnChartOptions.grid"
+          [stroke]="columnChartOptions.stroke"
+          [tooltip]="columnChartOptions.tooltip"
+          [plotOptions]="columnChartOptions.plotOptions"
+          [dataLabels]="columnChartOptions.dataLabels"
+          [legend]="columnChartOptions.legend"
+          [colors]="columnChartOptions.colors"
+          [markers]="columnChartOptions.markers"
+        >
+        </apx-chart>
+    </mat-card-content>
+  </mat-card>
+  

@@ -1,0 +1,289 @@
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- Right sidebar of task -->
+<!-- -------------------------------------------------------------------------------------- -->
+<div class="app-sidebar card" id="rightMenu">
+  @if(selectedST !== null) {
+  <div>
+    <!-- -------------------------------------------------------------------------------------- -->
+    <!-- Header of sidebar -->
+    <!-- -------------------------------------------------------------------------------------- -->
+    <div class="d-flex p-3 border-bottom card-header">
+      @if(selectedST) {
+      <div class="d-flex align-items-center">
+        <input
+          type="checkbox"
+          class="custom-checkbox-width"
+          [(ngModel)]="selectedST.status"
+          (change)="checkboxValue($event, selectedST)"
+        />
+        @if(selectedST.status) {
+
+        <label class="ml-3 mb-0 text-dark font-medium"
+          >MARK AS INCOMPLETE</label
+        >
+        } @if(!selectedST.status) {
+        <label class="ml-3 mb-0 text-dark font-medium">MARK AS COMPLETE</label>
+        }
+      </div>
+      }
+
+      <div class="ml-auto">
+        <a
+          href="javascript:void(0)"
+          class="text-danger"
+          (click)="closeRightMenu()"
+          ><i class="ti-close"></i
+        ></a>
+      </div>
+    </div>
+    <!-- ./  Header of sidebar -->
+    <!-- -------------------------------------------------------------------------------------- -->
+    <!-- Body of sidebar -->
+    <!-- -------------------------------------------------------------------------------------- -->
+    <div class="p-4">
+      @if(selectedST) {
+      <form>
+        <div class="form-group">
+          <label>{{ titleTaskSection }} Title</label>
+          <textarea
+            class="form-control"
+            name="title"
+            rows="3"
+            [(ngModel)]="selectedST.title"
+          ></textarea>
+        </div>
+        <div class="form-group row">
+          <div class="col">
+            <label> Priority</label>
+            <select
+              class="form-control"
+              name="priority"
+              [(ngModel)]="selectedST.priority"
+            >
+              <option value="low">Low</option>
+              <option value="normal">Normal</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Due Date</label>
+            <div class="form-group">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="Due Date"
+                  name="d2"
+                  #c2="ngModel"
+                  [(ngModel)]="selectedST.dueDate"
+                  ngbDatepicker
+                  #d2="ngbDatepicker"
+                />
+
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="d2.toggle()"
+                    type="button"
+                  >
+                    <i class="fas fa-calendar-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea
+            class="form-control"
+            name="notes"
+            rows="5"
+            [(ngModel)]="selectedST.notes"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <button
+            type="button"
+            class="btn btn-success btn-block"
+            (click)="closeRightMenu()"
+          >
+            <i class="ti-save mr-1"></i>Save {{ titleTaskSection }}
+          </button>
+        </div>
+        <div class="form-group">
+          <button
+            type="button"
+            class="btn btn-danger btn-block"
+            (click)="deleteClick(selectedST)"
+          >
+            <i class="ti-trash mr-1"></i>Delete {{ titleTaskSection }}
+          </button>
+        </div>
+      </form>
+      }
+    </div>
+    <!-- ./ Body of sidebar -->
+  </div>
+  }
+</div>
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- Task header -->
+<!-- -------------------------------------------------------------------------------------- -->
+
+<div class="d-md-flex align-items-center mt-2 bg-white p-3">
+  <div>
+    <h3 class="mb-0">Tasks</h3>
+  </div>
+
+  <div class="ml-auto">
+    <!-- Add Task -->
+    <!-- <button type="button" class="btn btn-cyan text-white" (click)='addTaskSection("task")'><i
+                class="fas fa-plus mr-1"></i>
+            Add Task</button> -->
+
+    <button mat-raised-button color="primary" (click)="addTaskSection('task')">
+      Add Task
+    </button>
+    <!-- Add new section -->
+    <!-- <button type="button" class="btn btn-dark ml-3" (click)='addTaskSection("section")'><i
+                class="fas fa-plus mr-1"></i> Add
+            Section</button> -->
+    <button
+      mat-raised-button
+      color="secondary"
+      (click)="addTaskSection('section')"
+    >
+      Add Section
+    </button>
+  </div>
+</div>
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- Listing of no. of Tasks -->
+<!-- -------------------------------------------------------------------------------------- -->
+
+<div
+  class="d-md-flex align-items-center justify-content-between border-top border-bottom bg-white p-2"
+>
+  <!-- No. of Incomplete task -->
+  <a
+    href="javascript:void(0)"
+    class="d-flex align-items-center p-2 rounded-pill bg-light"
+  >
+    <span class="badge badge-danger badge-pill px-3 font-weight-bold font-14">{{
+      count
+    }}</span>
+    <h5 class="mb-0 ml-1 text-dark">Incomplete Task(s)</h5>
+  </a>
+  <!-- No. of complete task -->
+  <a
+    href="javascript:void(0)"
+    class="d-flex align-items-center p-2 rounded-pill bg-light mt-3 mt-md-0"
+  >
+    <span
+      class="badge badge-success badge-pill px-3 font-weight-bold font-14"
+      >{{ completedcount }}</span
+    >
+    <h5 class="mb-0 ml-1 text-dark">Complete Task(s)</h5>
+  </a>
+  <!-- No. of Total task -->
+  <a
+    href="javascript:void(0)"
+    class="d-flex align-items-center p-2 rounded-pill bg-light mt-3 mt-md-0"
+  >
+    <span class="badge badge-info badge-pill px-3 font-weight-bold font-14">{{
+      totalcount
+    }}</span>
+    <h5 class="mb-0 ml-1 text-dark">Total Task(s)</h5>
+  </a>
+</div>
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- Listing of available tasks -->
+<!-- -------------------------------------------------------------------------------------- -->
+
+<div cdkDropList (cdkDropListDropped)="drop($event)" class="bg-white">
+  @for(st of sectionTask; track st.title; let i = $index) {
+  <div cdkDrag class="drag-list">
+    <!-- If the section is available and on click add border on left side -->
+    @if(st.sectionTaskType === 'section') {
+    <div>
+      <div
+        class="bg-light text-dark cursor p-3 d-flex align-items-center"
+        (click)="sectionTaskSelected(st)"
+        [ngStyle]="{ 'border-left': st.border ? '3px solid #2962ff' : 'none' }"
+      >
+        <i class="mdi mdi-drag-vertical font-20 drag-icon my-n2"></i>
+        <div class="font-weight-bold font-18">{{ st.title }}</div>
+      </div>
+    </div>
+    }
+
+    <!-- ./If the section is available and on click add border on left side -->
+
+    <!-- If the list is available and on click add border on left side -->
+    @if(st.sectionTaskType === 'task') {
+    <div
+      class="d-md-flex align-items-center p-3 cursor border-bottom"
+      [ngStyle]="{ 'border-left': st.border ? '3px solid #2962ff' : 'none' }"
+    >
+      <div class="cursor d-flex align-items-center">
+        <div class="flex-shrink-0 d-flex align-items-center">
+          <i class="mdi mdi-drag-vertical font-20 drag-icon my-n2"></i>
+          <!-- checkbox -->
+          <!-- <input type="checkbox" class="mr-2 custom-checkbox-width" [checked]='st.status'
+                          (change)="checkboxValue($event,st)"> -->
+          <span class="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="check{{ i }}"
+              [checked]="st.status"
+              (change)="checkboxValue($event, st)"
+            />
+            <label class="custom-control-label" for="check{{ i }}"> </label>
+          </span>
+        </div>
+        <!-- If task is completed [Title] -->
+        @if(st.status) {
+        <span (click)="sectionTaskSelected(st)">
+          <span class="text-muted font-16 text-decoration-linethrougth">{{
+            st.title
+          }}</span>
+        </span>
+        }
+
+        <!-- If task is not completed [Title] -->
+        @if(!st.status) {
+        <div (click)="sectionTaskSelected(st)">
+          <span class="font-16"> {{ st.title }}</span>
+        </div>
+        }
+      </div>
+      <!-- priority of tasks -->
+      <div class="ml-auto mt-3 mt-md-0" (click)="sectionTaskSelected(st)">
+        <div class="d-flex align-items-center justify-content-center">
+          @if(st.priority === 'low') {
+          <span class="mr-3 text-success font-medium text-center">
+            <i class="fas fa-caret-down mr-1 font-18 d-block"></i> low
+          </span>
+          } @if(st.priority === 'high') {
+          <span class="mr-3 text-danger font-medium text-center">
+            <i class="fas fa-caret-up mr-1 font-18 d-block"></i> high
+          </span>
+          }
+
+          <div class="ml-auto text-center border-left pl-3">
+            <i class="fas fa-calendar mr-1 d-block text-dark"></i>
+            <span class="font-medium text-muted">{{ st.dueDate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- ./ If the list is available and on click add border on left side -->
+  </div>
+  }
+</div>

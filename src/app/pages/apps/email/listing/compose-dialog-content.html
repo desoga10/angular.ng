@@ -1,0 +1,47 @@
+<h3 mat-dialog-title class="m-b-24">Compose Email</h3>
+<mat-dialog-content style="max-width: 600px">
+  <form class="basic-form">
+    <div class="row">
+      <div class="col-12">
+        <mat-label class="f-s-14 f-w-600 m-b-12 d-block"
+          >To</mat-label
+        >
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput formControlName="mailTo" />
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-label class="f-s-14 f-w-600 m-b-12 d-block"
+          >Subject</mat-label
+        >
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput formControlName="mailSubject" />
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-label class="f-s-14 f-w-600 m-b-12 d-block"
+          >Message</mat-label
+        >
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <textarea matInput rows="4"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-label class="f-s-14 f-w-600 m-b-12 d-block"
+          >Attachment</mat-label
+        >
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <ngx-mat-file-input [formControl]="fileControl"> </ngx-mat-file-input>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-divider></mat-divider>
+<mat-dialog-actions class="p-24">
+  <button mat-raised-button color="primary" mat-dialog-close>Send</button>
+  <button mat-raised-button color="accent" mat-dialog-close class="m-l-8">
+    Save as a Draft
+  </button>
+</mat-dialog-actions>

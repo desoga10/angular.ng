@@ -1,0 +1,64 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <span class="f-w-600 f-s-15 mat-body-1 d-block m-b-8">
+      Frankfurter API:
+    </span>
+    <div>
+      <div class="table-responsive">
+        <table class="table table-hover b-1 no-wrap w-100 rounded">
+          <thead>
+            <tr>
+              <th class="p-16">Amount</th>
+              <th class="p-16">From Currency</th>
+              <th class="p-16">To Currency</th>
+              <th class="p-16">Result</th>
+              <th class="p-16"></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td class="p-16">
+                <mat-form-field appearance="outline" class="w-100 hide-hint">
+                  <input type="number" matInput class="form-control" />
+                </mat-form-field>
+              </td>
+              <td class="p-16">
+                <mat-form-field appearance="outline" class="w-100 hide-hint" color="primary">
+                  <mat-label>Category</mat-label>
+                  <mat-select required [value]="selectedCategory" (selectionChange)="ddlChange($event)">
+                    <mat-option value="All" selected>All</mat-option>
+                    <mat-option value="Web">Web</mat-option>
+                    <mat-option value="Android">Android</mat-option>
+                    <mat-option value="Angular">Angular</mat-option>
+                    <mat-option value="Design">Design</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+
+              <td class="p-16">
+                <mat-form-field appearance="outline" class="w-100 hide-hint" color="primary">
+                  <mat-label>Category</mat-label>
+                  <mat-select required [value]="selectedCategory" (selectionChange)="ddlChange($event)">
+                    <mat-option value="All" selected>All</mat-option>
+                    <mat-option value="Web">Web</mat-option>
+                    <mat-option value="Android">Android</mat-option>
+                    <mat-option value="Angular">Angular</mat-option>
+                    <mat-option value="Design">Design</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+
+              <td class="p-16">
+                <mat-form-field appearance="outline" class="w-100 hide-hint">
+                  <input [disabled]="true" matInput matInput class="form-control" value="100" />
+                </mat-form-field>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

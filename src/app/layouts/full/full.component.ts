@@ -16,8 +16,7 @@ import { SidebarComponent } from './vertical/sidebar/sidebar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { HeaderComponent } from './vertical/header/header.component';
-import { AppHorizontalHeaderComponent } from './horizontal/header/header.component';
-import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.component';
+
 import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
 
@@ -36,7 +35,6 @@ interface apps {
   link: string;
 }
 
-
 @Component({
   selector: 'app-full',
   standalone: true,
@@ -49,8 +47,6 @@ interface apps {
     NgScrollbarModule,
     TablerIconsModule,
     HeaderComponent,
-    AppHorizontalHeaderComponent,
-    AppHorizontalSidebarComponent,
     AppBreadcrumbComponent,
     CustomizerComponent,
   ],
@@ -147,7 +143,7 @@ export class FullComponent implements OnInit {
       subtitle: 'Create new course',
       link: '/apps/courses',
     },
-  ]
+  ];
 
   constructor(
     private settings: CoreService,

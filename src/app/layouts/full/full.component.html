@@ -1,9 +1,5 @@
 <span [dir]="options.dir!">
-  <mat-sidenav-container
-    class="mainWrapper"
-    autosize
-    autoFocus
-    [ngClass]="{
+  <mat-sidenav-container class="mainWrapper" autosize autoFocus [ngClass]="{
       'sidebarNav-mini':
         options.sidenavCollapsed && options.navPos !== 'top' && !resView,
       'sidebarNav-horizontal': options.horizontal,
@@ -14,30 +10,19 @@
       purple_theme: options.activeTheme == 'purple_theme',
       green_theme: options.activeTheme == 'green_theme',
       cyan_theme: options.activeTheme == 'cyan_theme'
-    }"
-  >
+    }">
     <!-- ============================================================== -->
     <!-- Vertical Sidebar -->
     <!-- ============================================================== -->
     @if (!options.horizontal) {
-    <mat-sidenav
-      #leftsidenav
-      [mode]="isOver ? 'over' : 'side'"
-      [opened]="
+    <mat-sidenav #leftsidenav [mode]="isOver ? 'over' : 'side'" [opened]="
         options.navPos === 'side' &&
         options.sidenavOpened &&
         !isOver &&
         !resView
-      "
-      (openedChange)="onSidenavOpenedChange($event)"
-      (closedStart)="onSidenavClosedStart()"
-      class="sidebarNav"
-    >
+      " (openedChange)="onSidenavOpenedChange($event)" (closedStart)="onSidenavClosedStart()" class="sidebarNav">
       <div class="flex-layout">
-        <app-sidebar
-          (toggleMobileNav)="sidenav.toggle()"
-          [showToggle]="isOver"
-        ></app-sidebar>
+        <app-sidebar (toggleMobileNav)="sidenav.toggle()" [showToggle]="isOver"></app-sidebar>
         <ng-scrollbar class="position-relative" style="height: 100%">
           <mat-nav-list class="sidebar-list">
             @for(item of navItems; track item) {
@@ -54,14 +39,8 @@
     <!-- horizontal Sidebar -->
     <!-- ============================================================== -->
     @if (resView) {
-    <mat-sidenav
-      #leftsidenav
-      [mode]="'over'"
-      [opened]="options.sidenavOpened && !isTablet"
-      (openedChange)="onSidenavOpenedChange($event)"
-      (closedStart)="onSidenavClosedStart()"
-      class="sidebarNav"
-    >
+    <mat-sidenav #leftsidenav [mode]="'over'" [opened]="options.sidenavOpened && !isTablet"
+      (openedChange)="onSidenavOpenedChange($event)" (closedStart)="onSidenavClosedStart()" class="sidebarNav">
       <app-sidebar> </app-sidebar>
       <ng-scrollbar class="position-relative" style="height: 100%">
         <mat-nav-list class="sidebar-list">
@@ -82,46 +61,34 @@
       <!-- VerticalHeader -->
       <!-- ============================================================== -->
       @if (!options.horizontal) {
-      <app-header
-        [showToggle]="!isOver"
-        (toggleCollapsed)="toggleCollapsed()"
-        (toggleMobileNav)="sidenav.toggle()"
-        (toggleMobileFilterNav)="filterNavRight.toggle()"
-      ></app-header>
+      <app-header [showToggle]="!isOver" (toggleCollapsed)="toggleCollapsed()" (toggleMobileNav)="sidenav.toggle()"
+        (toggleMobileFilterNav)="filterNavRight.toggle()"></app-header>
       } @else {
       <!-- horizontal header -->
-      <app-horizontal-header
-        (toggleMobileNav)="sidenav.toggle()"
-        (toggleMobileFilterNav)="filterNavRight.toggle()"
-      ></app-horizontal-header>
+
       } @if(options.horizontal) {
-      <app-horizontal-sidebar></app-horizontal-sidebar>
+      <!-- <app-horizontal-sidebar></app-horizontal-sidebar> -->
       }
       <div class="body-wrapper">
-        <main
-          class="pageWrapper"
-          [ngClass]="{
+        <main class="pageWrapper" [ngClass]="{
             maxWidth: options.boxed
-          }"
-        >
+          }">
           <app-breadcrumb></app-breadcrumb>
           <!-- ============================================================== -->
           <!-- Outlet -->
           <!-- ============================================================== -->
           <router-outlet></router-outlet>
-          <div class="customizerBtn">
+          <!-- <div class="customizerBtn">
             <button mat-fab color="warn" (click)="customizerRight.toggle()">
               <mat-icon>settings</mat-icon>
             </button>
-          </div>
+          </div> -->
         </main>
       </div>
     </mat-sidenav-content>
 
     <mat-sidenav #customizerRight mode="over" position="end">
-      <div
-        class="p-x-16 p-y-20 d-flex align-items-center justify-content-between"
-      >
+      <div class="p-x-16 p-y-20 d-flex align-items-center justify-content-between">
         <h3 class="mat-subtitle-1 f-s-21 f-w-600">Settings</h3>
         <button class="d-lg-none" mat-button (click)="customizerRight.toggle()">
           Close
@@ -141,43 +108,25 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="branding">
           <a href="/">
-            <img
-              src="./assets/images/logos/logo.svg"
-              class="align-middle m-2"
-              alt="logo"
-            />
+            <img src="./assets/images/logos/logo.svg" class="align-middle m-2" alt="logo" />
           </a>
         </div>
-        <button
-          mat-icon-button
-          (click)="filterNavRight.toggle()"
-          class="d-flex justify-content-center"
-        >
+        <button mat-icon-button (click)="filterNavRight.toggle()" class="d-flex justify-content-center">
           <i-tabler name="x" class="icon-18 d-flex"></i-tabler>
         </button>
       </div>
       <div class="row p-x-16">
         @for(appdd of apps; track appdd.title) {
         <div class="col-12 text-hover-primary">
-          <a
-            [routerLink]="[appdd.link]"
-            class="d-flex align-items-center text-decoration-none m-b-24"
-          >
-            <span
-              class="text-{{ appdd.color }} bg-light-{{
+          <a [routerLink]="[appdd.link]" class="d-flex align-items-center text-decoration-none m-b-24">
+            <span class="text-{{ appdd.color }} bg-light-{{
                 appdd.color
-              }} rounded icon-48 d-flex align-items-center justify-content-center"
-            >
-              <span
-                class="iconify icon-20"
-                [attr.data-icon]="appdd.icon"
-              ></span>
+              }} rounded icon-48 d-flex align-items-center justify-content-center">
+              <span class="iconify icon-20" [attr.data-icon]="appdd.icon"></span>
             </span>
 
             <div class="m-l-16">
-              <h5
-                class="f-s-15 f-w-600 m-0 textprimary mat-subtitle-1 hover-text"
-              >
+              <h5 class="f-s-15 f-w-600 m-0 textprimary mat-subtitle-1 hover-text">
                 {{ appdd.title }}
               </h5>
               <span class="mat-body-1 f-s-13">{{ appdd.subtitle }}</span>
@@ -186,7 +135,7 @@
         </div>
         }
       </div>
-     
+
     </div>
   </mat-drawer>
 </span>

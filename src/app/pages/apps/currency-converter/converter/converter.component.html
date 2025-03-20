@@ -20,38 +20,35 @@
             <tr>
               <td class="p-16">
                 <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input type="number" matInput class="form-control" />
+                  <input type="number" matInput class="form-control" [(ngModel)]="amountValue"
+                    [ngModelOptions]="{standalone: true}" />
                 </mat-form-field>
               </td>
               <td class="p-16">
                 <mat-form-field appearance="outline" class="w-100 hide-hint" color="primary">
-                  <mat-label>Category</mat-label>
-                  <mat-select required [value]="selectedCategory" (selectionChange)="ddlChange($event)">
-                    <mat-option value="All" selected>All</mat-option>
-                    <mat-option value="Web">Web</mat-option>
-                    <mat-option value="Android">Android</mat-option>
-                    <mat-option value="Angular">Angular</mat-option>
-                    <mat-option value="Design">Design</mat-option>
+                  <mat-label>Select Currency</mat-label>
+                  <mat-select [(ngModel)]="fromValue" [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let currency of currencies" [value]="currency">
+                      {{ currency }}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
               </td>
 
               <td class="p-16">
                 <mat-form-field appearance="outline" class="w-100 hide-hint" color="primary">
-                  <mat-label>Category</mat-label>
-                  <mat-select required [value]="selectedCategory" (selectionChange)="ddlChange($event)">
-                    <mat-option value="All" selected>All</mat-option>
-                    <mat-option value="Web">Web</mat-option>
-                    <mat-option value="Android">Android</mat-option>
-                    <mat-option value="Angular">Angular</mat-option>
-                    <mat-option value="Design">Design</mat-option>
+                  <mat-label>Select Currency</mat-label>
+                  <mat-select [(ngModel)]="toValue" [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let currency of currencies" [value]="currency" selected>{{ currency
+                      }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </td>
 
               <td class="p-16">
                 <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input [disabled]="true" matInput matInput class="form-control" value="100" />
+                  <input type="number" [disabled]="true" matInput matInput class="form-control"
+                    value={{this.result()}} />
                 </mat-form-field>
               </td>
             </tr>
@@ -60,5 +57,15 @@
         </table>
       </div>
     </div>
+
+    <br />
+
+    @if (this.result()) {
+    <div> <b>{{this.amountValue()}} {{this.fromCurrency()}} =
+        {{this.result()}} {{this.toValue()}} </b></div>
+    }
+
+    <button [disabled]="this.amountValue() === '' || this.fromValue() === '' || this.toValue() === ''"
+      (click)="onSubmit()" class="mt-5 f-w-500 f-s-12 btn-shadow text-nowrap" mat-button>Convert</button>
   </mat-card-content>
 </mat-card>

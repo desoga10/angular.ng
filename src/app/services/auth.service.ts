@@ -38,7 +38,7 @@ export class AuthService {
     const { data, error } = await this.supabase_client.auth.getSession();
 
     if (data.session?.user) {
-      this.router.navigate(['apps/converter']); // Redirect on success
+      this.router.navigate(['/']); // Redirect on success
     } else if (error) {
       alert('Error retrieving session: ' + error.message);
       this.router.navigate(['/landingpage']);

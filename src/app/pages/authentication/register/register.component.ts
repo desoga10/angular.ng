@@ -55,7 +55,7 @@ export class RegisterComponent {
       )
       .then((res) => {
         if (res.data.user.role === 'authenticated') {
-          this.router.navigate(['/apps/invoice']);
+          this.router.navigate(['/']);
         }
       })
       .catch((err) => {

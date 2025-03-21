@@ -27,9 +27,9 @@ export class AuthService {
     this.supabase_client.auth.onAuthStateChange((event, session) => {
       localStorage.setItem('session', JSON.stringify(session?.user));
 
-      // if (session?.user) {
-      //   this.router.navigate(['apps/converter']);
-      // }
+      if (session?.user) {
+        this.router.navigate(['apps/converter']);
+      }
     });
   }
 
@@ -38,7 +38,7 @@ export class AuthService {
     const { data, error } = await this.supabase_client.auth.getSession();
 
     if (data.session?.user) {
-      this.router.navigate(['/']); // Redirect on success
+      this.router.navigate(['apps/converter']); // Redirect on success
     } else if (error) {
       alert('Error retrieving session: ' + error.message);
       this.router.navigate(['/landingpage']);

@@ -63,7 +63,7 @@ export class AppLandingpageComponent {
       id: 1,
       icon: 'solar:cash-out-bold',
       title: 'Currency Converter',
-      subtitle: 'Converts various currencies of the world',
+      subtitle: 'Convert currency in seconds',
       link: '/apps/converter',
     },
   ];

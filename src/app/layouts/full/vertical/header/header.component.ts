@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,11 +12,12 @@ import { navItems } from '../sidebar/sidebar-data';
 import { TranslateService } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AppSettings } from 'src/app/config';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface notifications {
   id: number;
@@ -61,8 +63,21 @@ export class HeaderComponent {
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
   showFiller = false;
+
+  async logOut() {
+    this.auth
+      .signOut()
+      .then(() => {
+        this.router.navigate(['/landingpage']);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
 
   public selectedLanguage: any = {
     language: 'English',
@@ -105,7 +120,7 @@ export class HeaderComponent {
   }
 
   options = this.settings.getOptions();
-  
+
   setDark() {
     this.settings.toggleTheme();
   }
@@ -163,35 +178,6 @@ export class HeaderComponent {
       time: '7:03 AM',
       title: 'Event tomorrow',
       subtitle: 'Just a reminder that you have event',
-    },
-  ];
-
-  profiledd: profiledd[] = [
-    {
-      id: 1,
-      title: 'My Profile',
-      link: '/',
-    },
-    {
-      id: 2,
-      title: 'My Subscription',
-      link: '/',
-    },
-    {
-      id: 3,
-      title: 'My Invoice',
-      new: true,
-      link: '/',
-    },
-    {
-      id: 4,
-      title: ' Account Settings',
-      link: '/',
-    },
-    {
-      id: 5,
-      title: 'Sign Out',
-      link: '/authentication/login',
     },
   ];
 

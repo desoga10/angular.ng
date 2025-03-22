@@ -138,113 +138,22 @@ export class HeaderComponent {
     this.selectedLanguage = lang;
   }
 
-  notifications: notifications[] = [
-    {
-      id: 1,
-      icon: 'a-b-2',
-      color: 'primary',
-      time: '8:30 AM',
-      title: 'Launch Admin',
-      subtitle: 'Just see the my new admin!',
-    },
-    {
-      id: 2,
-      icon: 'calendar',
-      color: 'accent',
-      time: '8:21 AM',
-      title: 'Event today',
-      subtitle: 'Just a reminder that you have event',
-    },
-    {
-      id: 3,
-      icon: 'settings',
-      color: 'warning',
-      time: '8:05 AM',
-      title: 'Settings',
-      subtitle: 'You can customize this template',
-    },
-    {
-      id: 4,
-      icon: 'a-b-2',
-      color: 'success',
-      time: '7:30 AM',
-      title: 'Launch Templates',
-      subtitle: 'Just see the my new admin!',
-    },
-    {
-      id: 5,
-      icon: 'exclamation-circle',
-      color: 'error',
-      time: '7:03 AM',
-      title: 'Event tomorrow',
-      subtitle: 'Just a reminder that you have event',
-    },
-  ];
-
   apps: apps[] = [
     {
       id: 1,
-      icon: 'solar:chat-line-line-duotone',
+      icon: 'solar:cash-out-bold',
       color: 'primary',
-      title: 'Chat Application',
-      subtitle: 'Messages & Emails',
-      link: '/apps/chat',
+      title: 'Currency Converter',
+      subtitle: 'Convert currency in seconds',
+      link: '/apps/converter',
     },
     {
       id: 2,
-      icon: 'solar:checklist-minimalistic-line-duotone',
-      color: 'accent',
-      title: 'Todo App',
-      subtitle: 'Completed task',
-      link: '/apps/todo',
-    },
-    {
-      id: 3,
       icon: 'solar:bill-list-line-duotone',
       color: 'success',
       title: 'Invoice App',
       subtitle: 'Get latest invoice',
       link: '/apps/invoice',
-    },
-    {
-      id: 4,
-      icon: 'solar:calendar-line-duotone',
-      color: 'error',
-      title: 'Calendar App',
-      subtitle: 'Get Dates',
-      link: '/apps/calendar',
-    },
-    {
-      id: 5,
-      icon: 'solar:smartphone-2-line-duotone',
-      color: 'warning',
-      title: 'Contact Application',
-      subtitle: '2 Unsaved Contacts',
-      link: '/apps/contacts',
-    },
-    {
-      id: 6,
-      icon: 'solar:ticket-line-duotone',
-      color: 'primary',
-      title: 'Tickets App',
-      subtitle: 'Create new ticket',
-      link: '/apps/tickets',
-    },
-    {
-      id: 7,
-      icon: 'solar:letter-line-duotone',
-      color: 'accent',
-      title: 'Email App',
-      subtitle: 'Get new emails',
-      link: '/apps/email/inbox',
-    },
-    {
-      id: 8,
-      icon: 'solar:book-2-line-duotone',
-      color: 'warning',
-      title: 'Courses',
-      subtitle: 'Create new course',
-      link: '/apps/courses',
     },
   ];
 }

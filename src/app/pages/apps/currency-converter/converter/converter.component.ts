@@ -15,16 +15,22 @@ import { MatButtonModule } from '@angular/material/button';
 export class AppConverterComponent {
   selectedCategory = 'All';
   currencyService = inject(ConverterService);
-  amountValue = signal('');
-  fromValue = signal('');
-  toValue = signal('');
+  amountValueFrankFurther = signal('');
+  fromValueFrankFurther = signal('');
+  toValueFrankFurther = signal('');
+  amountValueExchangeRate = signal('');
+  fromValueExchangeRate = signal('');
+  toValueExchangeRate = signal('');
   // amount = signal<number>(1);
   // fromCurrency = signal<string>('USD');
   // toCurrency = signal<string>('EUR');
-  result = signal<number | null>(null);
-  fromCurrency = signal<string | null>(null);
-  toCurrency = signal<string | null>(null);
-  currencies = [
+  resultFrankFurther = signal<number | null>(null);
+  resultExchangeRate = signal<number | null>(null);
+  fromCurrencyFrankFurther = signal<string | null>(null);
+  fromCurrencyExchangeRate = signal<string | null>(null);
+  toCurrencyFrankFurther = signal<string | null>(null);
+  toCurrencyExchangeRate = signal<string | null>(null);
+  frankFurtherCurrencies = [
     'AUD',
     'BGN',
     'BRL',
@@ -58,23 +64,206 @@ export class AppConverterComponent {
     'ZAR',
   ];
 
-  onSubmit() {
-    console.log(this.amountValue());
-    console.log(this.fromValue());
-    console.log(this.toValue());
+  exchangeRateCurrencies = [
+    'AED',
+    'AFN',
+    'ALL',
+    'AMD',
+    'ANG',
+    'AOA',
+    'ARS',
+    'AUD',
+    'AWG',
+    'AZN',
+    'BAM',
+    'BBD',
+    'BDT',
+    'BGN',
+    'BHD',
+    'BIF',
+    'BMD',
+    'BND',
+    'BOB',
+    'BRL',
+    'BSD',
+    'BTN',
+    'BWP',
+    'BYN',
+    'BZD',
+    'CAD',
+    'CDF',
+    'CHF',
+    'CLP',
+    'CNY',
+    'COP',
+    'CRC',
+    'CUP',
+    'CVE',
+    'CZK',
+    'DJF',
+    'DKK',
+    'DOP',
+    'DZD',
+    'EGP',
+    'ERN',
+    'ETB',
+    'EUR',
+    'FJD',
+    'FKP',
+    'FOK',
+    'GBP',
+    'GEL',
+    'GGP',
+    'GHS',
+    'GIP',
+    'GMD',
+    'GNF',
+    'GTQ',
+    'GYD',
+    'HKD',
+    'HNL',
+    'HRK',
+    'HTG',
+    'HUF',
+    'IDR',
+    'ILS',
+    'IMP',
+    'INR',
+    'IQD',
+    'IRR',
+    'ISK',
+    'JEP',
+    'JMD',
+    'JOD',
+    'JPY',
+    'KES',
+    'KGS',
+    'KHR',
+    'KID',
+    'KMF',
+    'KRW',
+    'KWD',
+    'KYD',
+    'KZT',
+    'LAK',
+    'LBP',
+    'LKR',
+    'LRD',
+    'LSL',
+    'LYD',
+    'MAD',
+    'MDL',
+    'MGA',
+    'MKD',
+    'MMK',
+    'MNT',
+    'MOP',
+    'MRU',
+    'MUR',
+    'MVR',
+    'MWK',
+    'MXN',
+    'MYR',
+    'MZN',
+    'NAD',
+    'NGN',
+    'NIO',
+    'NOK',
+    'NPR',
+    'NZD',
+    'OMR',
+    'PAB',
+    'PEN',
+    'PGK',
+    'PHP',
+    'PKR',
+    'PLN',
+    'PYG',
+    'QAR',
+    'RON',
+    'RSD',
+    'RUB',
+    'RWF',
+    'SAR',
+    'SBD',
+    'SCR',
+    'SDG',
+    'SEK',
+    'SGD',
+    'SHP',
+    'SLE',
+    'SOS',
+    'SRD',
+    'SSP',
+    'STN',
+    'SYP',
+    'SZL',
+    'THB',
+    'TJS',
+    'TMT',
+    'TND',
+    'TOP',
+    'TRY',
+    'TTD',
+    'TVD',
+    'TWD',
+    'TZS',
+    'UAH',
+    'UGX',
+    'USD',
+    'UYU',
+    'UZS',
+    'VES',
+    'VND',
+    'VUV',
+    'WST',
+    'XAF',
+    'XCD',
+    'XDR',
+    'XOF',
+    'XPF',
+    'YER',
+    'ZAR',
+    'ZMW',
+    'ZWL',
+  ];
+
+  onSubmitFrankFurther() {
+    console.log(this.amountValueFrankFurther());
+    console.log(this.fromValueFrankFurther());
+    console.log(this.toValueFrankFurther());
 
     this.currencyService.conversionParameters(
-      this.amountValue(),
-      this.fromValue(),
-      this.toValue()
+      this.amountValueFrankFurther(),
+      this.fromValueFrankFurther(),
+      this.toValueFrankFurther()
     );
 
-    this.currencyService.convertCurrency().subscribe((response) => {
+    this.currencyService.frankConvertCurrency().subscribe((response) => {
       console.log(response);
-      this.result.set(response.rates[this.toValue()]);
-      this.fromCurrency.set(response.base);
-      this.toCurrency.set(this.toValue());
-      console.log(this.toValue());
+      this.resultFrankFurther.set(response.rates[this.toValueFrankFurther()]);
+      this.fromCurrencyFrankFurther.set(response.base);
+      this.toCurrencyFrankFurther.set(this.toValueFrankFurther());
+      console.log(this.toValueFrankFurther());
+    });
+  }
+
+  onSubmitExchangeRate() {
+    console.log(this.amountValueExchangeRate());
+    console.log(this.fromValueExchangeRate());
+    console.log(this.toValueExchangeRate());
+
+    this.currencyService.conversionParameters(
+      this.amountValueExchangeRate(),
+      this.fromValueExchangeRate(),
+      this.toValueExchangeRate()
+    );
+
+    this.currencyService.exchangeRateConvertCurrency().subscribe((response) => {
+      console.log(response);
+      this.resultExchangeRate.set(response.conversion_result);
+      this.fromCurrencyExchangeRate.set(response.base_code);
+      this.toCurrencyExchangeRate.set(response.target_code);
     });
   }
 }

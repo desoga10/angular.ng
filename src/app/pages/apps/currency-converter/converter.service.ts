@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { CurrencyData } from '../../../interface/api-response';
+import { FrankFurtherCurrencyData } from '../../../interface/api-response';
+import { ExchangeRateCurrencyData } from '../../../interface/api-response';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -12,15 +13,27 @@ export class ConverterService {
   fromX = signal('');
   toX = signal('');
 
-  convertCurrency() {
+  frankConvertCurrency() {
     console.log(this.amountX());
     console.log(this.fromX());
     console.log(this.toX());
 
-    return this.http.get<CurrencyData>(
+    return this.http.get<FrankFurtherCurrencyData>(
       `${
-        environment.API_URL
+        environment.FRANKFURTER_API_URL
       }/latest?base=${this.fromX()}&symbols=${this.toX()}&amount=${this.amountX()}`
+    );
+  }
+
+  exchangeRateConvertCurrency() {
+    console.log(this.amountX());
+    console.log(this.fromX());
+    console.log(this.toX());
+
+    return this.http.get<ExchangeRateCurrencyData>(
+      `${
+        environment.EXCHANGE_RATE_API_URL
+      }/${this.fromX()}/${this.toX()}/${this.amountX()}`
     );
   }
 

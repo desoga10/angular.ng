@@ -26,11 +26,8 @@ export class AuthService {
 
     this.supabase_client.auth.onAuthStateChange((event, session) => {
       localStorage.setItem('session', JSON.stringify(session?.user));
-
-      if (session?.user) {
-        this.router.navigate(['apps/converter']);
-      }
     });
+    this.handleOAuthCallback();
   }
 
   async handleOAuthCallback() {
@@ -39,7 +36,9 @@ export class AuthService {
 
     if (data.session?.user) {
       this.router.navigate(['apps/converter']); // Redirect on success
-    } else if (error) {
+    }
+
+    if (error) {
       alert('Error retrieving session: ' + error.message);
       this.router.navigate(['/landingpage']);
     }

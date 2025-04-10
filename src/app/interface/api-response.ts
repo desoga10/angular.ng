@@ -12,3 +12,12 @@ export interface ExchangeRateCurrencyData {
   conversion_rate: number;
   conversion_result: number;
 }
+
+export interface UsersAccountSettingData {
+  id?: string;
+  username: string;
+  full_name: string;
+  country: string;
+  phone_number: string;
+  address: string;
+}

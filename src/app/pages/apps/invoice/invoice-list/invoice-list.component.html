@@ -3,24 +3,14 @@
     <div class="row justify-content-between">
       <div class="col-sm-4">
         <mat-form-field appearance="outline" class="w-100 hide-hint">
-          <input
-            matInput
-            placeholder="Search Invoice"
-            (keyup)="filter($any($event.target).value)"
-          />
+          <input matInput placeholder="Search Invoice" />
           <mat-icon matSuffix>
             <i-tabler name="search" class="icon-20"></i-tabler>
           </mat-icon>
         </mat-form-field>
       </div>
       <div class="col-sm-4 d-flex align-items-center justify-content-end mt-xs-12 mt-lg-0">
-        <a
-          mat-button
-          [routerLink]="['/apps/addInvoice']"
-          mat-flat-button
-          color="primary"
-          >Add Invoice</a
-        >
+        <a mat-button [routerLink]="['/apps/addInvoice']" mat-flat-button color="primary">Add Invoice</a>
       </div>
     </div>
   </mat-card-content>
@@ -28,39 +18,20 @@
 
 <mat-card class="cardWithShadow">
   <div class="table-responsive">
-    <table
-      mat-table
-      [dataSource]="invoiceList"
-      matSort
-      class="no-wrap m-t-0 v-middle w-100"
-    >
+    <table mat-table matSort class="no-wrap m-t-0 v-middle w-100">
       <ng-container matColumnDef="chk">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox
-            [checked]="allComplete"
-            [indeterminate]="someComplete()"
-            (change)="setAll($event.checked)"
-            color="primary"
-          >
+          <mat-checkbox [checked]="allComplete" color="primary">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let element" class="f-s-14">
-          <mat-checkbox
-            [(ngModel)]="element.completed"
-            (ngModelChange)="updateAllComplete()"
-            color="primary"
-          >
+          <mat-checkbox [(ngModel)]="element.completed" color="primary">
           </mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="id">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="f-w-600 f-s-15"
-        >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="f-w-600 f-s-15">
           Id
         </th>
         <td mat-cell *matCellDef="let element" class="f-s-14">
@@ -69,12 +40,7 @@
       </ng-container>
 
       <ng-container matColumnDef="billFrom">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="f-w-600 f-s-15"
-        >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="f-w-600 f-s-15">
           Bill From
         </th>
         <td mat-cell *matCellDef="let element" class="f-s-14">
@@ -83,12 +49,7 @@
       </ng-container>
 
       <ng-container matColumnDef="billTo">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="f-w-600 f-s-15"
-        >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="f-w-600 f-s-15">
           Bill To
         </th>
         <td mat-cell *matCellDef="let element" class="f-s-14">
@@ -97,12 +58,7 @@
       </ng-container>
 
       <ng-container matColumnDef="totalCost">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="f-w-600 f-s-15"
-        >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="f-w-600 f-s-15">
           Total Cost
         </th>
         <td mat-cell *matCellDef="let element" class="f-s-14">
@@ -111,39 +67,37 @@
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          class="f-w-600 f-s-15"
-        >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="f-w-600 f-s-15">
           Status
         </th>
         <td mat-cell *matCellDef="let element" class="f-s-14">
           @if(element.status == 'Shipped') {
-            <span class="bg-light-warning text-warning mat-body-2 f-w-500 p-x-8 p-y-4 f-s-12 rounded-pill">Shipped</span>
-            }
+          <span class="bg-light-warning text-warning mat-body-2 f-w-500 p-x-8 p-y-4 f-s-12 rounded-pill">Shipped</span>
+          }
 
-            @if(element.status == 'Delivered') {
-            <span class="bg-light-success text-success mat-body-2 f-w-500 p-x-8 p-y-4 f-s-12 rounded-pill">Delivered</span>
-            }
+          @if(element.status == 'Delivered') {
+          <span
+            class="bg-light-success text-success mat-body-2 f-w-500 p-x-8 p-y-4 f-s-12 rounded-pill">Delivered</span>
+          }
 
-            @if(element.status == 'Pending') {
-            <span class="bg-light-error text-error mat-body-2 f-w-500 p-x-8 p-y-4 f-s-12 rounded-pill">Pending</span>
-            }
+          @if(element.status == 'Pending') {
+          <span class="bg-light-error text-error mat-body-2 f-w-500 p-x-8 p-y-4 f-s-12 rounded-pill">Pending</span>
+          }
 
-         
+
         </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-15">Action</th>
         <td mat-cell *matCellDef="let element" class="f-s-14 d-flex">
-          <a mat-icon-button [routerLink]="['/apps/viewInvoice/', element.id]" class="d-flex align-items-center justify-content-center">
+          <a mat-icon-button [routerLink]="['/apps/viewInvoice/', element.id]"
+            class="d-flex align-items-center justify-content-center">
             <i-tabler name="eye" class="icon-18 d-flex align-items-center"></i-tabler>
           </a>
 
-          <button mat-icon-button (click)="deleteInvoice(element.id)" class="d-flex align-items-center justify-content-center">
+          <button mat-icon-button (click)="deleteInvoice(element.id)"
+            class="d-flex align-items-center justify-content-center">
             <i-tabler name="trash" class="icon-18 d-flex align-items-center"></i-tabler>
           </button>
         </td>
@@ -152,9 +106,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-paginator
-      [pageSizeOptions]="[5, 8, 10]"
-      showFirstLastButtons
-    ></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 8, 10]" showFirstLastButtons></mat-paginator>
   </div>
 </mat-card>

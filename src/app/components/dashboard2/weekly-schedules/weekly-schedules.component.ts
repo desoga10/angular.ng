@@ -12,7 +12,7 @@ import {
   NgApexchartsModule,
   ApexFill,
 } from 'ng-apexcharts';
-import * as moment from 'moment';
+import moment from 'moment';
 
 export interface weeklyChart {
   series: ApexAxisChartSeries;

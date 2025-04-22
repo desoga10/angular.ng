@@ -1,6 +1,7 @@
-<mat-card class="cardWithShadow">
-  <mat-card-content class="p-24">
-    <form>
+<form [formGroup]="addInvoiceForm" (ngSubmit)="onSubmit()">
+  <mat-card class="cardWithShadow">
+    <mat-card-content class="p-24">
+
       <div class="row justify-content-between m-b-24">
         <div class="col-sm-4 d-flex align-items-center">
         </div>
@@ -8,21 +9,16 @@
           <a routerLink="/apps/invoice" mat-stroked-button color="warn" class="m-r-10">
             Cancel
           </a>
-          <button mat-raised-button color="primary">
-            Save Invoice
-          </button>
         </div>
       </div>
-
       <mat-divider></mat-divider>
-
       <div class="row p-y-24 justify-content-between">
         <div class="col-sm-4">
           <span class="f-w-600 f-s-15 mat-body-1 d-block m-b-8">
             Order Status:
           </span>
           <mat-form-field appearance="outline" class="w-100 theme-select">
-            <mat-select value="Pending">
+            <mat-select value="Pending" formControlName="order_status">
               <mat-option value="Pending"> Pending </mat-option>
               <mat-option value="Shipped"> Shipped </mat-option>
               <mat-option value="Delivered"> Delivered </mat-option>
@@ -36,7 +32,7 @@
             </span>
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Order Date</mat-label>
-              <input type="date" matInput placeholder="Order Date" />
+              <input formControlName="order_date" type="date" matInput placeholder="Order Date" />
             </mat-form-field>
           </div>
         </div>
@@ -50,37 +46,37 @@
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Business Name</mat-label>
-            <input matInput placeholder="Business Name" />
+            <input formControlName="from_business_name" matInput placeholder="Business Name" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="email@business.com" />
+            <input formControlName="from_email" type="email" matInput placeholder="email@business.com" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Enter Address</mat-label>
-            <input matInput placeholder="Enter Address" />
+            <input formControlName="from_address" matInput placeholder="Enter Address" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Phone Number</mat-label>
-            <input type="tel" matInput placeholder="(123) 456 789" />
+            <input formControlName="from_phone_number" type="tel" matInput placeholder="(123) 456 789" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Invoice Number</mat-label>
-            <input value="INV0001" matInput placeholder="Invoice Number" />
+            <input formControlName="from_invoice_number" value="INV0001" matInput placeholder="Invoice Number" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Item Description</mat-label>
-            <input matInput placeholder="Item Description" />
+            <mat-label>Bank Account Name</mat-label>
+            <input formControlName="from_bank_account_name" matInput placeholder="Bank Account Name" />
           </mat-form-field>
         </div>
       </div>
@@ -93,103 +89,122 @@
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Client Name</mat-label>
-            <input matInput placeholder="Business Name" />
+            <input formControlName="to_client_name" matInput placeholder="Business Name" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="email@client.com" />
+            <input formControlName="to_email" type="email" matInput placeholder="email@client.com" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Enter Address</mat-label>
-            <input matInput placeholder="Enter Address" />
+            <input formControlName="to_address" matInput placeholder="Enter Address" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Phone Number</mat-label>
-            <input type="tel" matInput placeholder="(123) 456 789" />
+            <input formControlName="to_phone_number" type="tel" matInput placeholder="(123) 456 789" />
           </mat-form-field>
         </div>
       </div>
-    </form>
 
-    <mat-divider></mat-divider>
-    <h2>Due Date</h2>
-    <mat-form-field appearance="outline" class="w-100 theme-select m-y-24">
-      <mat-select value="None">
-        <mat-option value="None">None</mat-option>
-        <mat-option value="Shipped"> Next Day </mat-option>
-        <mat-option value="Delivered"> 2 Days </mat-option>
-      </mat-select>
-    </mat-form-field>
 
-    <div>
-      <div class="table-responsive">
-        <table class="table table-hover b-1 no-wrap w-100 rounded">
-          <thead>
-            <tr>
-              <th class="p-16">Item Name</th>
-              <th class="p-16">Unit Price</th>
-              <th class="p-16">Units</th>
-              <th class="p-16">Unit Total Price</th>
-              <th class="p-16"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
+      <mat-divider></mat-divider>
+      <h2>Due Date</h2>
+      <mat-form-field appearance="outline" class="w-100 theme-select m-y-24">
+        <mat-select value="None" formControlName="due_date">
+          <mat-option value="None">None</mat-option>
+          <mat-option value="Shipped"> Next Day </mat-option>
+          <mat-option value="Delivered"> 2 Days </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input type="text" matInput class="form-control" />
-                </mat-form-field>
-              </td>
 
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input type="number" matInput class="form-control" min="1" />
-                </mat-form-field>
-              </td>
+      <div>
+        <div class="table-responsive" formArrayName="item_details">
+          <table class="table table-hover b-1 no-wrap w-100 rounded">
+            <thead>
+              <tr>
+                <th class="p-16">Item Description</th>
+                <th class="p-16">Unit Price</th>
+                <th class="p-16">Units</th>
+                <th class="p-16">Unit Total Price</th>
+                <th class="p-16"></th>
+                <th class="p-16"></th>
+              </tr>
+            </thead>
 
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input type="number" matInput class="form-control" min="1" />
-                </mat-form-field>
-              </td>
+            @for (itemDetail of itemDetails().controls; track itemDetail; let i = $index ) {
+            <tbody>
+              <tr [formGroupName]="i">
+                <ng-container>
+                  <td class="p-16">
+                    <mat-form-field appearance="outline" class="w-100 hide-hint">
+                      <input type="text" matInput class="form-control" placeholder="item description"
+                        formControlName="item_description" />
+                    </mat-form-field>
+                  </td>
 
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input [disabled]="true" matInput matInput class="form-control" />
-                </mat-form-field>
-              </td>
-              <td>
+                  <td class="p-16">
+                    <mat-form-field appearance="outline" class="w-100 hide-hint">
+                      <input type="number" matInput class="form-control" min="1" placeholder="unit price"
+                        formControlName="item_unit_price" />
+                    </mat-form-field>
+                  </td>
 
-                <button color="warn" mat-icon-button class="d-flex justify-content-center">
-                  <i-tabler class="icon-18 d-flex"></i-tabler>
-                </button>
+                  <td class="p-16">
+                    <mat-form-field appearance="outline" class="w-100 hide-hint">
+                      <input type="number" matInput class="form-control" min="1" placeholder="units"
+                        formControlName="item_units" />
+                    </mat-form-field>
+                  </td>
 
-              </td>
-            </tr>
+                  <td class="p-16">
+                    <mat-form-field appearance="outline" class="w-100 hide-hint">
+                      <input [disabled]="true" matInput matInput class="form-control" />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <button (click)="addDetails()" color="warn" mat-icon-button class="d-flex justify-content-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" />
+                      </svg>
+                    </button>
+                  </td>
+                  <td>
+                    <button (click)="removeDetails(i)" color="warn" mat-icon-button
+                      class="d-flex justify-content-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19 12.998H5v-2h14z" />
+                      </svg>
+                    </button>
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+            }
+          </table>
+        </div>
 
-          </tbody>
-        </table>
+        <div class="text-right m-t-30">
+
+          <button type="submit" color="primary" mat-flat-button>
+            Create Invoice
+          </button>
+
+
+          <h5 class="m-b-5 f-w-600 f-s-16">Sub total: {{ 1000 }}</h5>
+          <h5 class="f-w-600 f-s-16">Total Vat: {{ 10 }}%</h5>
+          <mat-divider></mat-divider>
+          <h3 class="m-b-0 p-t-20 f-s-18">Grand Total: {{ 10000 }}</h3>
+        </div>
       </div>
+    </mat-card-content>
+  </mat-card>
+</form>
 
-      <div class="text-right m-t-30">
-
-        <button color="primary" mat-flat-button>
-          Add row
-        </button>
-
-
-        <h5 class="m-b-5 f-w-600 f-s-16">Sub total: {{ 1000 }}</h5>
-        <h5 class="f-w-600 f-s-16">Total Vat: {{ 10 }}%</h5>
-        <mat-divider></mat-divider>
-        <h3 class="m-b-0 p-t-20 f-s-18">Grand Total: {{ 10000 }}</h3>
-      </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+<p *ngIf="itemDetails().length === 0">No items in the form array.</p>

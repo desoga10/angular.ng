@@ -14,10 +14,6 @@ export class ConverterService {
   toX = signal('');
 
   frankConvertCurrency() {
-    console.log(this.amountX());
-    console.log(this.fromX());
-    console.log(this.toX());
-
     return this.http.get<FrankFurtherCurrencyData>(
       `${
         environment.FRANKFURTER_API_URL
@@ -26,10 +22,6 @@ export class ConverterService {
   }
 
   exchangeRateConvertCurrency() {
-    console.log(this.amountX());
-    console.log(this.fromX());
-    console.log(this.toX());
-
     return this.http.get<ExchangeRateCurrencyData>(
       `${
         environment.EXCHANGE_RATE_API_URL

@@ -21,3 +21,28 @@ export interface UsersAccountSettingData {
   phone_number: string;
   address: string;
 }
+
+export interface InvoiceItem {
+  item_name: string;
+  unit_price: number;
+  units: number;
+}
+
+export interface AddNewInvoice {
+  id: string;
+  created_at: string;
+  order_status: string;
+  order_date: string;
+  from_business_name: string;
+  from_email: string;
+  from_address: string;
+  from_phone_number: string;
+  from_invoice_number: string;
+  from_description: string;
+  to_client_name: string;
+  to_email: string;
+  to_address: string;
+  to_phone_number: string;
+  due_date: string;
+  item_details: InvoiceItem[]; // 👈 Now supports multiple items
+}

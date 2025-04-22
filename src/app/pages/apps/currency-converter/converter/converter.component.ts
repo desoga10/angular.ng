@@ -229,10 +229,6 @@ export class AppConverterComponent {
   ];
 
   onSubmitFrankFurther() {
-    console.log(this.amountValueFrankFurther());
-    console.log(this.fromValueFrankFurther());
-    console.log(this.toValueFrankFurther());
-
     this.currencyService.conversionParameters(
       this.amountValueFrankFurther(),
       this.fromValueFrankFurther(),
@@ -240,19 +236,13 @@ export class AppConverterComponent {
     );
 
     this.currencyService.frankConvertCurrency().subscribe((response) => {
-      console.log(response);
       this.resultFrankFurther.set(response.rates[this.toValueFrankFurther()]);
       this.fromCurrencyFrankFurther.set(response.base);
       this.toCurrencyFrankFurther.set(this.toValueFrankFurther());
-      console.log(this.toValueFrankFurther());
     });
   }
 
   onSubmitExchangeRate() {
-    console.log(this.amountValueExchangeRate());
-    console.log(this.fromValueExchangeRate());
-    console.log(this.toValueExchangeRate());
-
     this.currencyService.conversionParameters(
       this.amountValueExchangeRate(),
       this.fromValueExchangeRate(),
@@ -260,7 +250,6 @@ export class AppConverterComponent {
     );
 
     this.currencyService.exchangeRateConvertCurrency().subscribe((response) => {
-      console.log(response);
       this.resultExchangeRate.set(response.conversion_result);
       this.fromCurrencyExchangeRate.set(response.base_code);
       this.toCurrencyExchangeRate.set(response.target_code);

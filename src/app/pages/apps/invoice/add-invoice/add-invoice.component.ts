@@ -15,6 +15,7 @@ import { AddedDialogComponent } from './added-dialog/added-dialog.component';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-invoice',
@@ -30,11 +31,13 @@ import { TablerIconsModule } from 'angular-tabler-icons';
   ],
 })
 export class AppAddInvoiceComponent {
-  invoiceService = inject(ServiceinvoiceService);
+  private invoiceService = inject(ServiceinvoiceService);
   private fb = inject(FormBuilder);
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
   addInvoiceForm!: FormGroup;
 
-  constructor(private router: Router, public dialog: MatDialog) {
+  constructor(public dialog: MatDialog) {
     this.addInvoiceForm = this.fb.group({
       order_status: [''],
       order_date: [''],
@@ -79,10 +82,27 @@ export class AppAddInvoiceComponent {
         const result = await this.invoiceService.submitInvoiceWithItems(
           formValue
         );
-        // optionally navigate or show success message
-      } catch (err: any) {
-        alert('Error submitting invoice' + err.message);
+
+        // ✅ Show success toast
+        this.toastr.success('Invoice created successfully!', 'Success');
+
+        // Optional: navigate or reset form
+        this.addInvoiceForm.reset();
+        this.itemDetails().clear();
+        this.addDetails();
+        this.router.navigate(['/apps/invoice']);
+      } catch (err) {
+        // ❌ Show error toast
+        this.toastr.error(
+          'Failed to create invoice. Please try again.',
+          'Error'
+        );
       }
+    } else {
+      this.toastr.warning(
+        'Please complete all required fields.',
+        'Form Incomplete'
+      );
     }
   }
 }

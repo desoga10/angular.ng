@@ -125,69 +125,39 @@
 
 
       <div>
-        <div class="table-responsive" formArrayName="item_details">
-          <table class="table table-hover b-1 no-wrap w-100 rounded">
-            <thead>
-              <tr>
-                <th class="p-16">Item Description</th>
-                <th class="p-16">Unit Price</th>
-                <th class="p-16">Units</th>
-                <th class="p-16">Unit Total Price</th>
-                <th class="p-16"></th>
-                <th class="p-16"></th>
-              </tr>
-            </thead>
-
-            @for (itemDetail of itemDetails().controls; track itemDetail; let i = $index ) {
-            <tbody>
-              <tr [formGroupName]="i">
-                <ng-container>
-                  <td class="p-16">
-                    <mat-form-field appearance="outline" class="w-100 hide-hint">
-                      <input type="text" matInput class="form-control" placeholder="item description"
-                        formControlName="item_description" />
-                    </mat-form-field>
-                  </td>
-
-                  <td class="p-16">
-                    <mat-form-field appearance="outline" class="w-100 hide-hint">
-                      <input type="number" matInput class="form-control" min="1" placeholder="unit price"
-                        formControlName="item_unit_price" />
-                    </mat-form-field>
-                  </td>
-
-                  <td class="p-16">
-                    <mat-form-field appearance="outline" class="w-100 hide-hint">
-                      <input type="number" matInput class="form-control" min="1" placeholder="units"
-                        formControlName="item_units" />
-                    </mat-form-field>
-                  </td>
-
-                  <td class="p-16">
-                    <mat-form-field appearance="outline" class="w-100 hide-hint">
-                      <input [disabled]="true" matInput matInput class="form-control" />
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <button (click)="addDetails()" color="warn" mat-icon-button class="d-flex justify-content-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" />
-                      </svg>
-                    </button>
-                  </td>
-                  <td>
-                    <button (click)="removeDetails(i)" color="warn" mat-icon-button
-                      class="d-flex justify-content-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M19 12.998H5v-2h14z" />
-                      </svg>
-                    </button>
-                  </td>
-                </ng-container>
-              </tr>
-            </tbody>
+        <h2>Item Details</h2>
+        <div formArrayName="item_details">
+          @for (itemDetail of itemDetails().controls; track itemDetail; let i = $index ) {
+          <div class="row m-y-24 p-t-24" [formGroupName]="i">
+            <div class="col-sm-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <input type="text" matInput placeholder="item description" formControlName="item_description" />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <input type="number" matInput min="1" placeholder="unit price" formControlName="item_unit_price" />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <input type="number" matInput min="1" placeholder="units" formControlName="item_units" />
+              </mat-form-field>
+            </div>
+            <button (click)="addDetails()" color="warn" mat-icon-button class="d-flex justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" />
+              </svg>
+            </button>
+            @if(itemDetails().length > 1) {
+            <button (click)="removeDetails(i)" color="warn" mat-icon-button class="d-flex justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 12.998H5v-2h14z" />
+              </svg>
+            </button>
             }
-          </table>
+          </div>
+          }
         </div>
 
         <div class="text-right m-t-30">
@@ -197,12 +167,17 @@
           </button>
 
 
-          <h5 class="m-b-5 f-w-600 f-s-16">Sub total: {{ 1000 }}</h5>
-          <h5 class="f-w-600 f-s-16">Total Vat: {{ 10 }}%</h5>
+          <h5 class="m-b-5 f-w-600 f-s-16">Unit total: {{ 1000 }}</h5>
           <mat-divider></mat-divider>
           <h3 class="m-b-0 p-t-20 f-s-18">Grand Total: {{ 10000 }}</h3>
         </div>
       </div>
+
+
+
+
+
+
     </mat-card-content>
   </mat-card>
 </form>

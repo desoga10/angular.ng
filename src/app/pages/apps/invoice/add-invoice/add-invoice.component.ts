@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, computed, effect } from '@angular/core';
 import {
   Validators,
   FormControl,
@@ -10,8 +10,6 @@ import {
 } from '@angular/forms';
 import { ServiceinvoiceService } from '../serviceinvoice.service';
 import { Router, RouterModule } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { AddedDialogComponent } from './added-dialog/added-dialog.component';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -36,25 +34,49 @@ export class AppAddInvoiceComponent {
   private toastr = inject(ToastrService);
   private router = inject(Router);
   addInvoiceForm!: FormGroup;
+  itemDetailsSignal = signal<any[]>([]);
+  phoneNumber = '^(+d{1,3}[- ]?)?d{10}$';
 
-  constructor(public dialog: MatDialog) {
+  // Computed signals
+  unitTotals = computed(() =>
+    this.itemDetailsSignal().map(
+      (item) => (item.item_unit_price || 0) * (item.item_units || 0)
+    )
+  );
+
+  grandTotal = computed(() =>
+    this.unitTotals().reduce((acc: any, curr) => acc + curr, 0)
+  );
+  constructor() {
     this.addInvoiceForm = this.fb.group({
-      order_status: [''],
-      order_date: [''],
-      from_business_name: [''],
-      from_email: [''],
-      from_address: [''],
-      from_phone_number: [''],
-      from_invoice_number: [''],
-      from_bank_account_name: [''],
-      to_client_name: [''],
-      to_email: [''],
-      to_address: [''],
-      to_phone_number: [''],
-      due_date: [''],
+      order_status: ['', Validators.required],
+      order_date: ['', Validators.required],
+      from_business_name: ['', Validators.required],
+      from_email: ['', [Validators.required, Validators.email]],
+      from_address: ['', Validators.required],
+      from_phone_number: ['', Validators.required],
+      from_invoice_number: ['', Validators.required],
+      from_bank_account_name: ['', Validators.required],
+      to_client_name: ['', Validators.required],
+      to_email: ['', [Validators.required, Validators.email]],
+      to_address: ['', Validators.required],
+      to_phone_number: ['', Validators.required],
+      due_date: ['', Validators.required],
+      grand_total_price: [this.grandTotal()],
       item_details: this.fb.array([]),
     });
     this.addDetails();
+    // Sync signal after form is ready
+    this.itemDetails().valueChanges.subscribe((val) => {
+      this.itemDetailsSignal.set(val);
+    });
+
+    this.itemDetails().valueChanges.subscribe(() => {
+      const total = this.grandTotal();
+      this.addInvoiceForm
+        .get('grand_total_price')
+        ?.setValue(total, { emitEvent: false });
+    });
   }
 
   itemDetails(): FormArray {
@@ -66,6 +88,7 @@ export class AppAddInvoiceComponent {
       item_description: new FormControl('', Validators.required),
       item_unit_price: new FormControl('', Validators.required),
       item_units: new FormControl('', Validators.required),
+      unit_total_price: new FormControl('', Validators.required),
     });
     this.itemDetails().push(itemDetail);
   }

@@ -155,6 +155,9 @@
                 <path fill="currentColor" d="M19 12.998H5v-2h14z" />
               </svg>
             </button>
+            <p class="justify-content-end">Unit Total:</p>
+            <input type="text" matInput min="1" [(ngModel)]="unitTotals()[i]" formControlName="unit_total_price"
+              readonly style="border:0" />
             }
           </div>
           }
@@ -165,21 +168,13 @@
           <button type="submit" color="primary" mat-flat-button>
             Create Invoice
           </button>
-
-
-          <h5 class="m-b-5 f-w-600 f-s-16">Unit total: {{ 1000 }}</h5>
           <mat-divider></mat-divider>
-          <h3 class="m-b-0 p-t-20 f-s-18">Grand Total: {{ 10000 }}</h3>
+          <h3 class="m-b-0 p-t-20 f-s-18">Grand Total:
+          </h3>
+          <input type="text" [value]="grandTotal()" matInput min="1" formControlName="grand_total_price" readonly
+            style="border:0;margin-right: -177px;background-color: transparent;font-size: x-large;" />
         </div>
       </div>
-
-
-
-
-
-
     </mat-card-content>
   </mat-card>
 </form>
-
-<p *ngIf="itemDetails().length === 0">No items in the form array.</p>

@@ -26,6 +26,8 @@ export interface InvoiceItem {
   item_name: string;
   unit_price: number;
   units: number;
+  unit_total_price: number;
+  item_description: string;
 }
 
 export interface AddNewInvoice {
@@ -44,5 +46,6 @@ export interface AddNewInvoice {
   to_address: string;
   to_phone_number: string;
   due_date: string;
+  grand_total_price: number;
   item_details: InvoiceItem[]; // 👈 Now supports multiple items
 }

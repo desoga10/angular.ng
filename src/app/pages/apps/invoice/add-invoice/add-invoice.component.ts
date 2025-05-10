@@ -15,6 +15,11 @@ import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ToastrService } from 'ngx-toastr';
 
+interface OrderStatus {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-add-invoice',
   templateUrl: './add-invoice.component.html',
@@ -37,6 +42,12 @@ export class AppAddInvoiceComponent {
   itemDetailsSignal = signal<any[]>([]);
   phoneNumber = '^(+d{1,3}[- ]?)?d{10}$';
 
+  orders: OrderStatus[] = [
+    { value: 'pending-0', viewValue: 'Pending' },
+    { value: 'shipped-1', viewValue: 'Shipped' },
+    { value: 'delivered-2', viewValue: 'Delivered' },
+  ];
+
   // Computed signals
   unitTotals = computed(() =>
     this.itemDetailsSignal().map(
@@ -45,7 +56,7 @@ export class AppAddInvoiceComponent {
   );
 
   grandTotal = computed(() =>
-    this.unitTotals().reduce((acc: any, curr) => acc + curr, 0)
+    this.unitTotals().reduce((acc: any, curr) => acc + curr, 0.0)
   );
   constructor() {
     this.addInvoiceForm = this.fb.group({
@@ -106,7 +117,7 @@ export class AppAddInvoiceComponent {
           formValue
         );
 
-        // ✅ Show success toast
+        //Show success toast
         this.toastr.success('Invoice created successfully!', 'Success');
 
         // Optional: navigate or reset form
@@ -115,7 +126,7 @@ export class AppAddInvoiceComponent {
         this.addDetails();
         this.router.navigate(['/apps/invoice']);
       } catch (err) {
-        // ❌ Show error toast
+        //Show error toast
         this.toastr.error(
           'Failed to create invoice. Please try again.',
           'Error'

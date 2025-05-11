@@ -63,4 +63,33 @@ export class ServiceinvoiceService {
 
     return { invoiceId };
   }
+
+  async getAllInvoices() {
+    const { data: invoices, error: invoiceError } = await this.supabase
+      .from('invoice')
+      .select('*')
+      .order('order_date', { ascending: false });
+
+    if (invoiceError) throw invoiceError;
+
+    const { data: invoiceItems, error: itemsError } = await this.supabase
+      .from('invoice_items')
+      .select('invoice_id, item_details');
+
+    if (itemsError) throw itemsError;
+
+    console.log('Invoice items from DB:', invoiceItems);
+
+    const merged = invoices.map((invoice: any) => {
+      const matching = invoiceItems.find((item: any) => {
+        return Number(item.invoice_id) === Number(invoice.id);
+      });
+
+      return {
+        ...invoice,
+        items: matching?.item_details || [],
+      };
+    });
+    return merged;
+  }
 }

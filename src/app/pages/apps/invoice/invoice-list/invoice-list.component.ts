@@ -1,13 +1,21 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { ServiceinvoiceService } from '../serviceinvoice.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { RouterModule } from '@angular/router';
+
+export interface PeriodicElement {
+  id: number;
+  order_date: string;
+  due_date: string;
+  order_status: string;
+  grand_total_price: number;
+}
 
 @Component({
   selector: 'app-invoice-list',
@@ -20,31 +28,46 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule,
+    MatPaginatorModule,
   ],
 })
 export class AppInvoiceListComponent {
-  allComplete: boolean = false;
   displayedColumns: string[] = [
-    'chk',
     'id',
-    'billFrom',
-    'billTo',
-    'totalCost',
-    'status',
-    'action',
+    'order_date',
+    'due_date',
+    'order_status',
+    'grand_total_price',
+    'view_options',
   ];
 
-  @ViewChild(MatSort) sort: MatSort = Object.create(null);
-  @ViewChild(MatPaginator) paginator: MatPaginator = Object.create(null);
+  dataSource = new MatTableDataSource<PeriodicElement>();
 
-  constructor(private invoiceService: ServiceinvoiceService) {}
+  private service = inject(ServiceinvoiceService);
 
-  deleteInvoice(row: number): void {
-    if (confirm('Are you sure you want to delete this record ?')) {
-      // this.invoiceService.deleteInvoice(row);
-      // this.invoiceList.data = this.invoiceList.data.filter(
-      //   (invoice) => invoice.id !== row
-      // );
-    }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  invoices: any[] = [];
+  loading = true;
+  error: string | null = null;
+
+  ngOnInit() {
+    this.fetchInvoices();
+  }
+
+  async fetchInvoices() {
+    this.service
+      .getAllInvoices()
+      .then((result) => {
+        this.invoices = result;
+        this.loading = false;
+        console.log(this.invoices);
+        this.dataSource = new MatTableDataSource(this.invoices);
+        this.dataSource.paginator = this.paginator;
+      })
+      .catch((error) => {
+        this.loading = false;
+        alert(`Failed to load invoices: ${error}`);
+      });
   }
 }

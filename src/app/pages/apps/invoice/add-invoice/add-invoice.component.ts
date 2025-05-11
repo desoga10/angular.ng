@@ -43,9 +43,9 @@ export class AppAddInvoiceComponent {
   phoneNumber = '^(+d{1,3}[- ]?)?d{10}$';
 
   orders: OrderStatus[] = [
-    { value: 'pending-0', viewValue: 'Pending' },
-    { value: 'shipped-1', viewValue: 'Shipped' },
-    { value: 'delivered-2', viewValue: 'Delivered' },
+    { value: 'pending', viewValue: 'Pending' },
+    { value: 'shipped', viewValue: 'Shipped' },
+    { value: 'delivered', viewValue: 'Delivered' },
   ];
 
   // Computed signals

@@ -1,8 +1,7 @@
 <!-- ============================================================== -->
 <!-- Only router without any element -->
 <!-- ============================================================== -->
-<mat-sidenav-container
-  [ngClass]="{
+<mat-sidenav-container [ngClass]="{
     'cardBorder': options.cardBorder,
     orange_theme: options.activeTheme == 'orange_theme',
     blue_theme: options.activeTheme == 'blue_theme',
@@ -10,8 +9,6 @@
     purple_theme: options.activeTheme == 'purple_theme',
     green_theme: options.activeTheme == 'green_theme',
     cyan_theme: options.activeTheme == 'cyan_theme'
-  }"
-  [dir]="options.dir!"
->
+  }" [dir]="options.dir!">
   <router-outlet></router-outlet>
 </mat-sidenav-container>

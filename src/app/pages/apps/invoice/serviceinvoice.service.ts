@@ -68,7 +68,7 @@ export class ServiceinvoiceService {
     const { data: invoices, error: invoiceError } = await this.supabase
       .from('invoice')
       .select('*')
-      .order('order_date', { ascending: false });
+      .order('id', { ascending: false });
 
     if (invoiceError) throw invoiceError;
 
@@ -91,5 +91,28 @@ export class ServiceinvoiceService {
       };
     });
     return merged;
+  }
+
+  async getInvoiceById(id: number) {
+    const { data: invoice, error: invoiceError } = await this.supabase
+      .from('invoice')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (invoiceError) throw invoiceError;
+
+    const { data: itemRow, error: itemsError } = await this.supabase
+      .from('invoice_items')
+      .select('item_details')
+      .eq('invoice_id', id)
+      .single();
+
+    if (itemsError) throw itemsError;
+
+    return {
+      ...invoice,
+      items: itemRow?.item_details || [],
+    };
   }
 }

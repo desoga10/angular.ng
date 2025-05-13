@@ -78,19 +78,7 @@
   <!-- --------------------------------------------------------------- -->
   <!-- langugage Dropdown -->
   <!-- --------------------------------------------------------------- -->
-  <button [matMenuTriggerFor]="flags" mat-mini-fab color="inherit">
-    <img [src]="selectedLanguage.icon" class="rounded-circle object-cover icon-20 m-t-2" />
-  </button>
-  <mat-menu #flags="matMenu" class="cardWithShadow">
-    @for(lang of languages; track lang.icon) {
-    <button mat-menu-item (click)="changeLanguage(lang)">
-      <div class="d-flex align-items-center">
-        <img [src]="lang.icon" class="rounded-circle object-cover m-r-8 icon-20" />
-        <span class="mat-subtitle-1 f-s-14">{{ lang.language }}</span>
-      </div>
-    </button>
-    }
-  </mat-menu>
+
 
   <!-- --------------------------------------------------------------- -->
   <!-- profile Dropdown -->

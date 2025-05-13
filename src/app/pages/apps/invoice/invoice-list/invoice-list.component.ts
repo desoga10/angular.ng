@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, Input, ViewChild, inject } from '@angular/core';
 import { ServiceinvoiceService } from '../serviceinvoice.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -7,7 +7,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 export interface PeriodicElement {
   id: number;
@@ -62,6 +62,7 @@ export class AppInvoiceListComponent {
         this.invoices = result;
         this.loading = false;
         console.log(this.invoices);
+
         this.dataSource = new MatTableDataSource(this.invoices);
         this.dataSource.paginator = this.paginator;
       })

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { ServiceinvoiceService } from '../serviceinvoice.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
+// import { MatTableDataSource } from '@angular/material/table';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,20 +15,25 @@ import { TablerIconsModule } from 'angular-tabler-icons';
   imports: [
     MaterialModule,
     CommonModule,
-    RouterLink,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     TablerIconsModule,
   ],
 })
 export class AppInvoiceViewComponent {
-  id: any;
+  @Input() id = '';
   displayedColumns: string[] = ['itemName', 'unitPrice', 'unit', 'total'];
+  private service = inject(ServiceinvoiceService);
+  invoiceData = signal('');
 
-  constructor(
-    activatedRouter: ActivatedRoute,
-    private invoiceService: ServiceinvoiceService
-  ) {
-    this.id = activatedRouter.snapshot.paramMap.get('id');
+  ngOnInit() {
+    console.log(this.id);
+    if (this.id) {
+      this.service.getInvoiceById(Number(this.id)).then((res) => {
+        this.invoiceData.set(res);
+        console.log(this.invoiceData());
+      });
+    }
   }
 }

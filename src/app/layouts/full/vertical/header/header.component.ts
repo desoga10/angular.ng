@@ -9,31 +9,13 @@ import {
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
 import { navItems } from '../sidebar/sidebar-data';
-import { TranslateService } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { AppSettings } from 'src/app/config';
 import { AuthService } from 'src/app/services/auth.service';
-
-interface notifications {
-  id: number;
-  icon: string;
-  color: string;
-  title: string;
-  time: string;
-  subtitle: string;
-}
-
-interface profiledd {
-  id: number;
-  title: string;
-  link: string;
-  new?: boolean;
-}
 
 interface apps {
   id: number;
@@ -79,45 +61,7 @@ export class HeaderComponent {
       });
   }
 
-  public selectedLanguage: any = {
-    language: 'English',
-    code: 'en',
-    type: 'US',
-    icon: '/assets/images/flag/icon-flag-en.svg',
-  };
-
-  public languages: any[] = [
-    {
-      language: 'English',
-      code: 'en',
-      type: 'US',
-      icon: '/assets/images/flag/icon-flag-en.svg',
-    },
-    {
-      language: 'Español',
-      code: 'es',
-      icon: '/assets/images/flag/icon-flag-es.svg',
-    },
-    {
-      language: 'Français',
-      code: 'fr',
-      icon: '/assets/images/flag/icon-flag-fr.svg',
-    },
-    {
-      language: 'German',
-      code: 'de',
-      icon: '/assets/images/flag/icon-flag-de.svg',
-    },
-  ];
-
-  constructor(
-    private settings: CoreService,
-    private vsidenav: CoreService,
-    public dialog: MatDialog,
-    private translate: TranslateService
-  ) {
-    translate.setDefaultLang('en');
-  }
+  constructor(private settings: CoreService, public dialog: MatDialog) {}
 
   options = this.settings.getOptions();
 
@@ -131,11 +75,6 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
-  }
-
-  changeLanguage(lang: any): void {
-    this.translate.use(lang.code);
-    this.selectedLanguage = lang;
   }
 
   apps: apps[] = [

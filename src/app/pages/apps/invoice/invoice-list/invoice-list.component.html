@@ -57,7 +57,7 @@
         <mat-form-field class="example-user-input">
           <mat-label>Select Option</mat-label>
           <mat-select>
-            <mat-option>View</mat-option>
+            <mat-option [routerLink]="['/apps/viewInvoice', element.id]">View</mat-option>
             <mat-option>Download</mat-option>
             <mat-option>Delete</mat-option>
           </mat-select>

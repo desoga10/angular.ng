@@ -34,6 +34,7 @@
     "echarts": "^5.5.0",
     "echarts-gl": "^2.0.9",
     "echarts-stat": "^1.2.0",
+    "html2pdf.js": "^0.10.3",
     "iconify": "^1.4.0",
     "moment": "^2.30.1",
     "ng-apexcharts": "^1.7.6",

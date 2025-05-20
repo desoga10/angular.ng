@@ -1,12 +1,14 @@
-<mat-card class="cardWithShadow">
+<mat-card class="cardWithShadow" id="invoiceContent">
   <mat-card-content class="p-24">
 
     <span>
       <div class="row m-b-24">
         <div class="col-sm-4 d-flex align-items-center">
+          <h4 class="mat-subtitle-2 f-s-18 f-w-600">INVOICE</h4>
+          <br />
           <h4 class="mat-subtitle-2 f-s-18 f-w-600">#111</h4>
         </div>
-        <div class="col-sm-8 text-right">
+        <div class="col-sm-8 text-right" id="pdfButtons">
           <a mat-stroked-button color="primary" class="m-r-10" [routerLink]="['/apps/invoice']">Back to Invoice</a>
 
           <!-- <a
@@ -15,21 +17,23 @@
             color="primary"
             >Edit Invoice</a
           > -->
-          <a mat-flat-button color="primary">Edit Invoice</a>
+          <a mat-flat-button color="primary" class="m-r-10" disabled>Edit Invoice</a>
+          <a mat-flat-button color="primary" (click)="downloadPDF()">Download Invoice</a>
         </div>
       </div>
       <mat-divider></mat-divider>
+
       <div class="row p-y-24">
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1"> Order Status: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            done
+            {{this.invoiceData().order_status}}
           </h6>
         </div>
         <div class="col-sm-6 text-right">
           <span class="f-w-600 f-s-15 mat-body-1"> Order Date: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            May 8th, 1999
+            {{this.invoiceData().order_date | date}}
           </h6>
         </div>
       </div>
@@ -38,37 +42,37 @@
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1"> Bill From: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            desoga
+            {{this.invoiceData().from_business_name}}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            desogagmail.com
+            {{this.invoiceData().from_email}}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            desoga
+            {{this.invoiceData().from_address}}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            0890878765876
+            {{this.invoiceData().from_phone_number}}
           </h6>
         </div>
         <div class="col-sm-6 text-right">
           <span class="f-w-600 f-s-15 mat-body-1"> Bill To: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            desoga
+            {{this.invoiceData().to_client_name}}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            desogagmail.com
+            {{this.invoiceData().to_email}}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            desoga
+            {{this.invoiceData().from_address}}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            8578578979879
+            {{this.invoiceData().to_phone_number}}
           </h6>
         </div>
       </div>
 
-      <div class="b-1 table-responsive">
-        <table mat-table class="no-wrap v-middle">
+      <!-- <div class="b-1 table-responsive">
+        <table [dataSource]="items()" mat-table class="no-wrap v-middle">
           <ng-container matColumnDef="itemName">
             <th class="font-medium font-16" mat-header-cell *matHeaderCellDef class="f-s-15 f-w-600">
               Item Name
@@ -104,18 +108,66 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+      </div> -->
+      <div class="b-1 table-responsive">
+        @if (invoiceData().items.length > 0) {
+        <table mat-table [dataSource]="invoiceData().items" class="no-wrap v-middle">
+
+          <!-- Item Name Column -->
+          <ng-container matColumnDef="itemName">
+            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
+              Item Name
+            </th>
+            <td mat-cell *matCellDef="let element" class="font-normal">
+              {{ element.item_description }}
+            </td>
+          </ng-container>
+
+          <!-- Unit Price Column -->
+          <ng-container matColumnDef="unitPrice">
+            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
+              Unit Price
+            </th>
+            <td mat-cell *matCellDef="let element" class="font-normal">
+              {{ element.item_unit_price }}
+            </td>
+          </ng-container>
+
+          <!-- Unit Column -->
+          <ng-container matColumnDef="unit">
+            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
+              Unit
+            </th>
+            <td mat-cell *matCellDef="let element" class="font-normal">
+              {{ element.item_units }}
+            </td>
+          </ng-container>
+
+          <!-- Total Cost Column -->
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
+              Total Cost
+            </th>
+            <td mat-cell *matCellDef="let element" class="font-normal">
+              {{ element.unit_total_price }}
+            </td>
+          </ng-container>
+
+          <!-- Table Header & Row Definitions -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        } @else {
+        <p class="p-3 text-muted">No items available for this invoice.</p>
+        }
       </div>
 
       <div class="text-right m-t-30">
-        <h5 class="m-b-5 f-w-600 f-s-16">
-          Sub total: 10000
-        </h5>
-        <span class="f-w-600 f-s-16">Vat: 10%</span>
+        <!-- <span class="f-w-600 f-s-16">Vat: 10%</span> -->
         <h3 class="m-b-0 b-t-1 p-t-20 f-s-18">
-          Grand Total: 1000000
+          Grand Total: {{this.invoiceData().grand_total_price}}
         </h3>
       </div>
     </span>
-
   </mat-card-content>
 </mat-card>

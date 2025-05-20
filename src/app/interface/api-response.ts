@@ -23,29 +23,45 @@ export interface UsersAccountSettingData {
 }
 
 export interface InvoiceItem {
-  item_name: string;
-  unit_price: number;
-  units: number;
+  item_unit_price: number;
+  item_units: number;
   unit_total_price: number;
   item_description: string;
 }
 
 export interface AddNewInvoice {
   id: string;
-  created_at: string;
   order_status: string;
   order_date: string;
   from_business_name: string;
+  from_bank_account_name: string;
   from_email: string;
   from_address: string;
   from_phone_number: string;
   from_invoice_number: string;
-  from_description: string;
   to_client_name: string;
   to_email: string;
   to_address: string;
   to_phone_number: string;
   due_date: string;
   grand_total_price: number;
-  item_details: InvoiceItem[]; // 👈 Now supports multiple items
+  items: InvoiceItem[]; // 👈 Now supports multiple items
+}
+export interface ViewInvoiceResponse {
+  id: string;
+  order_status: string;
+  order_date: string;
+  from_business_name: string;
+  from_bank_account_name: string;
+  from_email: string;
+  from_address: string;
+  from_phone_number: string;
+  from_invoice_number: string;
+  to_client_name: string;
+  to_email: string;
+  to_address: string;
+  to_phone_number: string;
+  due_date: string;
+  grand_total_price: number;
+  items: InvoiceItem[]; // 👈 Now supports multiple items
 }

@@ -11,3 +11,38 @@ button[disabled]{
   color: #666666;
   cursor: not-allowed;
 }
+
+#oanda_cc_link {
+  font-size: 0 !important;
+  visibility: hidden;
+}
+#oanda_cc_link::after {
+  content: 'Currency Rates';
+  font-size: 10px;
+  visibility: visible;
+  color: #888;
+}
+
+#oanda_widget_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+
+  iframe {
+    border: 0px solid #ffffff;
+    display: block;
+
+    // Mobile view
+    width: 300px;
+    height: 250px;
+  }
+
+  @media (min-width: 768px) {
+    iframe {
+      width: 1023px !important;
+      height: 293px;
+    }
+  }
+}

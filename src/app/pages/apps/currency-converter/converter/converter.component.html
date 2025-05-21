@@ -1,6 +1,6 @@
 <!-- Frankfurter Starts -->
 
-<mat-card class="cardWithShadow">
+<!-- <mat-card class="cardWithShadow">
   <mat-card-content class="p-24">
     <span class="f-w-600 f-s-15 mat-body-1 d-block m-b-8">
       Frankfurter API:
@@ -71,88 +71,71 @@
       [disabled]="this.amountValueFrankFurther() === '' || this.fromValueFrankFurther() === '' || this.toValueFrankFurther() === ''"
       (click)="onSubmitFrankFurther()" class="mt-5 f-w-500 f-s-12 btn-shadow text-nowrap" mat-button>Convert</button>
   </mat-card-content>
-</mat-card>
+</mat-card> -->
 <!-- Frankfurter Ends -->
 
-
-
-
-
-
-
-
-
-<!-- Exchange Rate API -->
+<!-- Exchange Rate API Starts -->
 <mat-card class="cardWithShadow">
   <mat-card-content class="p-24">
-    <span class="f-w-600 f-s-15 mat-body-1 d-block m-b-8">
-      Exchange Rate API:
-    </span>
+    <h2>Exchange Rate API</h2>
     <div>
-      <div class="table-responsive">
-        <table class="table table-hover b-1 no-wrap w-100 rounded">
-          <thead>
-            <tr>
-              <th class="p-16">Amount</th>
-              <th class="p-16">From Currency</th>
-              <th class="p-16">To Currency</th>
-              <th class="p-16">Result</th>
-              <th class="p-16"></th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr>
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input type="number" matInput class="form-control" [(ngModel)]="amountValueExchangeRate"
-                    [ngModelOptions]="{standalone: true}" />
-                </mat-form-field>
-              </td>
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint" color="primary">
-                  <mat-label>Select Currency</mat-label>
-                  <mat-select [(ngModel)]="fromValueExchangeRate" [ngModelOptions]="{standalone: true}" required>
-                    <mat-option *ngFor="let currency of exchangeRateCurrencies" [value]="currency">
-                      {{ currency }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint" color="primary">
-                  <mat-label>Select Currency</mat-label>
-                  <mat-select [(ngModel)]="toValueExchangeRate" [ngModelOptions]="{standalone: true}" required>
-                    <mat-option *ngFor="let currency of exchangeRateCurrencies" [value]="currency" selected>{{ currency
-                      }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-
-              <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
-                  <input type="number" [disabled]="true" matInput matInput class="form-control"
-                    value={{this.resultExchangeRate()}} />
-                </mat-form-field>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
+      <div class="row m-y-24 p-t-24">
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline" class="w-100 hide-hint m-y-24">
+            <input placeholder="Enter Amount to Convert" type="number" matInput class="form-control"
+              [(ngModel)]="amountValueExchangeRate" [ngModelOptions]="{standalone: true}" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline" class="w-100 hide-hint m-y-24" color="primary">
+            <mat-label>From Currency</mat-label>
+            <mat-select [(ngModel)]="fromValueExchangeRate" [ngModelOptions]="{standalone: true}" required>
+              @for (currency of currencies(); track currency.code) {
+              <mat-option [value]="currency.code">
+                {{ currency.name }} ({{ currency.code }})
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline" class="w-100 hide-hint m-y-24" color="primary">
+            <mat-label>To Currency</mat-label>
+            <mat-select [(ngModel)]="toValueExchangeRate" [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let currency of currencies()" [value]="currency.code" selected>
+                {{ currency.name }} ({{ currency.code }})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        @if (this.resultExchangeRate()) {
+        <div> <b>{{this.amountValueExchangeRate()}} {{this.fromCurrencyExchangeRate()}} =
+            {{this.resultExchangeRate()}} {{this.toValueExchangeRate()}} </b></div>
+        }
       </div>
     </div>
 
-    <br />
+    <div class="text-right m-t-30">
 
-    @if (this.resultExchangeRate()) {
-    <div> <b>{{this.amountValueExchangeRate()}} {{this.fromCurrencyExchangeRate()}} =
-        {{this.resultExchangeRate()}} {{this.toValueExchangeRate()}} </b></div>
-    }
+      <button
+        [disabled]="this.amountValueExchangeRate() === '' || this.fromValueExchangeRate() === '' || this.toValueExchangeRate() === ''"
+        (click)="onSubmitExchangeRate()" type="submit" color="primary" mat-flat-button>
+        Convert Currency
+      </button>
+      <mat-divider style="margin-top: 30px;"></mat-divider>
 
-    <button
-      [disabled]="this.amountValueExchangeRate() === '' || this.fromValueExchangeRate() === '' || this.toValueExchangeRate() === ''"
-      (click)="onSubmitExchangeRate()" class="mt-5 f-w-500 f-s-12 btn-shadow text-nowrap" mat-button>Convert</button>
+    </div>
   </mat-card-content>
 </mat-card>
-<!-- Free Currency API Ends -->
+<!-- Exchange Rate API Ends -->
+
+
+<!-- Oanda Currency -->
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <div id="oanda_widget_wrapper">
+      <div id="oanda_ecc_container"></div>
+    </div>
+
+  </mat-card-content>
+</mat-card>

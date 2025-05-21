@@ -100,7 +100,6 @@ export class AppAddInvoiceComponent {
   getAllCurrencies() {
     this.invoiceService.getCurrencies().subscribe((data) => {
       this.currencies.set(data);
-      console.log(this.currencies());
     });
   }
 

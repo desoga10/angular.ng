@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -9,11 +10,18 @@ import { environment } from 'src/environments/environment.development';
 export class ServiceinvoiceService {
   http = inject(HttpClient);
   private supabase!: SupabaseClient;
+  currencies: { code: string; name: string }[] = [];
 
   constructor() {
     this.supabase = createClient(
       environment.supabaseUrl,
       environment.supabaseKey
+    );
+  }
+
+  getCurrencies(): Observable<{ code: string; name: string }[]> {
+    return this.http.get<{ code: string; name: string }[]>(
+      '../../../assets/json/currencies.json'
     );
   }
 

@@ -1,9 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { ConverterService } from '../converter.service';
 import { MatButtonModule } from '@angular/material/button';
+import { ServiceinvoiceService } from '../../invoice/serviceinvoice.service';
 
 @Component({
   selector: 'app-converter',
@@ -15,12 +16,14 @@ import { MatButtonModule } from '@angular/material/button';
 export class AppConverterComponent {
   selectedCategory = 'All';
   currencyService = inject(ConverterService);
+  invoiceService = inject(ServiceinvoiceService);
   amountValueFrankFurther = signal('');
   fromValueFrankFurther = signal('');
   toValueFrankFurther = signal('');
   amountValueExchangeRate = signal('');
   fromValueExchangeRate = signal('');
   toValueExchangeRate = signal('');
+  currencies = signal<{ code: string; name: string }[]>([]);
   // amount = signal<number>(1);
   // fromCurrency = signal<string>('USD');
   // toCurrency = signal<string>('EUR');
@@ -64,169 +67,16 @@ export class AppConverterComponent {
     'ZAR',
   ];
 
-  exchangeRateCurrencies = [
-    'AED',
-    'AFN',
-    'ALL',
-    'AMD',
-    'ANG',
-    'AOA',
-    'ARS',
-    'AUD',
-    'AWG',
-    'AZN',
-    'BAM',
-    'BBD',
-    'BDT',
-    'BGN',
-    'BHD',
-    'BIF',
-    'BMD',
-    'BND',
-    'BOB',
-    'BRL',
-    'BSD',
-    'BTN',
-    'BWP',
-    'BYN',
-    'BZD',
-    'CAD',
-    'CDF',
-    'CHF',
-    'CLP',
-    'CNY',
-    'COP',
-    'CRC',
-    'CUP',
-    'CVE',
-    'CZK',
-    'DJF',
-    'DKK',
-    'DOP',
-    'DZD',
-    'EGP',
-    'ERN',
-    'ETB',
-    'EUR',
-    'FJD',
-    'FKP',
-    'FOK',
-    'GBP',
-    'GEL',
-    'GGP',
-    'GHS',
-    'GIP',
-    'GMD',
-    'GNF',
-    'GTQ',
-    'GYD',
-    'HKD',
-    'HNL',
-    'HRK',
-    'HTG',
-    'HUF',
-    'IDR',
-    'ILS',
-    'IMP',
-    'INR',
-    'IQD',
-    'IRR',
-    'ISK',
-    'JEP',
-    'JMD',
-    'JOD',
-    'JPY',
-    'KES',
-    'KGS',
-    'KHR',
-    'KID',
-    'KMF',
-    'KRW',
-    'KWD',
-    'KYD',
-    'KZT',
-    'LAK',
-    'LBP',
-    'LKR',
-    'LRD',
-    'LSL',
-    'LYD',
-    'MAD',
-    'MDL',
-    'MGA',
-    'MKD',
-    'MMK',
-    'MNT',
-    'MOP',
-    'MRU',
-    'MUR',
-    'MVR',
-    'MWK',
-    'MXN',
-    'MYR',
-    'MZN',
-    'NAD',
-    'NGN',
-    'NIO',
-    'NOK',
-    'NPR',
-    'NZD',
-    'OMR',
-    'PAB',
-    'PEN',
-    'PGK',
-    'PHP',
-    'PKR',
-    'PLN',
-    'PYG',
-    'QAR',
-    'RON',
-    'RSD',
-    'RUB',
-    'RWF',
-    'SAR',
-    'SBD',
-    'SCR',
-    'SDG',
-    'SEK',
-    'SGD',
-    'SHP',
-    'SLE',
-    'SOS',
-    'SRD',
-    'SSP',
-    'STN',
-    'SYP',
-    'SZL',
-    'THB',
-    'TJS',
-    'TMT',
-    'TND',
-    'TOP',
-    'TRY',
-    'TTD',
-    'TVD',
-    'TWD',
-    'TZS',
-    'UAH',
-    'UGX',
-    'USD',
-    'UYU',
-    'UZS',
-    'VES',
-    'VND',
-    'VUV',
-    'WST',
-    'XAF',
-    'XCD',
-    'XDR',
-    'XOF',
-    'XPF',
-    'YER',
-    'ZAR',
-    'ZMW',
-    'ZWL',
-  ];
+  ngOnInit(): void {
+    this.getAllCurrencies();
+  }
+
+  getAllCurrencies() {
+    this.invoiceService.getCurrencies().subscribe((data) => {
+      this.currencies.set(data);
+      console.log(this.currencies());
+    });
+  }
 
   onSubmitFrankFurther() {
     this.currencyService.conversionParameters(
@@ -254,5 +104,25 @@ export class AppConverterComponent {
       this.fromCurrencyExchangeRate.set(response.base_code);
       this.toCurrencyExchangeRate.set(response.target_code);
     });
+  }
+
+  ngAfterViewInit(): void {
+    const container = document.getElementById('oanda_ecc_container');
+    if (container) {
+      container.innerHTML = `
+        <div id="oanda_ecc">
+          <span style="color:#000; text-decoration:none; font-size:9px; float:left;">
+            Currency Converter
+            <a id="oanda_cc_link" style="color:#000; font-size:9px;" href="https://www.oanda.com/currency/converter/">by OANDA</a>
+          </span>
+        </div>
+      `;
+
+      const script = document.createElement('script');
+      script.src =
+        'https://www.oanda.com/embedded/converter/get/b2FuZGFlY2N1c2VyLy9kZWZhdWx0/?lang=en';
+      script.async = true;
+      container.appendChild(script);
+    }
   }
 }

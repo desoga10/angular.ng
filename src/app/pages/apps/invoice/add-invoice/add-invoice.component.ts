@@ -41,6 +41,7 @@ export class AppAddInvoiceComponent {
   addInvoiceForm!: FormGroup;
   itemDetailsSignal = signal<any[]>([]);
   phoneNumber = '^(+d{1,3}[- ]?)?d{10}$';
+  currencies = signal<{ code: string; name: string }[]>([]);
 
   orders: OrderStatus[] = [
     { value: 'pending', viewValue: 'Pending' },
@@ -68,6 +69,8 @@ export class AppAddInvoiceComponent {
       from_phone_number: ['', Validators.required],
       from_invoice_number: ['', Validators.required],
       from_bank_account_name: ['', Validators.required],
+      from_bank_account_number: ['', Validators.required],
+      currency: ['', Validators.required],
       to_client_name: ['', Validators.required],
       to_email: ['', [Validators.required, Validators.email]],
       to_address: ['', Validators.required],
@@ -87,6 +90,17 @@ export class AppAddInvoiceComponent {
       this.addInvoiceForm
         .get('grand_total_price')
         ?.setValue(total, { emitEvent: false });
+    });
+  }
+
+  ngOnInit(): void {
+    this.getAllCurrencies();
+  }
+
+  getAllCurrencies() {
+    this.invoiceService.getCurrencies().subscribe((data) => {
+      this.currencies.set(data);
+      console.log(this.currencies());
     });
   }
 

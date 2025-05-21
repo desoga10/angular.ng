@@ -53,6 +53,8 @@ export interface ViewInvoiceResponse {
   order_date: string;
   from_business_name: string;
   from_bank_account_name: string;
+  from_bank_account_number: string;
+  currency: string;
   from_email: string;
   from_address: string;
   from_phone_number: string;

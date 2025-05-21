@@ -36,6 +36,8 @@ export class AppInvoiceViewComponent {
     order_date: '',
     from_business_name: '',
     from_bank_account_name: '',
+    from_bank_account_number: '',
+    currency: '',
     from_email: '',
     from_address: '',
     from_phone_number: '',

@@ -79,6 +79,25 @@
             <input formControlName="from_bank_account_name" matInput placeholder="Bank Account Name" />
           </mat-form-field>
         </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Bank Account Number</mat-label>
+            <input formControlName="from_bank_account_number" matInput placeholder="Bank Account Number" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Currency</mat-label>
+            <mat-select formControlName="currency">
+              @for (currency of currencies(); track currency.code) {
+              <mat-option [value]="currency.code">
+                {{ currency.name }} ({{ currency.code }})
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
 
       <!-- To input fields -->

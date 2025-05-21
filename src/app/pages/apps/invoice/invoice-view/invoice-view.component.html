@@ -71,6 +71,54 @@
         </div>
       </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="row p-y-24">
+        <div class="col-sm-6">
+          <span class="f-w-600 f-s-15 mat-body-1"> Account Details: </span>
+          <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
+            <span style="font-weight: bolder;"> Bank Name: </span>{{this.invoiceData().from_bank_account_name}}
+          </h6>
+          <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
+            <span style="font-weight: bold;">Bank Account Number:</span> {{this.invoiceData().from_bank_account_number}}
+          </h6>
+          <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
+            <span style="font-weight: bold;"> Currency: {{this.invoiceData().currency}}</span>
+          </h6>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- <div class="b-1 table-responsive">
         <table [dataSource]="items()" mat-table class="no-wrap v-middle">
           <ng-container matColumnDef="itemName">

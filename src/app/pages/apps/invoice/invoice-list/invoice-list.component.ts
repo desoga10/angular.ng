@@ -52,17 +52,16 @@ export class AppInvoiceListComponent {
   error: string | null = null;
 
   ngOnInit() {
-    this.fetchInvoices();
+    this.fetchUserInvoices();
   }
 
-  async fetchInvoices() {
+  async fetchUserInvoices() {
     this.service
-      .getAllInvoices()
+      .getUserInvoices()
       .then((result) => {
+        console.log(result);
         this.invoices = result;
         this.loading = false;
-        console.log(this.invoices);
-
         this.dataSource = new MatTableDataSource(this.invoices);
         this.dataSource.paginator = this.paginator;
       })

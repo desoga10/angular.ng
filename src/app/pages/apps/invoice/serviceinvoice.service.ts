@@ -123,4 +123,23 @@ export class ServiceinvoiceService {
       items: itemRow?.item_details || [],
     };
   }
+
+  async getUserInvoices() {
+    const {
+      data: { user },
+      error: userError,
+    } = await this.supabase.auth.getUser();
+
+    if (userError || !user) throw userError || new Error('User not found');
+
+    const { data: invoices, error } = await this.supabase
+      .from('invoice')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('id', { ascending: false });
+
+    if (error) throw error;
+
+    return invoices;
+  }
 }

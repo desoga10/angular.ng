@@ -39,6 +39,7 @@ export class AppAddInvoiceComponent {
   private toastr = inject(ToastrService);
   private router = inject(Router);
   addInvoiceForm!: FormGroup;
+  loading = signal(false);
   itemDetailsSignal = signal<any[]>([]);
   phoneNumber = '^(+d{1,3}[- ]?)?d{10}$';
   currencies = signal<{ code: string; name: string }[]>([]);
@@ -109,10 +110,10 @@ export class AppAddInvoiceComponent {
 
   addDetails() {
     const itemDetail = this.fb.group({
-      item_description: new FormControl('', Validators.required),
-      item_unit_price: new FormControl('', Validators.required),
-      item_units: new FormControl('', Validators.required),
-      unit_total_price: new FormControl('', Validators.required),
+      item_description: new FormControl(''),
+      item_unit_price: new FormControl(''),
+      item_units: new FormControl(''),
+      unit_total_price: new FormControl(''),
     });
     this.itemDetails().push(itemDetail);
   }
@@ -124,7 +125,7 @@ export class AppAddInvoiceComponent {
   async onSubmit() {
     if (this.addInvoiceForm.valid) {
       const formValue = this.addInvoiceForm.value;
-
+      this.loading.set(true); // disable the button
       try {
         const result = await this.invoiceService.submitInvoiceWithItems(
           formValue
@@ -144,6 +145,8 @@ export class AppAddInvoiceComponent {
           'Failed to create invoice. Please try again.',
           'Error'
         );
+      } finally {
+        this.loading.set(false); // enable the button
       }
     } else {
       this.toastr.warning(

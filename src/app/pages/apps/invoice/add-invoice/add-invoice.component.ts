@@ -137,7 +137,7 @@ export class AppAddInvoiceComponent {
         // Optional: navigate or reset form
         this.addInvoiceForm.reset();
         this.itemDetails().clear();
-        this.addDetails();
+        // this.addDetails();
         this.router.navigate(['/apps/invoice']);
       } catch (err) {
         //Show error toast

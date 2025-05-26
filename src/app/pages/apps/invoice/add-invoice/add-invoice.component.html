@@ -51,44 +51,44 @@
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Email</mat-label>
+            <mat-label>Email (Optional)</mat-label>
             <input formControlName="from_email" type="email" matInput placeholder="email@business.com" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Enter Address</mat-label>
+            <mat-label>Enter Address (Optional)</mat-label>
             <input formControlName="from_address" matInput placeholder="Enter Address" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Phone Number</mat-label>
+            <mat-label>Phone Number (Optional)</mat-label>
             <input formControlName="from_phone_number" type="tel" matInput placeholder="(123) 456 789" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Invoice Number</mat-label>
+            <mat-label>Invoice Number (Optional)</mat-label>
             <input formControlName="from_invoice_number" value="INV0001" matInput placeholder="Invoice Number" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Bank Account Name</mat-label>
+            <mat-label>Bank Account Name (Optional)</mat-label>
             <input formControlName="from_bank_account_name" matInput placeholder="Bank Account Name" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Bank Account Number</mat-label>
+            <mat-label>Bank Account Number (Optional)</mat-label>
             <input formControlName="from_bank_account_number" matInput placeholder="Bank Account Number" />
           </mat-form-field>
         </div>
 
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Currency</mat-label>
+            <mat-label>Currency (Optional)</mat-label>
             <mat-select formControlName="currency">
               @for (currency of currencies(); track currency.code) {
               <mat-option [value]="currency.code">
@@ -113,19 +113,19 @@
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Email</mat-label>
+            <mat-label>Email (Optional)</mat-label>
             <input formControlName="to_email" type="email" matInput placeholder="email@client.com" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Enter Address</mat-label>
+            <mat-label>Enter Address (Optional)</mat-label>
             <input formControlName="to_address" matInput placeholder="Enter Address" />
           </mat-form-field>
         </div>
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Phone Number</mat-label>
+            <mat-label>Phone Number (Optional)</mat-label>
             <input formControlName="to_phone_number" type="tel" matInput placeholder="(123) 456 789" />
           </mat-form-field>
         </div>
@@ -133,7 +133,7 @@
 
 
       <mat-divider></mat-divider>
-      <h2>Due Date</h2>
+      <h2>Due Date (Optional)</h2>
       <mat-form-field appearance="outline" class="w-25">
         <input formControlName="due_date" type="date" matInput placeholder="due_date" />
       </mat-form-field>

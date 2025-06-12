@@ -40,7 +40,6 @@ export type ChartOptions = {
   imports: [NgApexchartsModule, MaterialModule],
   templateUrl: './column.component.html',
 })
-
 export class AppColumnChartComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
   public columnChartOptions: Partial<ChartOptions> | any;
@@ -87,7 +86,7 @@ export class AppColumnChartComponent {
         curve: 'straight',
         width: '0',
       },
-      colors: ['#635bff', '#16cdc7'],
+      colors: ['#008000', '#16cdc7'],
       legend: {
         show: true,
       },

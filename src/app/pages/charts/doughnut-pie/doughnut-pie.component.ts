@@ -71,15 +71,15 @@ export class AppDoughnutpieChartComponent {
         position: 'bottom',
         width: '50px',
       },
-      colors: ['#635bff', '#16cdc7', '#f8c20a', '#ff6692', '#36c76c'],
+      colors: ['#008000', '#16cdc7', '#f8c20a', '#ff6692', '#36c76c'],
       tooltip: {
         theme: 'dark',
         fillSeriesColor: false,
       },
     };
 
-     //pie chart.
-     this.pieChartOptions = {
+    //pie chart.
+    this.pieChartOptions = {
       series: [45, 15, 27, 18, 35],
       chart: {
         id: 'pie-chart',

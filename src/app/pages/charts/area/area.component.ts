@@ -76,7 +76,7 @@ export class AppAreaChartComponent {
         curve: 'smooth',
         width: '2',
       },
-      colors: ['#635bff', '#16cdc7'],
+      colors: ['#008000', '#16cdc7'],
       legend: {
         show: false,
       },

@@ -59,7 +59,7 @@ export class AppRadialRadarChartComponent {
           show: false,
         },
       },
-      colors: ['#635bff', '#16cdc7', '#f8c20a', '#36c76c'],
+      colors: ['#008000', '#16cdc7', '#f8c20a', '#36c76c'],
       plotOptions: {
         radialBar: {
           dataLabels: {

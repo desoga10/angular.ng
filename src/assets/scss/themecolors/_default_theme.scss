@@ -1,7 +1,7 @@
 $mat-primary: (
   100: white,
-  500: #635bff,
-  700: #635bff,
+  500: #008000,
+  700: #008000,
   contrast: (
     100: white,
     500: white,
@@ -77,8 +77,8 @@ $darkbluetheme: mat.m2-define-dark-theme(
 );
 
 .mdc-list-item:hover::before {
-  --mdc-list-list-item-hover-state-layer-color: #635bff;
-  --mdc-list-list-item-focus-state-layer-color:#635bff;
+  --mdc-list-list-item-hover-state-layer-color: #008000;
+  --mdc-list-list-item-focus-state-layer-color:#008000;
 }
 
 .bg-primary,

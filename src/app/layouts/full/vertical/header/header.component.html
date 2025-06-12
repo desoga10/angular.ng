@@ -92,20 +92,32 @@
     </div>
   </button>
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
+
     <div class="p-x-32 p-y-16">
       <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
         <img src="/assets/images/profile/user-1.jpg" class="rounded-circle" width="56" />
+
+
+
+        @if (this.user() ) {
         <div class="m-l-16">
           <h6 class="f-s-14 f-w-600 m-0 mat-subtitle-1 d-flex align-items-center">
-            David McMichael
-            <span class="f-s-14 d-block text-success m-l-4">Pro</span>
+            {{ this.user()?.user_metadata?.full_name }}
+            <span class="f-s-14 d-block text-success m-l-4">Free</span>
           </h6>
-          <span> david&#64;wrappixel.com </span>
+          <span> {{this.user()?.email}} </span>
         </div>
+
+        }
+
+
+
       </div>
     </div>
-    <div class="p-x-32 p-b-16">
 
+
+
+    <div class="p-x-32 p-b-16">
       <a [routerLink]="['/theme-pages/account-setting']" class="p-8 text-decoration-none d-block text-hover-primary">
         <div class="d-flex align-items-center">
           <h5 class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text">

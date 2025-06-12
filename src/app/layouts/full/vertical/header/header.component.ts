@@ -5,6 +5,7 @@ import {
   Input,
   ViewEncapsulation,
   inject,
+  effect,
 } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -61,7 +62,11 @@ export class HeaderComponent {
       });
   }
 
-  constructor(private settings: CoreService, public dialog: MatDialog) {}
+  constructor(private settings: CoreService, public dialog: MatDialog) {
+    effect(() => {
+      console.log('Current user:', this.user());
+    });
+  }
 
   options = this.settings.getOptions();
 
@@ -95,6 +100,8 @@ export class HeaderComponent {
       link: '/apps/invoice',
     },
   ];
+
+  user = this.auth.user;
 }
 
 @Component({

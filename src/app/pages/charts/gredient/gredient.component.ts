@@ -100,7 +100,7 @@ export class AppGredientChartComponent {
         type: 'gradient',
         gradient: {
           shade: 'dark',
-          gradientToColors: ['#635bff'],
+          gradientToColors: ['#008000'],
           shadeIntensity: 1,
           type: 'horizontal',
           opacityFrom: 1,
@@ -111,7 +111,7 @@ export class AppGredientChartComponent {
       markers: {
         size: 4,
         opacity: 0.9,
-        colors: ['#635bff'],
+        colors: ['#008000'],
         strokeColor: '#fff',
         strokeWidth: 2,
 

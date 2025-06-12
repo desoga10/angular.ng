@@ -262,7 +262,7 @@ export class AppCandlestickChartComponent {
       plotOptions: {
         candlestick: {
           colors: {
-            upward: '#635bff',
+            upward: '#008000',
             downward: '#16cdc7',
           },
         },

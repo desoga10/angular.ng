@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private supabase_client!: SupabaseClient;
   private router = inject(Router);
-  // private _ngZone = inject(NgZone);
+  user = signal<any | null>(null);
 
   constructor() {
     this.supabase_client = createClient(
@@ -28,6 +28,7 @@ export class AuthService {
       localStorage.setItem('session', JSON.stringify(session?.user));
     });
     this.handleOAuthCallback();
+    this.loadUser();
   }
 
   async handleOAuthCallback() {
@@ -92,5 +93,12 @@ export class AuthService {
   //SignOut
   public signOut(): Promise<any> {
     return this.supabase_client.auth.signOut();
+  }
+
+  private async loadUser() {
+    const {
+      data: { user },
+    } = await this.supabase_client.auth.getUser();
+    this.user.set(user);
   }
 }

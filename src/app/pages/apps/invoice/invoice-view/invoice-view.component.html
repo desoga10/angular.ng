@@ -2,7 +2,7 @@
   <mat-card-content class="p-24">
 
     <span>
-      <div class="row m-b-24">
+      <!-- <div class="row m-b-24">
         <div class="col-sm-4 d-flex align-items-center">
           <h4 class="mat-subtitle-2 f-s-18 f-w-600">INVOICE</h4>
           <br />
@@ -10,17 +10,25 @@
         </div>
         <div class="col-sm-8 text-right" id="pdfButtons">
           <a mat-stroked-button color="primary" class="m-r-10" [routerLink]="['/apps/invoice']">Back to Invoice</a>
-
-          <!-- <a
-            [routerLink]="['/apps/editinvoice/', invoiceDetail.id]"
-            mat-flat-button
-            color="primary"
-            >Edit Invoice</a
-          > -->
           <a mat-flat-button color="primary" class="m-r-10" disabled>Edit Invoice</a>
+          <a mat-flat-button color="primary" (click)="downloadPDF()" class="m-r-10">Download Invoice</a>
+        </div>
+      </div> -->
+      <div class="row m-b-24">
+        <div class="col-sm-4 d-flex flex-column flex-sm-row align-items-sm-center">
+          <h4 class="mat-subtitle-2 f-s-18 f-w-600 me-sm-2">INVOICE</h4>
+          <h4 class="mat-subtitle-2 f-s-18 f-w-600">#{{ invoiceData()?.id || 'N/A' }}</h4>
+        </div>
+
+        <div
+          class="col-sm-8 d-flex flex-column flex-sm-row justify-content-sm-end align-items-sm-center gap-2 gap-sm-3 mt-3 mt-sm-0"
+          id="pdfButtons">
+          <a mat-stroked-button color="primary" [routerLink]="['/apps/invoice']">Back to Invoice</a>
+          <a mat-flat-button color="primary" disabled>Edit Invoice</a>
           <a mat-flat-button color="primary" (click)="downloadPDF()">Download Invoice</a>
         </div>
       </div>
+
       <mat-divider></mat-divider>
 
       <div class="row p-y-24">
@@ -71,27 +79,6 @@
         </div>
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <div class="row p-y-24">
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1"> Account Details: </span>
@@ -105,116 +92,49 @@
             <span style="font-weight: bold;"> Currency: {{this.invoiceData().currency}}</span>
           </h6>
         </div>
-
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-      <!-- <div class="b-1 table-responsive">
-        <table [dataSource]="items()" mat-table class="no-wrap v-middle">
-          <ng-container matColumnDef="itemName">
-            <th class="font-medium font-16" mat-header-cell *matHeaderCellDef class="f-s-15 f-w-600">
-              Item Name
-            </th>
-            <td class="font-normal" mat-cell *matCellDef="let element">
-              food
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="unitPrice">
-            <th class="font-medium font-16" mat-header-cell *matHeaderCellDef class="f-s-15 f-w-600">
-              Unit Price
-            </th>
-            <td class="font-normal" mat-cell *matCellDef="let element">
-              {{ element.unitPrice }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="unit">
-            <th class="font-medium font-16" mat-header-cell *matHeaderCellDef class="f-s-15 f-w-600">
-              Unit
-            </th>
-            <td class="font-normal" mat-cell *matCellDef="let element">
-              {{ element.units }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="total">
-            <th class="font-medium font-16" mat-header-cell *matHeaderCellDef class="f-s-15 f-w-600">
-              Total Cost
-            </th>
-            <td class="font-normal" mat-cell *matCellDef="let element">
-              {{ element.unitTotalPrice }}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-      </div> -->
-      <div class="b-1 table-responsive">
+      <div>
+        <h2>Item Details</h2>
         @if (invoiceData().items.length > 0) {
-        <table mat-table [dataSource]="invoiceData().items" class="no-wrap v-middle">
+        @for (item of invoiceData().items; track item) {
+        <div class="row m-y-24 p-t-24">
+          <div class="col-sm-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <input type="text" matInput placeholder="Item Description" [value]="item.item_description" readonly />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <input type="number" matInput min="1" placeholder="Unit Price" [value]="item.item_unit_price" readonly />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <input type="number" matInput min="1" placeholder="Units" [value]="item.item_units" readonly />
+            </mat-form-field>
+          </div>
 
-          <!-- Item Name Column -->
-          <ng-container matColumnDef="itemName">
-            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
-              Item Name
-            </th>
-            <td mat-cell *matCellDef="let element" class="font-normal">
-              {{ element.item_description }}
-            </td>
-          </ng-container>
+          <div class="col-12 text-right">
+            <p class="f-w-600 m-b-0">Unit Total:</p>
+            <input type="text" matInput [value]="item.unit_total_price" readonly
+              style="border: 0; background: transparent; font-weight: 600; margin-right: -115px;" />
+          </div>
 
-          <!-- Unit Price Column -->
-          <ng-container matColumnDef="unitPrice">
-            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
-              Unit Price
-            </th>
-            <td mat-cell *matCellDef="let element" class="font-normal">
-              {{ element.item_unit_price }}
-            </td>
-          </ng-container>
-
-          <!-- Unit Column -->
-          <ng-container matColumnDef="unit">
-            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
-              Unit
-            </th>
-            <td mat-cell *matCellDef="let element" class="font-normal">
-              {{ element.item_units }}
-            </td>
-          </ng-container>
-
-          <!-- Total Cost Column -->
-          <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef class="font-medium font-16 f-s-15 f-w-600">
-              Total Cost
-            </th>
-            <td mat-cell *matCellDef="let element" class="font-normal">
-              {{ element.unit_total_price }}
-            </td>
-          </ng-container>
-
-          <!-- Table Header & Row Definitions -->
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+          <mat-divider class="my-3"></mat-divider>
+        </div>
+        }
         } @else {
         <p class="p-3 text-muted">No items available for this invoice.</p>
         }
-      </div>
-
-      <div class="text-right m-t-30">
-        <!-- <span class="f-w-600 f-s-16">Vat: 10%</span> -->
-        <h3 class="m-b-0 b-t-1 p-t-20 f-s-18">
-          Grand Total: {{this.invoiceData().grand_total_price}}
-        </h3>
+        <div class="text-right m-t-30">
+          <mat-divider style="margin-top: 30px;"></mat-divider>
+          <h3 class="m-b-0 p-t-20 f-s-18">
+            Grand Total:
+            <input type="text" [value]="invoiceData().grand_total_price" matInput readonly
+              style="border:0;background-color: transparent;margin-right: -140px;font-size: inherit;" />
+          </h3>
+        </div>
       </div>
     </span>
   </mat-card-content>

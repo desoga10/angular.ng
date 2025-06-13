@@ -182,11 +182,6 @@
         </div>
 
         <div class="text-right m-t-30">
-
-          <!-- <button type="submit" color="primary" mat-flat-button>
-            Create Invoice
-          </button> -->
-
           <button type="submit" color="primary" mat-flat-button [disabled]="loading() || addInvoiceForm.invalid">
             <mat-progress-spinner *ngIf="loading()" diameter="20" mode="indeterminate" color="accent"
               style="margin-right: 8px;"></mat-progress-spinner>

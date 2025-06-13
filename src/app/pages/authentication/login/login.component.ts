@@ -54,6 +54,7 @@ export class LoginComponent {
       .then((res) => {
         if (res.data.user.role === 'authenticated') {
           this.router.navigate(['/']);
+          window.location.reload();
         }
       })
       .catch((err) => {

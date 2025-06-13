@@ -5,3 +5,7 @@ table {
 .pdf-hidden {
   display: none !important;
 }
+
+a[mat-flat-button] {
+  cursor: pointer;
+}

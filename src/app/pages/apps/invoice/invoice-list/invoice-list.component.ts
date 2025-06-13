@@ -33,7 +33,7 @@ export interface PeriodicElement {
 })
 export class AppInvoiceListComponent {
   displayedColumns: string[] = [
-    'id',
+    'position',
     'order_date',
     'due_date',
     'order_status',

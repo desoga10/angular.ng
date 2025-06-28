@@ -1,6 +1,6 @@
 import { Component, computed, inject, Input, signal } from '@angular/core';
 import { ServiceInvoiceService } from '../serviceinvoice.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 // import { MatTableDataSource } from '@angular/material/table';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
@@ -50,8 +50,17 @@ export class AppInvoiceViewComponent {
     grand_total_price: 0,
     items: [],
   });
+  invoiceIndex = '';
+  private route = inject(ActivatedRoute);
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.id = params['id'];
+    });
+
+    this.route.queryParams.subscribe((query) => {
+      this.invoiceIndex = query['index'];
+    });
     console.log(this.id);
     if (this.id) {
       this.service.getInvoiceById(Number(this.id)).then((res) => {

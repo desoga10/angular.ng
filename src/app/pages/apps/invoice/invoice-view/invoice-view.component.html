@@ -15,11 +15,10 @@
         </div>
       </div> -->
       <div class="row m-b-24">
-        <div class="col-sm-4 d-flex flex-column flex-sm-row align-items-sm-center">
+        <div class="col-sm-4 d-flex flex-column flex-sm-row align-items-sm-center mb-mobile-16">
           <h4 class="mat-subtitle-2 f-s-18 f-w-600 me-sm-2">INVOICE</h4>
-          <h4 class="mat-subtitle-2 f-s-18 f-w-600">#{{ invoiceData()?.id || 'N/A' }}</h4>
+          <h4 class="mat-subtitle-2 f-s-18 f-w-600">#{{ invoiceData().id || 'N/A' }}</h4>
         </div>
-
         <div
           class="col-sm-8 d-flex flex-column flex-sm-row justify-content-sm-end align-items-sm-center gap-2 gap-sm-3 mt-3 mt-sm-0"
           id="pdfButtons">

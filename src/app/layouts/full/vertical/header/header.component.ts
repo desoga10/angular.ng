@@ -48,6 +48,7 @@ export class HeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
   private auth = inject(AuthService);
   private router = inject(Router);
+  private core = inject(CoreService);
 
   showFiller = false;
 
@@ -62,16 +63,22 @@ export class HeaderComponent {
       });
   }
 
-  constructor(private settings: CoreService, public dialog: MatDialog) {
+  constructor(public dialog: MatDialog) {
     effect(() => {
       console.log('Current user:', this.user());
     });
   }
 
-  options = this.settings.getOptions();
+  toggleTheme() {
+    this.core.toggleTheme();
+  }
+
+  get currentTheme(): string {
+    return this.core.getOptions().theme;
+  }
 
   setDark() {
-    this.settings.toggleTheme();
+    this.core.toggleTheme();
   }
 
   openDialog() {

@@ -62,8 +62,9 @@
 
   <span class="flex-1-auto"></span>
 
-  <button mat-mini-fab color="inherit" aria-label="lightdark" class="d-flex justify-content-center" (click)="setDark()">
-    <i-tabler class="d-flex icon-22" [name]="options.theme === 'dark' ? 'sun' : 'moon'"></i-tabler>
+  <button mat-mini-fab color="primary" aria-label="Toggle theme" (click)="toggleTheme()"
+    class="d-flex justify-content-center">
+    <i-tabler class="d-flex icon-22" [name]="currentTheme === 'dark' ? 'sun' : 'moon'"></i-tabler>
   </button>
 
   <!-- Mobile Menu -->

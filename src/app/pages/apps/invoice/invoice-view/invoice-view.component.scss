@@ -9,3 +9,9 @@ table {
 a[mat-flat-button] {
   cursor: pointer;
 }
+
+@media (max-width: 599px) {
+  .mb-mobile-16 {
+    margin-bottom: 16px;
+  }
+}

@@ -64,8 +64,9 @@
         </mat-tab>
       </mat-tab-group>
       <div class="text-right p-24 p-t-0">
-        <button mat-flat-button color="primary" class="m-r-8" [disabled]="!userForm.valid" type="submit">Save</button>
-        <button mat-stroked-button color="warn">Cancel</button>
+        <button mat-flat-button color="primary" class="m-r-8" [disabled]="!userForm.valid || !userForm.touched"
+          type="submit">Save</button>
+        <button mat-stroked-button color="warn" type="button">Cancel</button>
       </div>
     </mat-card-content>
   </mat-card>

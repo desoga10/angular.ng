@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, inject } from '@angular/core';
-import { ServiceinvoiceService } from '../serviceinvoice.service';
+import { ServiceInvoiceService } from '../serviceinvoice.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -43,7 +43,7 @@ export class AppInvoiceListComponent {
 
   dataSource = new MatTableDataSource<PeriodicElement>();
 
-  private service = inject(ServiceinvoiceService);
+  private serviceInvoice = inject(ServiceInvoiceService);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -56,7 +56,7 @@ export class AppInvoiceListComponent {
   }
 
   async fetchUserInvoices() {
-    this.service
+    this.serviceInvoice
       .getUserInvoices()
       .then((result) => {
         console.log(result);
@@ -69,5 +69,18 @@ export class AppInvoiceListComponent {
         this.loading = false;
         alert(`Failed to load invoices: ${error}`);
       });
+  }
+
+  deleteInvoice(id: string) {
+    if (confirm('Are you sure you want to delete this invoice?')) {
+      this.serviceInvoice.deleteInvoice(id).then(({ error }) => {
+        if (error) {
+          alert('Error deleting invoice: ' + error.message);
+        } else {
+          alert('Invoice deleted successfully!');
+          this.fetchUserInvoices();
+        }
+      });
+    }
   }
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceinvoiceService } from '../serviceinvoice.service';
-import { Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
@@ -26,12 +25,7 @@ export class AppEditInvoiceComponent {
   vat = 0;
   grandTotal = 0;
 
-  constructor(
-    activatedRouter: ActivatedRoute,
-    private invoiceService: ServiceinvoiceService,
-    private router: Router,
-    public dialog: MatDialog
-  ) {
+  constructor(activatedRouter: ActivatedRoute, public dialog: MatDialog) {
     this.id = activatedRouter.snapshot.paramMap.get('id');
   }
 }

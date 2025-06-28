@@ -8,7 +8,7 @@ import {
   FormGroup,
   FormArray,
 } from '@angular/forms';
-import { ServiceinvoiceService } from '../serviceinvoice.service';
+import { ServiceInvoiceService } from '../serviceinvoice.service';
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
@@ -34,7 +34,7 @@ interface OrderStatus {
   ],
 })
 export class AppAddInvoiceComponent {
-  private invoiceService = inject(ServiceinvoiceService);
+  private invoiceService = inject(ServiceInvoiceService);
   private fb = inject(FormBuilder);
   private toastr = inject(ToastrService);
   private router = inject(Router);

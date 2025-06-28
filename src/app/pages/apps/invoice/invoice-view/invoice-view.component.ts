@@ -1,5 +1,5 @@
 import { Component, computed, inject, Input, signal } from '@angular/core';
-import { ServiceinvoiceService } from '../serviceinvoice.service';
+import { ServiceInvoiceService } from '../serviceinvoice.service';
 import { RouterModule } from '@angular/router';
 // import { MatTableDataSource } from '@angular/material/table';
 import { MaterialModule } from 'src/app/material.module';
@@ -28,7 +28,7 @@ const html2pdf = require('html2pdf.js');
 export class AppInvoiceViewComponent {
   @Input() id = '';
   displayedColumns: string[] = ['itemName', 'unitPrice', 'unit', 'total'];
-  private service = inject(ServiceinvoiceService);
+  private service = inject(ServiceInvoiceService);
   items = computed(() => this.invoiceData().items);
   invoiceData = signal<ViewInvoiceResponse>({
     id: '',

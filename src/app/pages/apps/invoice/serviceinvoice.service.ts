@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root',
 })
-export class ServiceinvoiceService {
+export class ServiceInvoiceService {
   http = inject(HttpClient);
   private supabase!: SupabaseClient;
   currencies: { code: string; name: string }[] = [];
@@ -141,5 +141,23 @@ export class ServiceinvoiceService {
     if (error) throw error;
 
     return invoices;
+  }
+
+  async deleteInvoice(id: string) {
+    // Delete related invoice_items first
+    const { error: itemsError } = await this.supabase
+      .from('invoice_items')
+      .delete()
+      .eq('invoice_id', id);
+
+    if (itemsError) return { error: itemsError };
+
+    // Then delete the main invoice
+    const { error: invoiceError } = await this.supabase
+      .from('invoice')
+      .delete()
+      .eq('id', id);
+
+    return { error: invoiceError };
   }
 }

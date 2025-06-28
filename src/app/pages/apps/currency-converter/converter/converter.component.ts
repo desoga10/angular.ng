@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { ConverterService } from '../converter.service';
 import { MatButtonModule } from '@angular/material/button';
-import { ServiceinvoiceService } from '../../invoice/serviceinvoice.service';
+import { ServiceInvoiceService } from '../../invoice/serviceinvoice.service';
 
 @Component({
   selector: 'app-converter',
@@ -16,7 +16,7 @@ import { ServiceinvoiceService } from '../../invoice/serviceinvoice.service';
 export class AppConverterComponent {
   selectedCategory = 'All';
   currencyService = inject(ConverterService);
-  invoiceService = inject(ServiceinvoiceService);
+  invoiceService = inject(ServiceInvoiceService);
   amountValueFrankFurther = signal('');
   fromValueFrankFurther = signal('');
   toValueFrankFurther = signal('');

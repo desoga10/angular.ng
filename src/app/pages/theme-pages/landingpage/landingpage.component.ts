@@ -66,5 +66,12 @@ export class AppLandingpageComponent {
       subtitle: 'Convert currency in seconds',
       link: '/apps/converter',
     },
+    {
+      id: 2,
+      icon: 'solar:bill-list-line-duotone',
+      title: 'Invoice App',
+      subtitle: 'Create and manage your invoice',
+      link: '/apps/invoice',
+    },
   ];
 }

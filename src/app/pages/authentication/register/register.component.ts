@@ -46,25 +46,45 @@ export class RegisterComponent {
     return this.form.controls;
   }
 
-  submit() {
-    this.auth
-      .signUp(
+  async submit() {
+    const res = await this.auth.signUp(
+      this.form.value.email as string,
+      this.form.value.password as string,
+      this.form.value.username as string
+    );
+
+    if (res.error) {
+      console.error('SIGNUP ERROR:', res.error);
+      this.errorMessage = res.error.message;
+      alert(this.errorMessage);
+      return; // exit early
+    }
+
+    const user = res.data.user;
+
+    if (user?.aud === 'authenticated') {
+      await this.auth.sendWelcomeEmail(
         this.form.value.email as string,
-        this.form.value.password as string,
         this.form.value.username as string
-      )
+      );
+    }
+
+    if (user?.role === 'authenticated') {
+      this.router.navigate(['/']);
+      window.location.reload();
+    }
+  }
+  async handleAuth() {
+    await this.auth
+      .signInWithGoogle()
       .then((res) => {
-        if (res.data.user.role === 'authenticated') {
-          this.router.navigate(['/']);
-          window.location.reload();
-        }
+        this.auth.sendWelcomeEmail(
+          this.form.value.email as string,
+          this.form.value.username as string
+        );
       })
       .catch((err) => {
-        this.errorMessage = err;
+        this.errorMessage = err.message;
       });
-  }
-
-  async handleAuth() {
-    await this.auth.signInWithGoogle();
   }
 }

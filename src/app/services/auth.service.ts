@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private supabase_client!: SupabaseClient;
   private router = inject(Router);
+  private http = inject(HttpClient);
   user = signal<any | null>(null);
 
   constructor() {
@@ -100,5 +102,19 @@ export class AuthService {
       data: { user },
     } = await this.supabase_client.auth.getUser();
     this.user.set(user);
+  }
+
+  sendWelcomeEmail(email: string, username: string) {
+    const body = {
+      email: email,
+      username: username || '',
+    };
+
+    return this.http
+      .post(`${environment.WELCOME_EMAIL_API_URL}/api/send-welcome-email`, body)
+      .subscribe({
+        next: () => console.log('Welcome email sent'),
+        error: (err: any) => console.error('Email send failed:', err),
+      });
   }
 }

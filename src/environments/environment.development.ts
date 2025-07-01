@@ -6,4 +6,6 @@ export const environment = {
   FRANKFURTER_API_URL: 'https://api.frankfurter.app',
   EXCHANGE_RATE_API_URL:
     'https://v6.exchangerate-api.com/v6/6eb99285a0390c91620a279c/pair',
+  WELCOME_EMAIL_API_URL:
+    'https://ng-angular-welcome-email-template.onrender.com',
 };

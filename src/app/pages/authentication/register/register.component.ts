@@ -57,7 +57,7 @@ export class RegisterComponent {
       console.error('SIGNUP ERROR:', res.error);
       this.errorMessage = res.error.message;
       alert(this.errorMessage);
-      return; // exit early
+      return;
     }
 
     const user = res.data.user;
@@ -70,10 +70,13 @@ export class RegisterComponent {
     }
 
     if (user?.role === 'authenticated') {
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+
       this.router.navigate(['/']);
       window.location.reload();
     }
   }
+
   async handleAuth() {
     await this.auth
       .signInWithGoogle()

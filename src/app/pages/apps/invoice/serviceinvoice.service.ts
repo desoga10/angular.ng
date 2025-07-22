@@ -61,7 +61,7 @@ export class ServiceInvoiceService {
         {
           invoice_id: invoiceId,
           item_details: item_details,
-          user_id: user_id, // 👈 required for RLS
+          user_id: user_id,
         },
       ]);
 

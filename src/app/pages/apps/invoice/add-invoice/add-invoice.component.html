@@ -73,31 +73,6 @@
             <input formControlName="from_invoice_number" value="INV0001" matInput placeholder="Invoice Number" />
           </mat-form-field>
         </div>
-        <div class="col-sm-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Bank Account Name (Optional)</mat-label>
-            <input formControlName="from_bank_account_name" matInput placeholder="Bank Account Name" />
-          </mat-form-field>
-        </div>
-        <div class="col-sm-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Bank Account Number (Optional)</mat-label>
-            <input formControlName="from_bank_account_number" matInput placeholder="Bank Account Number" />
-          </mat-form-field>
-        </div>
-
-        <div class="col-sm-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Currency (Optional)</mat-label>
-            <mat-select formControlName="currency">
-              @for (currency of currencies(); track currency.code) {
-              <mat-option [value]="currency.code">
-                {{ currency.name }} ({{ currency.code }})
-              </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
       </div>
 
       <!-- To input fields -->
@@ -130,6 +105,79 @@
           </mat-form-field>
         </div>
       </div>
+
+
+      <mat-divider></mat-divider>
+      <h2>Payment Details</h2>
+      <div class="row m-y-24 p-t-24">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Bank Account Name</mat-label>
+            <input formControlName="from_bank_account_name" matInput placeholder="Bank Account Name" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Bank Account Number</mat-label>
+            <input formControlName="from_bank_account_number" matInput placeholder="Bank Account Number" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Currency</mat-label>
+            <mat-select formControlName="currency">
+              @for (currency of currencies(); track currency.code) {
+              <mat-option [value]="currency.code">
+                {{ currency.name }} ({{ currency.code }})
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Sort Code</mat-label>
+            <input formControlName="sort_code" matInput placeholder="Sort Code" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>SWIFT</mat-label>
+            <input formControlName="swift" matInput placeholder="SWIFT Code" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>IBAN</mat-label>
+            <input formControlName="iban" matInput placeholder="IBAN" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Routing Number</mat-label>
+            <input formControlName="routing_number" matInput placeholder="Routing Number" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Account Type</mat-label>
+            <input formControlName="account_type" matInput placeholder="e.g., Checking, Savings" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Beneficiary Name</mat-label>
+            <input formControlName="beneficiary_name" matInput placeholder="Beneficiary Name" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Bank Address</mat-label>
+            <input formControlName="bank_address" matInput placeholder="Bank Address" />
+          </mat-form-field>
+        </div>
+      </div>
+
 
 
       <mat-divider></mat-divider>

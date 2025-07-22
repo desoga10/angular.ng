@@ -52,8 +52,16 @@ export interface ViewInvoiceResponse {
   order_status: string;
   order_date: string;
   from_business_name: string;
+  from_bank_name: string;
   from_bank_account_name: string;
   from_bank_account_number: string;
+  beneficiary_name: string;
+  bank_address: string;
+  account_type: string;
+  sort_code: string;
+  iban: string;
+  swift: string;
+  routing_number: string;
   currency: string;
   from_email: string;
   from_address: string;
@@ -65,5 +73,5 @@ export interface ViewInvoiceResponse {
   to_phone_number: string;
   due_date: string;
   grand_total_price: number;
-  items: InvoiceItem[]; // 👈 Now supports multiple items
+  items: InvoiceItem[];
 }

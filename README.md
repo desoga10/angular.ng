@@ -1,3 +1,4 @@
+My apologies for the confusion. Here is the updated `README.md` file with the added information about the analytics scripts, without any tool calls.
 
 -----
 
@@ -93,6 +94,14 @@ After setting up the project, you can run it locally:
 4.  Open a **pull request** on the original repository, comparing your branch to the `main` branch.
 
 Please ensure your code follows our project's coding standards and provide a detailed description of your changes in the pull request. Thank you for helping us build `angular.ng`\!
+
+-----
+
+### 📝 Note on Analytics Scripts
+
+This project's `index.html` file includes scripts for **Google Analytics** and **Tawk.to**. When you run the application locally, data from your development environment (such as page views or chat interactions) may be sent to the project owner's accounts. This does not pose a security threat or expose any of your personal data.
+
+To avoid sending this data during local testing, you can temporarily comment out these script tags in the `src/index.html` file.
 
 -----
 

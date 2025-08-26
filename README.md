@@ -42,7 +42,7 @@ Make sure you have the following installed on your machine:
 2.  **Clone your forked repository** to your local machine:
 
     ```
-    git clone [https://github.com/your-username/angular.ng.git](https://github.com/your-username/angular.ng.git)
+    git clone https://github.com/your-username/angular.ng.git
 
     ```
 
@@ -89,9 +89,9 @@ Make sure you have the following installed on your machine:
           production: false,
           supabaseUrl: '',
           supabaseKey: '',
-          FRANKFURTER_API_URL: '[https://api.frankfurter.app](https://api.frankfurter.app)',
-          EXCHANGE_RATE_API_URL: '[https://v6.exchangerate-api.com/v6/6eb99285a0390c91620a279c/pair](https://v6.exchangerate-api.com/v6/6eb99285a0390c91620a279c/pair)',
-          WELCOME_EMAIL_API_URL: '[https://ng-angular-welcome-email-template.onrender.com](https://ng-angular-welcome-email-template.onrender.com)',
+          FRANKFURTER_API_URL: 'https://api.frankfurter.app',
+          EXCHANGE_RATE_API_URL: 'https://v6.exchangerate-api.com/v6/6eb99285a0390c91620a279c/pair',
+          WELCOME_EMAIL_API_URL: 'https://ng-angular-welcome-email-template.onrender.com',
         };
 
         ```

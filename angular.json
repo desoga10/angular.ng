@@ -33,7 +33,6 @@
             "styles": [
               "src/styles.scss",
               "src/assets/scss/style.scss",
-              "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/dropzone/dist/dropzone.css"
             ],
             "scripts": []

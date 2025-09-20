@@ -160,4 +160,51 @@ export class ServiceInvoiceService {
 
     return { error: invoiceError };
   }
+
+  async editInvoice(id: number | string, updatedInvoiceData: any) {
+    const { item_details: updatedItems, ...updatedInvoiceFields } =
+      updatedInvoiceData;
+
+    // Step 1: Update main invoice record
+    const { error: invoiceUpdateError } = await this.supabase
+      .from('invoice')
+      .update(updatedInvoiceFields)
+      .eq('id', id);
+
+    if (invoiceUpdateError) {
+      throw new Error('Invoice update failed: ' + invoiceUpdateError.message);
+    }
+
+    // Step 2: Handle invoice_items table - Delete existing and insert new
+    // First, delete all existing items for this invoice
+    const { error: deleteError } = await this.supabase
+      .from('invoice_items')
+      .delete()
+      .eq('invoice_id', id);
+
+    if (deleteError) {
+      throw new Error(
+        'Failed to delete existing invoice items: ' + deleteError.message
+      );
+    }
+
+    // Prepare items for insertion by adding the invoice_id to each item
+    const itemsToInsert = updatedItems.map((item: any) => ({
+      ...item,
+      invoice_id: id,
+    }));
+
+    // Then, insert all updated items
+    const { error: insertError } = await this.supabase
+      .from('invoice_items')
+      .insert(itemsToInsert);
+
+    if (insertError) {
+      throw new Error(
+        'Failed to insert updated invoice items: ' + insertError.message
+      );
+    }
+
+    return { success: true };
+  }
 }

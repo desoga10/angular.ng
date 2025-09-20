@@ -29,8 +29,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 //Import all material modules
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { provideToastr } from 'ngx-toastr';
@@ -65,10 +64,6 @@ export const appConfig: ApplicationConfig = {
       NgxPermissionsModule.forRoot(),
       TablerIconsModule.pick(TablerIcons),
       NgScrollbarModule,
-      CalendarModule.forRoot({
-        provide: DateAdapter,
-        useFactory: adapterFactory,
-      }),
       NgxEchartsModule.forRoot({
         echarts: () => import('echarts'),
       }),

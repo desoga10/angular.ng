@@ -23,7 +23,7 @@
           class="col-sm-8 d-flex flex-column flex-sm-row justify-content-sm-end align-items-sm-center gap-2 gap-sm-3 mt-3 mt-sm-0"
           id="pdfButtons">
           <a mat-stroked-button color="primary" [routerLink]="['/apps/invoice']">Back to Invoice</a>
-          <a mat-flat-button color="primary" disabled>Edit Invoice</a>
+          <a mat-flat-button color="primary" [routerLink]="['/apps/editinvoice', invoiceData().id]">Edit Invoice</a>
           <a mat-flat-button color="primary" (click)="downloadPDF()">Download Invoice</a>
         </div>
       </div>

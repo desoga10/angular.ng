@@ -15,55 +15,9 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'starter',
-        loadChildren: () =>
-          import('./pages/pages.routes').then((m) => m.PagesRoutes),
-      },
-      {
-        path: 'dashboards',
-        loadChildren: () =>
-          import('./pages/dashboards/dashboards.routes').then(
-            (m) => m.DashboardsRoutes
-          ),
-      },
-      {
-        path: 'ui-components',
-        loadChildren: () =>
-          import('./pages/ui-components/ui-components.routes').then(
-            (m) => m.UiComponentsRoutes
-          ),
-      },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./pages/forms/forms.routes').then((m) => m.FormsRoutes),
-      },
-      {
-        path: 'charts',
-        loadChildren: () =>
-          import('./pages/charts/charts.routes').then((m) => m.ChartsRoutes),
-      },
-      {
         path: 'apps',
         loadChildren: () =>
           import('./pages/apps/apps.routes').then((m) => m.AppsRoutes),
-      },
-      {
-        path: 'widgets',
-        loadChildren: () =>
-          import('./pages/widgets/widgets.routes').then((m) => m.WidgetsRoutes),
-      },
-      {
-        path: 'tables',
-        loadChildren: () =>
-          import('./pages/tables/tables.routes').then((m) => m.TablesRoutes),
-      },
-      {
-        path: 'datatable',
-        loadChildren: () =>
-          import('./pages/datatable/datatable.routes').then(
-            (m) => m.DatatablesRoutes
-          ),
       },
       {
         path: 'theme-pages',
@@ -94,7 +48,6 @@ export const routes: Routes = [
       },
     ],
   },
-
   {
     path: '**',
     redirectTo: 'authentication/error',

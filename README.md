@@ -1,149 +1,187 @@
-# angular.ng 🚀
+# Angular.ng
 
-**angular.ng** is an open-source productivity dashboard built with **Angular** and **Supabase**. The platform aims to be a comprehensive suite of tools designed to help end-users with daily tasks. It currently features an invoice generator and a currency converter, with plans to expand with more productivity-focused applications.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Angular](https://img.shields.io/badge/Angular-17+-DD0031?logo=angular)](https://angular.io/)
+[![Supabase](https://img.shields.io/badge/Supabase-Enabled-3ECF8E?logo=supabase)](https://supabase.com/)
 
-## ✨ Key Features
+> An open-source productivity dashboard built with Angular and Supabase
 
-* **Growing Suite of Productivity Apps**: The dashboard is a hub for various tools, with a vision to add more over time.
+**Angular.ng** is a comprehensive suite of productivity tools designed to streamline your daily tasks. Built with modern web technologies, it provides a seamless experience across all devices.
 
-* **Invoice Generator**: A user-friendly tool to create and manage invoices.
+🌐 **[Live Demo](https://angular.ng/)**
 
-* **Currency Converter**: A quick and accurate tool for converting different currencies.
+## Table of Contents
 
-* **User Authentication**: Secure user login and management handled by Supabase.
+- [Features](#features)
+- [Demo](#demo)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running Locally](#running-locally)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Privacy Notice](#privacy-notice)
+- [License](#license)
+- [Support](#support)
 
-* **Real-time Database**: Powered by Supabase for instant data synchronization.
+## Features
 
-* **Responsive Design**: The dashboard is optimized for seamless use on any device.
+### 🧾 Invoice Generator
+Create, customize, and manage professional invoices with ease. Perfect for freelancers and small businesses.
 
-## 🤝 How to Contribute
+### 💱 Currency Converter
+Quick and accurate currency conversion using real-time exchange rates from trusted APIs.
 
-We welcome contributions from the community! To get started, please follow these steps.
+### 🔐 User Authentication
+Secure user login and account management powered by Supabase Auth.
+
+### ⚡ Real-time Database
+Instant data synchronization across devices using Supabase's real-time capabilities.
+
+### 📱 Responsive Design
+Optimized for seamless use on desktop, tablet, and mobile devices.
+
+## Demo
+
+Visit [https://angular.ng/](https://angular.ng/) to see the live application in action.
+
+## Tech Stack
+
+- **Frontend Framework:** Angular 17+
+- **Backend/Database:** Supabase (PostgreSQL, Auth, Storage)
+- **Styling:** Angular Material / Custom CSS
+- **APIs:**
+  - [Frankfurter API](https://www.frankfurter.app/) - Currency exchange rates
+  - [ExchangeRate API](https://www.exchangerate-api.com/) - Alternative exchange rates
+- **Deployment:** Vercel
+
+## Getting Started
 
 ### Prerequisites
 
-Make sure you have the following installed on your machine:
+Before you begin, ensure you have the following installed:
 
-* **Node.js**: [LTS version](https://nodejs.org/en/download/) is recommended.
+- **Node.js:** [LTS version](https://nodejs.org/en/download/) (v18 or higher recommended)
+- **Angular CLI:** Install globally via npm:
+  ```bash
+  npm install -g @angular/cli
+  ```
+- **Supabase CLI:** Follow the [official documentation](https://supabase.com/docs/guides/cli) to install
+- **Git:** For version control
 
-* **Angular CLI**: Install it globally using npm:
+### Installation
 
-    ```
-    npm install -g @angular/cli
+1. **Fork the repository** on GitHub by clicking the "Fork" button at the top right of the [repository page](https://github.com/desoga10/angular.ng).
 
-    ```
+2. **Clone your forked repository:**
+   ```bash
+   git clone https://github.com/desoga10/angular.ng.git
+   cd angular.ng
+   ```
 
-* **Supabase CLI**: Follow the instructions on the [Supabase Docs](https://supabase.com/docs/guides/cli) to install and configure it.
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### Setup and Installation
+4. **Generate the environments folder** (if not present):
+   ```bash
+   ng g environments
+   ```
 
-1.  **Fork the repository** on GitHub.
+5. **Set up your Supabase project:** 🔒
 
-2.  **Clone your forked repository** to your local machine:
+   **⚠️ Important:** You must create your own Supabase instance to work on this project.
 
-    ```
-    git clone https://github.com/your-username/angular.ng.git
+   - Go to [Supabase](https://supabase.com/) and create a new project
+   - Navigate to **Settings > API** in your project dashboard
+   - Copy your **API URL** and **anon public key**
 
-    ```
+6. **Configure environment variables:**
 
-3.  **Navigate into the project directory**:
+   Open `src/environments/environment.development.ts` and add your credentials:
 
-    ```
-    cd angular.ng
+   ```typescript
+   export const environment = {
+     production: false,
+     supabaseUrl: 'YOUR_SUPABASE_URL',
+     supabaseKey: 'YOUR_SUPABASE_ANON_KEY',
+     FRANKFURTER_API_URL: 'https://api.frankfurter.app',
+     EXCHANGE_RATE_API_URL: 'https://v6.exchangerate-api.com/v6/6eb99285a0390c91620a279c/pair',
+     WELCOME_EMAIL_API_URL: 'https://ng-angular-welcome-email-template.onrender.com',
+   };
+   ```
 
-    ```
+### Running Locally
 
-4.  **Install project dependencies**:
+Start the development server:
 
-    ```
-    npm install
+```bash
+ng serve
+```
 
-    ```
+Navigate to `http://localhost:4200/` in your browser. The application will automatically reload when you make changes to the source files.
 
-5.  **Generate the `environments` folder**:
-    If your project doesn't have an `environments` folder, create it using the Angular CLI command:
+## Roadmap
 
-    ```
-    ng g environments
+- [x] Invoice Generator
+- [x] Currency Converter
+- [x] User Authentication
+- [ ] Task Manager
+- [ ] Calendar Integration
+- [ ] Note-Taking App
+- [ ] Expense Tracker
+- [ ] Time Tracker
+- [ ] Document Scanner
 
-    ```
+Have an idea for a new feature? [Open an issue](https://github.com/desoga10/angular.ng/issues/new) to discuss it!
 
-6.  **Set Up Your Own Supabase Project**: 🔒
+## Contributing
 
-    * **Crucial Step:** To work on this project, you must set up your own Supabase instance. This ensures that your work is isolated and your changes do not affect the main project's database.
+We welcome contributions from developers of all skill levels! Whether you're fixing bugs, adding features, or improving documentation, your help is appreciated.
 
-    * Go to the [Supabase website](https://supabase.com/) and create a new project.
+Please read our [Contributing Guide](CONTRIBUTING.md) for detailed information on:
+- Code of conduct
+- How to submit issues
+- Pull request process
+- Coding standards
 
-    * From your new project's dashboard, navigate to **Settings** > **API**.
+**Quick Start for Contributors:**
+1. Fork and clone the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes and commit: `git commit -m "feat: add amazing feature"`
+4. Push to your fork: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
-    * **Copy your project's API URL and `anon` public key.**
+## Privacy Notice
 
-7.  **Update `environment.development.ts`**:
+The `index.html` file includes scripts for Google Analytics and Tawk.to for the production environment. When running the application locally, these analytics may collect data from your development environment.
 
-    * Open the `src/environments/environment.development.ts` file and update it with the following template. You will need to paste your Supabase API keys into the empty strings.
+**To disable analytics during local development:**
+- Temporarily comment out the Google Analytics and Tawk.to script tags in `src/index.html`
+- Or use a browser extension to block these services
 
-    * The file should have this format:
+This does not pose a security risk or expose your personal data, but we wanted to be transparent about it.
 
-        ```
-        export const environment = {
-          production: false,
-          supabaseUrl: '',
-          supabaseKey: '',
-          FRANKFURTER_API_URL: 'https://api.frankfurter.app',
-          EXCHANGE_RATE_API_URL: 'https://v6.exchangerate-api.com/v6/6eb99285a0390c91620a279c/pair',
-          WELCOME_EMAIL_API_URL: 'https://ng-angular-welcome-email-template.onrender.com',
-        };
+## License
 
-        ```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-    * **Note:** Your contributions will be to the code, not the data. If your changes require a new database schema (e.g., adding a new table for a new feature), please include the necessary Supabase migration files in your pull request.
+## Support
 
-### Running the Application
+Need help or have questions?
 
-After setting up the project, you can run it locally:
+- 📖 Check our [documentation](https://github.com/desoga10/angular.ng/wiki)
+- 🐛 [Report a bug](https://github.com/desoga10/angular.ng/issues/new?template=bug_report.md)
+- 💡 [Request a feature](https://github.com/desoga10/angular.ng/issues/new?template=feature_request.md)
+- 💬 [Start a discussion](https://github.com/desoga10/angular.ng/discussions)
+- 📧 Email: [thecodeangle@gmail.com]
 
-* **Start the development server**:
+---
 
-    ```
-    ng serve
+Made with ❤️ by [desoga10](https://github.com/desoga10) and [contributors](https://github.com/desoga10/angular.ng/graphs/contributors)
 
-    ```
-
-* The application will be accessible at `http://localhost:4200`.
-
-### Submitting a Pull Request
-
-1.  Create a new branch for your feature or bug fix:
-
-    ```
-    git checkout -b feature/your-feature-name
-
-    ```
-
-2.  Make your changes and **commit them with a clear, descriptive message**:
-
-    ```
-    git commit -m "feat: add new calendar app"
-
-    ```
-
-3.  Push your changes to your forked repository:
-
-    ```
-    git push origin feature/your-feature-name
-
-    ```
-
-4.  Open a **pull request** on the original repository, comparing your branch to the `main` branch.
-
-Please ensure your code follows our project's coding standards and provide a detailed description of your changes in the pull request. Thank you for helping us build `angular.ng`!
-
-### 📝 Note on Analytics Scripts
-
-This project's `index.html` file includes scripts for **Google Analytics** and **Tawk.to**. When you run the application locally, data from your development environment (such as page views or chat interactions) may be sent to the project owner's accounts. This does not pose a security threat or expose any of your personal data.
-
-To avoid sending this data during local testing, you can temporarily comment out these script tags in the `src/index.html` file.
-
-## 🔗 Live Demo
-
+**Star ⭐ this repository if you find it helpful!**
+=======
 * **Project URL**: <https://angular.ng/>

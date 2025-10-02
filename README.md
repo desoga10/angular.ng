@@ -54,7 +54,7 @@ Visit [https://angular.ng/](https://angular.ng/) to see the live application in 
 - **APIs:**
   - [Frankfurter API](https://www.frankfurter.app/) - Currency exchange rates
   - [ExchangeRate API](https://www.exchangerate-api.com/) - Alternative exchange rates
-- **Deployment:** Vercel
+- **Deployment:** Vercel / Netlify
 
 ## Getting Started
 
@@ -176,7 +176,7 @@ Need help or have questions?
 - 🐛 [Report a bug](https://github.com/desoga10/angular.ng/issues/new?template=bug_report.md)
 - 💡 [Request a feature](https://github.com/desoga10/angular.ng/issues/new?template=feature_request.md)
 - 💬 [Start a discussion](https://github.com/desoga10/angular.ng/discussions)
-- 📧 Email: [thecodeangle@gmail.com]
+- 📧 Email: [your-email@example.com]
 
 ---
 

@@ -179,12 +179,58 @@ Add screenshots for UI changes.
    - Copy your API URL and anon key
    - Update `src/environments/environment.development.ts`
 
-5. **Run the development server:**
+5. **Set up the database schema:**
+
+   The project includes SQL schema files in the `docs/` folder that contain all necessary table definitions:
+   - `docs/user-schema.sql` - User authentication tables
+   - `docs/invoice-schema.sql` - Invoice management tables
+   - `docs/invoice-items-schema.sql` - Invoice line items tables
+   - `docs/seeder.sql` - Mock data for testing and development
+
+   **To set up your database:**
+
+   **Option 1: Using Supabase Dashboard (Recommended for beginners)**
+   - Go to your Supabase project dashboard
+   - Navigate to **SQL Editor**
+   - Open each schema file and run them **in this exact order**:
+     1. `user-schema.sql` - Copy contents, paste into SQL Editor, click **Run**
+     2. `invoice-schema.sql` - Copy contents, paste into SQL Editor, click **Run**
+     3. `invoice-items-schema.sql` - Copy contents, paste into SQL Editor, click **Run**
+     4. `seeder.sql` - Copy contents, paste into SQL Editor, click **Run** (this adds sample data)
+
+   **Option 2: Using Supabase CLI**
+   ```bash
+   # Make sure you're in the project root
+   supabase db reset
+
+   # Run each schema file in order
+   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/user-schema.sql
+   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/invoice-schema.sql
+   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/invoice-items-schema.sql
+   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/seeder.sql
+   ```
+
+   **Option 3: Manual execution via SQL Editor**
+   ```bash
+   # In your Supabase SQL Editor, run these in order:
+   cat docs/user-schema.sql           # Copy and execute
+   cat docs/invoice-schema.sql        # Copy and execute
+   cat docs/invoice-items-schema.sql  # Copy and execute
+   cat docs/seeder.sql                # Copy and execute
+   ```
+
+   **⚠️ Important Notes:**
+   - The schema files **must** be run in the order listed above
+   - The `seeder.sql` file should be run **last** after all tables are created
+   - Running the seeder will populate your database with sample invoices, users, and invoice items
+   - This mock data is essential for testing features locally without creating data manually
+
+6. **Run the development server:**
    ```bash
    ng serve
    ```
 
-6. **Create a feature branch:**
+7. **Create a feature branch:**
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -320,39 +366,131 @@ Added step for generating environments folder.
 - First line should be 50 characters or less
 - Reference issues and PRs in the footer
 
-## Database Changes
+## Database Schema
 
-If your feature requires database schema changes:
+The project uses Supabase (PostgreSQL) for data storage. All database schema definitions are located in the `docs/` folder:
 
-1. **Create migration files** using Supabase CLI:
-   ```bash
-   supabase migration new your_migration_name
+- **`docs/user-schema.sql`** - User authentication and profile tables
+- **`docs/invoice-schema.sql`** - Invoice management tables
+- **`docs/invoice-items-schema.sql`** - Invoice line items and related tables
+- **`docs/seeder.sql`** - Sample data for testing and development
+
+### Setting Up Your Database
+
+When you first set up the project, you must run these schema files in your Supabase instance in the exact order listed above. The seeder file provides mock data so you can immediately start testing features without manually creating invoices and users. See the [Development Setup](#development-setup) section for detailed instructions.
+
+### Working with Mock Data
+
+The `seeder.sql` file contains sample data including:
+- Test user accounts
+- Sample invoices with various statuses (paid, unpaid, draft)
+- Invoice line items with realistic data
+- Different currencies and amounts
+
+This mock data helps you:
+- Test features immediately without manual data entry
+- Verify search and filter functionality
+- Test edge cases with different invoice states
+- Develop UI components with realistic data
+
+**To reset your database with fresh mock data:**
+```bash
+# Re-run the seeder file in Supabase SQL Editor
+# Or using psql:
+psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/seeder.sql
+```
+
+### Making Database Changes
+
+If your contribution requires changes to the database schema:
+
+1. **Modify the appropriate schema file(s)** in the `docs/` folder
+   - Update `user-schema.sql` for user-related tables
+   - Update `invoice-schema.sql` for invoice tables
+   - Update `invoice-items-schema.sql` for invoice items tables
+
+2. **Document your changes clearly:**
+   ```sql
+   -- Add new column to invoices table
+   ALTER TABLE public.invoices
+   ADD COLUMN due_date TIMESTAMP WITH TIME ZONE;
+
+   -- Add index for better query performance
+   CREATE INDEX idx_invoices_due_date ON public.invoices(due_date);
    ```
 
-2. **Include migrations in your PR:**
-   - Place migration files in `supabase/migrations/`
-   - Document the changes in the PR description
-   - Explain why the schema change is necessary
+3. **Update Row Level Security (RLS) policies if needed:**
+   ```sql
+   -- Update RLS policy for new column
+   CREATE POLICY "Users can view invoices with due dates"
+       ON public.invoices FOR SELECT
+       USING (auth.uid() = user_id);
+   ```
 
-3. **Provide seed data** if needed for testing
+4. **Include in your PR:**
+   - Modified schema file(s)
+   - Clear explanation of why the change is needed
+   - Migration notes for existing databases
+   - Updated `seeder.sql` file if your changes affect sample data
+   - Any additional seed data required for testing the new feature
 
-**Example migration structure:**
+5. **Test your schema changes:**
+   - Drop and recreate your local database
+   - Run all schema files in order
+   - Verify the application works with the new schema
+   - Test with sample data
+
+### Schema Best Practices
+
+- **Always use RLS (Row Level Security)** for data protection
+- **Add appropriate indexes** for frequently queried columns
+- **Use meaningful table and column names**
+- **Include comments** for complex tables or columns
+- **Set appropriate constraints** (NOT NULL, UNIQUE, CHECK)
+- **Use UUID for primary keys** (Supabase default)
+- **Add timestamps** (created_at, updated_at) for audit trails
+
+**Example of a well-structured table:**
 ```sql
--- Create new table
-CREATE TABLE IF NOT EXISTS public.tasks (
+CREATE TABLE IF NOT EXISTS public.expenses (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
-    title TEXT NOT NULL,
-    completed BOOLEAN DEFAULT false,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())
+    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+    invoice_id UUID REFERENCES public.invoices(id) ON DELETE SET NULL,
+    amount DECIMAL(10, 2) NOT NULL CHECK (amount >= 0),
+    category VARCHAR(100) NOT NULL,
+    description TEXT,
+    expense_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- Add RLS policies
-ALTER TABLE public.tasks ENABLE ROW LEVEL SECURITY;
+-- Add RLS
+ALTER TABLE public.expenses ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view their own tasks"
-    ON public.tasks FOR SELECT
+-- RLS Policies
+CREATE POLICY "Users can view their own expenses"
+    ON public.expenses FOR SELECT
     USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert their own expenses"
+    ON public.expenses FOR INSERT
+    WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own expenses"
+    ON public.expenses FOR UPDATE
+    USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete their own expenses"
+    ON public.expenses FOR DELETE
+    USING (auth.uid() = user_id);
+
+-- Indexes
+CREATE INDEX idx_expenses_user_id ON public.expenses(user_id);
+CREATE INDEX idx_expenses_date ON public.expenses(expense_date);
+
+-- Comments
+COMMENT ON TABLE public.expenses IS 'Stores user expense records linked to invoices';
+COMMENT ON COLUMN public.expenses.amount IS 'Expense amount in decimal format with 2 decimal places';
 ```
 
 ## Testing

@@ -533,7 +533,7 @@ describe('CurrencyConverterComponent', () => {
 Don't hesitate to ask questions! You can:
 - Open an issue with the `question` label
 - Start a discussion on GitHub Discussions
-- Reach out to maintainers via email
+- Reach out to maintainers via email (thecodeangle@gmail.com)
 
 **Remember:** There are no stupid questions. We were all beginners once!
 

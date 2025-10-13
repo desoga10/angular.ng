@@ -5,6 +5,7 @@ First off, thank you for considering contributing to Angular.ng! It's people lik
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
+- [Development Workflow](#development-workflow)
 - [How Can I Contribute?](#how-can-i-contribute)
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Features](#suggesting-features)
@@ -27,6 +28,29 @@ This project and everyone participating in it is governed by our Code of Conduct
 - Focus on what is best for the community
 - Show empathy towards other community members
 - Accept constructive criticism gracefully
+
+## Development Workflow
+
+We use a **two-branch workflow** to ensure stability in production:
+
+### Branch Structure
+```
+main (production) ← https://angular.ng/
+  ↑
+dev (staging) ← where PRs are merged
+  ↑
+feature branches ← your contributions
+```
+
+### How It Works
+1. **`dev` branch** - This is our staging/development branch. All pull requests should target this branch.
+2. **`main` branch** - This is our production branch. Only tested and approved changes from `dev` are merged here.
+
+### Deployment URLs
+- **Production:** https://angular.ng/ (from `main` branch)
+- **Staging:** Auto-deployed preview URL from `dev` branch (check Vercel deployments)
+
+**Important:** Always create your pull requests against the `dev` branch, not `main`. This allows us to test changes in a staging environment before they go live.
 
 ## How Can I Contribute?
 
@@ -100,9 +124,9 @@ Unsure where to begin? Look for issues labeled:
 2. Wait for a maintainer to assign it to you (this avoids duplicate work)
 3. Fork the repository
 4. Follow the [Development Setup](#development-setup) instructions
-5. Create your feature branch
+5. Create your feature branch from `dev` (not `main`)
 6. Make your changes
-7. Submit a pull request
+7. Submit a pull request to the `dev` branch
 
 ### Pull Requests
 
@@ -110,14 +134,15 @@ Unsure where to begin? Look for issues labeled:
 - Ensure your code follows our [Coding Standards](#coding-standards)
 - Update documentation if needed
 - Test your changes thoroughly
-- Make sure your branch is up to date with `main`
+- Make sure your branch is up to date with `dev` (not `main`)
 
 **PR Guidelines:**
-1. **One PR per feature/fix** - Keep PRs focused and manageable
-2. **Link related issues** - Use "Closes #123" in the PR description
-3. **Provide context** - Explain what changes you made and why
-4. **Include screenshots** - For UI changes, show before/after
-5. **Be responsive** - Address review comments promptly
+1. **Target the `dev` branch** - All PRs must be made against `dev`, not `main`
+2. **One PR per feature/fix** - Keep PRs focused and manageable
+3. **Link related issues** - Use "Closes #123" in the PR description
+4. **Provide context** - Explain what changes you made and why
+5. **Include screenshots** - For UI changes, show before/after
+6. **Be responsive** - Address review comments promptly
 
 **PR Template:**
 ```markdown
@@ -146,6 +171,7 @@ Add screenshots for UI changes.
 - [ ] I have updated the documentation
 - [ ] My changes generate no new warnings
 - [ ] I have tested my changes locally
+- [ ] My PR targets the `dev` branch (not `main`)
 ```
 
 ## Development Setup
@@ -164,22 +190,27 @@ Add screenshots for UI changes.
    cd angular.ng
    ```
 
-2. **Install dependencies:**
+2. **Checkout the dev branch:**
+   ```bash
+   git checkout dev
+   ```
+
+3. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Create environments folder:**
+4. **Create environments folder:**
    ```bash
    ng g environments
    ```
 
-4. **Configure Supabase:**
+5. **Configure Supabase:**
    - Create a Supabase project at https://supabase.com/
    - Copy your API URL and anon key
    - Update `src/environments/environment.development.ts`
 
-5. **Set up the database schema:**
+6. **Set up the database schema:**
 
    The project includes SQL schema files in the `docs/` folder that contain all necessary table definitions:
    - `docs/user-schema.sql` - User authentication tables
@@ -225,12 +256,12 @@ Add screenshots for UI changes.
    - Running the seeder will populate your database with sample invoices, users, and invoice items
    - This mock data is essential for testing features locally without creating data manually
 
-6. **Run the development server:**
+7. **Run the development server:**
    ```bash
    ng serve
    ```
 
-7. **Create a feature branch:**
+8. **Create a feature branch from dev:**
    ```bash
    git checkout -b feature/your-feature-name
    ```

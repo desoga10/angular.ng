@@ -3,7 +3,11 @@
     <div class="row justify-content-between">
       <div class="col-sm-4">
         <mat-form-field appearance="outline" class="w-100 hide-hint">
-          <input matInput placeholder="Search Invoice" />
+          <input matInput placeholder="Search Invoice" [formControl]="searchControl"
+           />
+           <button *ngIf="searchControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="searchControl.setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
           <mat-icon matSuffix>
             <i-tabler name="search" class="icon-20"></i-tabler>
           </mat-icon>
@@ -65,6 +69,9 @@
         </mat-form-field>
       </td>
     </ng-container>
+    <tr class="text-center text-success" *matNoDataRow>
+      <td colspan="4">No results found.</td>
+    </tr>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

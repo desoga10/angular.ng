@@ -17,6 +17,7 @@ First off, thank you for considering contributing to Angular.ng! It's people lik
 - [Database Changes](#database-changes)
 - [Testing](#testing)
 - [Questions?](#questions)
+- [Support](#support)
 
 ## Code of Conduct
 
@@ -568,6 +569,16 @@ Don't hesitate to ask questions! You can:
 
 **Remember:** There are no stupid questions. We were all beginners once!
 
+## Support
+
+Need help or have questions?
+
+- 📖 Check our [documentation](https://github.com/desoga10/angular.ng/wiki)
+- 🐛 [Report a bug](https://github.com/desoga10/angular.ng/issues/new?template=bug_report.md)
+- 💡 [Request a feature](https://github.com/desoga10/angular.ng/issues/new?template=feature_request.md)
+- 💬 [Start a discussion](https://github.com/desoga10/angular.ng/discussions)
+- 📧 Email: [thecodeangle@gmail.com]
+
 ---
 
-Thank you for contributing to Angular.ng! Your time and effort help make this project better for everyone. 🎉
+Made with ❤️ by [desoga10](https://github.com/desoga10) and [contributors](https://github.com/desoga10/angular.ng/graphs/contributors)

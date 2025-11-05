@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, inject, signal, computed } from '@angular/core';
+import { Component, Input, ViewChild, inject } from '@angular/core';
 import { ServiceInvoiceService } from '../serviceinvoice.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -94,7 +94,6 @@ export class AppInvoiceListComponent {
       });
     }
   }
-  
   applyFilter(value: string | null): void {
     this.dataSource.filter = (value ?? '').trim().toLowerCase();
   }

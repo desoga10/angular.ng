@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export interface PeriodicElement {
   id: number;
@@ -30,6 +31,7 @@ export interface PeriodicElement {
     ReactiveFormsModule,
     TablerIconsModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class AppInvoiceListComponent {
@@ -68,12 +70,15 @@ export class AppInvoiceListComponent {
         console.log(result);
         this.invoices = result;
         this.loading = false;
+        this.error = null;
         this.dataSource = new MatTableDataSource(this.invoices);
         this.dataSource.paginator = this.paginator;
       })
       .catch((error) => {
         this.loading = false;
-        alert(`Failed to load invoices: ${error}`);
+          this.error = `Failed to load invoices: ${error}`;
+
+        // alert(`Failed to load invoices: ${error}`);
       });
   }
 

@@ -113,3 +113,53 @@ $utility in $rtlutilities {
 }
 
 
+.order_status {
+    position: relative;
+    padding-left: 15px;
+    text-transform: capitalize;
+  }
+  
+  .order_status.paid::before ,
+  .order_status.unpaid::before ,
+  .order_status.overdue::before ,
+  .order_status.draft::before ,
+  .order_status.sent::before
+   {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: orange;
+    border-radius: 50%;
+  }
+  
+  .order_status.paid::before {
+   
+    
+    background-color: green;
+    
+  }
+  
+  
+  .order_status.unpaid::before {
+   
+    
+    background-color: gray;
+   
+  }
+  
+  .order_status.overdue::before {
+
+   
+    background-color: red;
+    
+  }
+  
+  .order_status.draft::before {
+   
+    background-color: blue;
+    
+  }

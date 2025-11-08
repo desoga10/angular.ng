@@ -1,0 +1,44 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  
+  .badge svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Status-specific styles */
+  .paid {
+    background-color: #28a745; /* green */
+    color: white;
+   
+  }
+  
+  .unpaid {
+    background-color: #ffc107; /* amber */
+    color: #333;
+  }
+  
+  .overdue {
+    background-color: #dc3545; /* red */
+    color: white;
+  }
+  
+  .draft {
+    background-color: #6c757d; /* gray */
+    color: white;
+  }
+  lucide-icon {
+   
+    display: inline-block;
+    vertical-align: middle;
+  }
+  

@@ -14,6 +14,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ToastrService } from 'ngx-toastr';
+import { LucideAngularModule } from 'lucide-angular';
 
 interface OrderStatus {
   value: string;
@@ -31,6 +32,7 @@ interface OrderStatus {
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule,
+    LucideAngularModule
   ],
 })
 export class AppAddInvoiceComponent {

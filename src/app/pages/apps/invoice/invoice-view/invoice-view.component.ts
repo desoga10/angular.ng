@@ -42,7 +42,6 @@ readonly house = House;
   items = computed(() => this.invoiceData().items);
   invoiceData = signal<ViewInvoiceResponse>({
     id: '',
-    order_status: 'overdue',
     order_date: '',
     from_business_name: '',
     from_bank_name: '',
@@ -71,8 +70,8 @@ readonly house = House;
   invoiceIndex = '';
   private route = inject(ActivatedRoute);
 
- /* testStatuses = ['paid', 'unpaid', 'overdue', 'draft'] as const;
-testIndex = 0; */
+  testStatuses = ['paid', 'unpaid', 'overdue', 'draft'] as const;
+testIndex = 0; 
 
 
   ngOnInit() {
@@ -91,21 +90,7 @@ testIndex = 0; */
       });
     }
 
-   /* this.invoiceData.set({
-      ...this.invoiceData(),
-      order_status: 'paid',
-    });
-
-    setInterval(() => {
-      this.invoiceData.set({
-        ...this.invoiceData(),
-        order_status: this.testStatuses[this.testIndex],
-      });
-      this.testIndex = (this.testIndex + 1) % this.testStatuses.length;
-    }, 2000);
-
-    */
-
+    
 
 
   }

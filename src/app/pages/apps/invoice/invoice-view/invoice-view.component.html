@@ -43,8 +43,8 @@
           <span class="f-w-600 f-s-15 mat-body-1">Order Status:</span>
           <div>
          <!--<app-status-badge [status]="invoiceData().order_status" size="large"></app-status-badge> -->
-         <ng-container *ngIf="['paid','unpaid','overdue','draft'].includes(invoiceData().order_status); else normalText">
-          <app-status-badge [status]="invoiceData().order_status" size="large"></app-status-badge>
+         <ng-container *ngIf="['paid','unpaid','overdue','draft'].includes(invoiceData().order_status ?? ''); else normalText">
+          <app-status-badge [status]="invoiceData().order_status!" size="large"></app-status-badge>
         </ng-container>
       
         <ng-template #normalText>

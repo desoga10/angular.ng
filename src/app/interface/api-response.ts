@@ -49,7 +49,7 @@ export interface AddNewInvoice {
 }
 export interface ViewInvoiceResponse {
   id: string;
-  order_status: 'paid' | 'unpaid' | 'overdue' | 'draft';
+  order_status?: 'paid' | 'unpaid' | 'overdue' | 'draft' ;
   order_date: string;
   from_business_name: string;
   from_bank_name: string;

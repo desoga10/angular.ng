@@ -39,6 +39,6 @@ export class StatusBadgeComponent {
       overdue: 'triangle-alert',
       draft: 'file-text'
     };
-    return icons[this.status] ||  '' ;
+    return icons[this.status] ;
   }
 }

@@ -1,5 +1,14 @@
 <span class="badge m-b-0" [ngClass]="status">
     <lucide-icon [name]="getIcon()" [size]="iconSize"></lucide-icon>
     <span>{{ status | uppercase }}</span>
-  </span>
+  </span> 
   
+  <!-- <div *ngIf="showAsBadge; else plainText" class="badge m-b-0" [ngClass]="status.toLowerCase()">
+    <lucide-icon [name]="getIcon()" [size]="iconSize"></lucide-icon>
+    <span class="status-text">{{ status }}</span>
+  </div>
+  
+ Otherwise, show plain text 
+  <ng-template #plainText>
+    <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2">{{ status || 'N/A' }}</h6>
+  </ng-template> -->

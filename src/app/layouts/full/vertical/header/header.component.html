@@ -1,16 +1,32 @@
 <mat-toolbar class="topbar">
   <!-- --------------------------------------------------------------- -->
   <!-- Desktop Menu -->
-  @if(showToggle) {
-  <button mat-mini-fab color="inherit" (click)="toggleCollapsed.emit()" class="d-flex justify-content-center">
-    <i class="iconify icon-20 d-flex" data-icon="solar:hamburger-menu-line-duotone"></i>
+  @if(showToggle()) {
+  <button
+    mat-mini-fab
+    color="inherit"
+    (click)="toggleCollapsed.emit()"
+    class="d-flex justify-content-center"
+  >
+    <i
+      class="iconify icon-20 d-flex"
+      data-icon="solar:hamburger-menu-line-duotone"
+    ></i>
   </button>
   }
 
   <!-- Mobile Menu -->
-  @if(!showToggle) {
-  <button mat-mini-fab color="inherit" (click)="toggleMobileNav.emit()" class="d-flex justify-content-center">
-    <i class="iconify icon-20 d-flex" data-icon="solar:hamburger-menu-line-duotone"></i>
+  @if(!showToggle()) {
+  <button
+    mat-mini-fab
+    color="inherit"
+    (click)="toggleMobileNav.emit()"
+    class="d-flex justify-content-center"
+  >
+    <i
+      class="iconify icon-20 d-flex"
+      data-icon="solar:hamburger-menu-line-duotone"
+    ></i>
   </button>
   }
   <!-- --------------------------------------------------------------- -->
@@ -18,7 +34,12 @@
   <!-- --------------------------------------------------------------- -->
   <!--  Search -->
   <!-- --------------------------------------------------------------- -->
-  <button mat-mini-fab color="inherit" (click)="openDialog()" class="d-flex justify-content-center">
+  <button
+    mat-mini-fab
+    color="inherit"
+    (click)="openDialog()"
+    class="d-flex justify-content-center"
+  >
     <i class="iconify icon-20 d-flex" data-icon="solar:magnifer-outline"></i>
   </button>
 
@@ -34,15 +55,25 @@
             <div class="row">
               @for(appdd of apps; track appdd.title) {
               <div class="col-sm-6 text-hover-primary">
-                <a [routerLink]="[appdd.link]" class="d-flex align-items-center text-decoration-none m-b-24">
-                  <span class="text-{{ appdd.color }} bg-light-{{
+                <a
+                  [routerLink]="[appdd.link]"
+                  class="d-flex align-items-center text-decoration-none m-b-24"
+                >
+                  <span
+                    class="text-{{ appdd.color }} bg-light-{{
                       appdd.color
-                    }} rounded icon-48 d-flex align-items-center justify-content-center">
-                    <span class="iconify icon-20" [attr.data-icon]="appdd.icon"></span>
+                    }} rounded icon-48 d-flex align-items-center justify-content-center"
+                  >
+                    <span
+                      class="iconify icon-20"
+                      [attr.data-icon]="appdd.icon"
+                    ></span>
                   </span>
 
                   <div class="m-l-16">
-                    <h5 class="f-s-15 f-w-600 m-0 textprimary mat-subtitle-1 hover-text">
+                    <h5
+                      class="f-s-15 f-w-600 m-0 textprimary mat-subtitle-1 hover-text"
+                    >
                       {{ appdd.title }}
                     </h5>
                     <span class="mat-body-1 f-s-13">{{ appdd.subtitle }}</span>
@@ -54,7 +85,11 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <img src="/assets/images/backgrounds/mega-dd-bg.jpg" alt="mega-dd-bg" class="mega-dd-bg" />
+          <img
+            src="/assets/images/backgrounds/mega-dd-bg.jpg"
+            alt="mega-dd-bg"
+            class="mega-dd-bg"
+          />
         </div>
       </div>
     </mat-menu>
@@ -62,68 +97,105 @@
 
   <span class="flex-1-auto"></span>
 
-  <button mat-mini-fab color="primary" aria-label="Toggle theme" (click)="toggleTheme()"
-    class="d-flex justify-content-center">
-    <i-tabler class="d-flex icon-22" [name]="currentTheme === 'dark' ? 'sun' : 'moon'"></i-tabler>
+  <button
+    mat-mini-fab
+    color="primary"
+    aria-label="Toggle theme"
+    (click)="toggleTheme()"
+    class="d-flex justify-content-center"
+  >
+    <i-tabler
+      class="d-flex icon-22"
+      [name]="currentTheme === 'dark' ? 'sun' : 'moon'"
+    ></i-tabler>
   </button>
 
   <!-- Mobile Menu -->
-  <button mat-mini-fab color="inherit" (click)="toggleMobileFilterNav.emit()"
-    class="d-flex d-lg-none justify-content-center">
-    <i class="iconify icon-20 d-flex" data-icon="solar:widget-3-line-duotone"></i>
+  <button
+    mat-mini-fab
+    color="inherit"
+    (click)="toggleMobileFilterNav.emit()"
+    class="d-flex d-lg-none justify-content-center"
+  >
+    <i
+      class="iconify icon-20 d-flex"
+      data-icon="solar:widget-3-line-duotone"
+    ></i>
   </button>
 
   <!-- --------------------------------------------------------------- -->
-
 
   <!-- --------------------------------------------------------------- -->
   <!-- langugage Dropdown -->
   <!-- --------------------------------------------------------------- -->
 
-
   <!-- --------------------------------------------------------------- -->
   <!-- profile Dropdown -->
   <!-- --------------------------------------------------------------- -->
-  <button mat-fab extended color="inherit" [matMenuTriggerFor]="profilemenu" aria-label="Notifications"
-    class="d-flex justify-content-center profile-btn-dd">
+  <button
+    mat-fab
+    extended
+    color="inherit"
+    [matMenuTriggerFor]="profilemenu"
+    aria-label="Notifications"
+    class="d-flex justify-content-center profile-btn-dd"
+  >
     <div class="d-flex align-items-center gap-4">
-      <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover icon-35 profile-dd" width="35" />
+      <img
+        src="/assets/images/profile/user-1.jpg"
+        class="rounded-circle object-cover icon-35 profile-dd"
+        width="35"
+      />
 
       <i data-icon="solar:alt-arrow-down-bold" class="iconify f-s-8"></i>
     </div>
   </button>
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
-
     <div class="p-x-32 p-y-16">
       <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
-        <img src="/assets/images/profile/user-1.jpg" class="rounded-circle" width="56" />
+        <img
+          src="/assets/images/profile/user-1.jpg"
+          class="rounded-circle"
+          width="56"
+        />
         @if (this.user() ) {
         <div class="m-l-16">
-          <h6 class="f-s-14 f-w-600 m-0 mat-subtitle-1 d-flex align-items-center">
-            {{ this.user()?.user_metadata?.full_name ?? this.user()?.user_metadata?.username }}
+          <h6
+            class="f-s-14 f-w-600 m-0 mat-subtitle-1 d-flex align-items-center"
+          >
+            {{
+              this.user()?.user_metadata?.full_name ??
+                this.user()?.user_metadata?.username
+            }}
             <span class="f-s-14 d-block text-success m-l-4">Free</span>
           </h6>
-          <span> {{this.user()?.email}} </span>
+          <span> {{ this.user()?.email }} </span>
         </div>
         }
       </div>
     </div>
     <div class="p-x-32 p-b-16">
-      <a [routerLink]="['/theme-pages/account-setting']" class="p-8 text-decoration-none d-block text-hover-primary">
+      <a
+        [routerLink]="['/theme-pages/account-setting']"
+        class="p-8 text-decoration-none d-block text-hover-primary"
+      >
         <div class="d-flex align-items-center">
           <h5 class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text">
             Account Settings
           </h5>
         </div>
       </a>
-      <a (click)="logOut()" style="cursor: pointer" class="p-8 text-decoration-none d-block text-hover-primary">
+      <a
+        (click)="logOut()"
+        style="cursor: pointer"
+        class="p-8 text-decoration-none d-block text-hover-primary"
+      >
         <div class="d-flex align-items-center">
           <h5 class="f-s-14 f-w-600 m-0 textprimary mat-subtitle-1 hover-text">
             Sign Out
           </h5>
         </div>
       </a>
-
     </div>
   </mat-menu>
 </mat-toolbar>

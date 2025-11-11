@@ -26,11 +26,9 @@ const html2pdf = require('html2pdf.js');
   ],
 })
 export class AppInvoiceViewComponent {
-  @Input() id = '';
-  displayedColumns: string[] = ['itemName', 'unitPrice', 'unit', 'total'];
-  private service = inject(ServiceInvoiceService);
-  items = computed(() => this.invoiceData().items);
-  invoiceData = signal<ViewInvoiceResponse>({
+  // Protected properties
+  public items = computed(() => this.invoiceData().items);
+  public invoiceData = signal<ViewInvoiceResponse>({
     id: '',
     order_status: 'pending',
     order_date: '',
@@ -58,27 +56,32 @@ export class AppInvoiceViewComponent {
     grand_total_price: 0,
     items: [],
   });
-  invoiceIndex = '';
-  private route = inject(ActivatedRoute);
+  public invoiceIndex = signal<string>('');
 
+  // Private properties
+  private service = inject(ServiceInvoiceService);
+  private route = inject(ActivatedRoute);
+  private id = signal<string>('');
+
+  // Lifecycle hooks
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.id = params['id'];
+      this.id.set(params['id']);
     });
 
     this.route.queryParams.subscribe((query) => {
-      this.invoiceIndex = query['index'];
+      this.invoiceIndex.set(query['index']);
     });
-    console.log(this.id);
-    if (this.id) {
-      this.service.getInvoiceById(Number(this.id)).then((res) => {
+
+    if (this.id()) {
+      this.service.getInvoiceById(Number(this.id())).then((res) => {
         this.invoiceData.set(res);
-        console.log(this.invoiceData());
       });
     }
   }
 
-  downloadPDF(): void {
+  // Public methods
+  public downloadPDF(): void {
     const html2pdf = require('html2pdf.js');
 
     // Hide the buttons temporarily

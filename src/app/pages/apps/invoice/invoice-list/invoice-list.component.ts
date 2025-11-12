@@ -1,20 +1,11 @@
-import {
-  Component,
-  Input,
-  ViewChild,
-  inject,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewChild, inject, signal } from '@angular/core';
 import { ServiceInvoiceService } from '../serviceinvoice.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MaterialModule } from 'src/app/material.module';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export interface PeriodicElement {
@@ -24,7 +15,6 @@ export interface PeriodicElement {
   order_status: string;
   grand_total_price: number;
 }
-
 
 @Component({
   selector: 'app-invoice-list',
@@ -59,15 +49,12 @@ export class AppInvoiceListComponent {
   private serviceInvoice = inject(ServiceInvoiceService);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  invoices: any[] = [];
-  loading = true;
-  error: string | null = null;
   searchControl = new FormControl('');
 
   ngOnInit() {
     this.fetchUserInvoices();
 
-    this.searchControl.valueChanges.subscribe(value => {
+    this.searchControl.valueChanges.subscribe((value) => {
       this.applyFilter(value);
     });
   }
@@ -106,5 +93,4 @@ export class AppInvoiceListComponent {
   applyFilter(value: string | null): void {
     this.dataSource.filter = (value ?? '').trim().toLowerCase();
   }
-
 }

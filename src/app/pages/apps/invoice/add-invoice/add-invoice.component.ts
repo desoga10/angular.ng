@@ -13,6 +13,7 @@ import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ToastrService } from 'ngx-toastr';
+import { LucideAngularModule } from 'lucide-angular';
 
 interface OrderStatus {
   value: string;
@@ -29,6 +30,7 @@ interface OrderStatus {
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule,
+    LucideAngularModule
   ],
 })
 export class AppAddInvoiceComponent {
@@ -68,12 +70,12 @@ export class AppAddInvoiceComponent {
       from_business_name: ['', Validators.required],
       from_email: ['', [Validators.email]],
       from_address: [''],
-      from_phone_number: [''],
+      from_phone_number: [null],
       from_invoice_number: [''],
       to_client_name: ['', Validators.required],
       to_email: ['', [Validators.email]],
       to_address: [''],
-      to_phone_number: [''],
+      to_phone_number: [null],
       due_date: [''],
       grand_total_price: [this.grandTotal()],
       from_bank_account_name: [''],

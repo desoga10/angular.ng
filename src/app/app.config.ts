@@ -1,3 +1,4 @@
+
 import {
   ApplicationConfig,
   provideZoneChangeDetection,
@@ -19,9 +20,14 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+
+
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
+
+import { LucideAngularModule ,Check, Clock, TriangleAlert, FileText, House } from 'lucide-angular';
+
 
 // perfect scrollbar
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -40,6 +46,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
 
 import { NgxEchartsModule } from 'ngx-echarts';
 
+const appIcons = { House, Check };
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -57,10 +65,12 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(), // required animations providers
     provideToastr(), // Toastr providers
 
+
     importProvidersFrom(
       FormsModule,
       ReactiveFormsModule,
       MaterialModule,
+      LucideAngularModule.pick({Check , Clock , TriangleAlert, FileText, House}),
       NgxPermissionsModule.forRoot(),
       TablerIconsModule.pick(TablerIcons),
       NgScrollbarModule,

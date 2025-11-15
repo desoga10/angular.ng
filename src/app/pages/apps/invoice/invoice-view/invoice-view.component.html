@@ -14,42 +14,48 @@
         </div>
       </div> -->
       <div class="row m-b-24">
-        <div
-          class="col-sm-4 d-flex flex-column flex-sm-row align-items-sm-center mb-mobile-16"
-        >
-          <h4 class="mat-subtitle-2 f-s-18 f-w-600 me-sm-2">INVOICE</h4>
-          <h4 class="mat-subtitle-2 f-s-18 f-w-600">
-            #{{ invoiceIndex() || "N/A" }}
-          </h4>
+        <div class="col-sm-4 d-flex flex-column flex-sm-row align-items-sm-center mb-mobile-16">
+          <h6 class="mat-subtitle-2 f-s-18 f-w-600 me-sm-2">INVOICE</h6>
+          <h4 class="mat-subtitle-2 f-s-18 f-w-600">#{{ invoiceIndex || 'N/A' }}</h4>
         </div>
         <div
           class="col-sm-8 d-flex flex-column flex-sm-row justify-content-sm-end align-items-sm-center gap-2 gap-sm-3 mt-3 mt-sm-0"
-          id="pdfButtons"
-        >
-          <a mat-stroked-button color="primary" [routerLink]="['/apps/invoice']"
-            >Back to Invoice</a
-          >
-          <a
-            mat-flat-button
-            color="primary"
-            [routerLink]="['/apps/editinvoice', invoiceData().id]"
-            >Edit Invoice</a
-          >
-          <a mat-flat-button color="primary" (click)="downloadPDF()"
-            >Download Invoice</a
-          >
+          id="pdfButtons">
+          <a mat-stroked-button color="primary" [routerLink]="['/apps/invoice']">Back to Invoice</a>
+          <a mat-flat-button color="primary" [routerLink]="['/apps/editinvoice', invoiceData().id]">Edit Invoice</a>
+          <a mat-flat-button color="primary" (click)="downloadPDF()">Download Invoice</a>
         </div>
       </div>
 
       <mat-divider></mat-divider>
 
       <div class="row p-y-24">
-        <div class="col-sm-6">
+        <!--<div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1"> Order Status: </span>
-          <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{ this.invoiceData().order_status }}
+          <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2 order_status" [ngClass]="(displayStatus || invoiceData.order_status)?.toLowerCase()">
+            {{this.displayStatus || this.invoiceData().order_status}},
+
           </h6>
+
+        </div> -->
+        <div class="col-sm-6">
+          <span class="f-w-600 f-s-15 mat-body-1">Order Status:</span>
+          <div>
+            <!--<app-status-badge [status]="invoiceData().order_status" size="large"></app-status-badge> -->
+            <ng-container
+              *ngIf="['paid','unpaid','overdue','draft','pending','shipped','delivered'].includes((invoiceData().order_status ?? '').trim().toLowerCase()); else normalText">
+              <app-status-badge [status]="invoiceData().order_status!" size="large"></app-status-badge>
+            </ng-container>
+
+            <ng-template #normalText>
+              <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2 order_status">
+                {{ invoiceData().order_status }}
+              </h6>
+            </ng-template>
+
+          </div>
         </div>
+
         <div class="col-sm-6 text-right">
           <span class="f-w-600 f-s-15 mat-body-1"> Order Date: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
@@ -166,54 +172,28 @@
         <div class="row m-y-24 p-t-24">
           <div class="col-sm-4">
             <mat-form-field appearance="outline" class="w-100">
-              <input
-                type="text"
-                matInput
-                placeholder="Item Description"
-                [value]="item.item_description"
-                readonly
-              />
+              <input type="text" matInput placeholder="Item Description" [value]="item.item_description" readonly />
             </mat-form-field>
           </div>
           <div class="col-sm-4">
             <mat-form-field appearance="outline" class="w-100">
-              <input
-                type="number"
-                matInput
-                min="1"
-                placeholder="Unit Price"
-                [value]="item.item_unit_price"
-                readonly
-              />
+              <input type="number" matInput min="1" placeholder="Unit Price" [value]="item.item_unit_price" readonly />
             </mat-form-field>
           </div>
           <div class="col-sm-4">
             <mat-form-field appearance="outline" class="w-100">
-              <input
-                type="number"
-                matInput
-                min="1"
-                placeholder="Units"
-                [value]="item.item_units"
-                readonly
-              />
+              <input type="number" matInput min="1" placeholder="Units" [value]="item.item_units" readonly />
             </mat-form-field>
           </div>
 
           <div class="col-12 text-right">
             <p class="f-w-600 m-b-0">Unit Total:</p>
-            <input
-              type="text"
-              matInput
-              [value]="item.unit_total_price"
-              readonly
-              style="
+            <input type="text" matInput [value]="item.unit_total_price" readonly style="
                 border: 0;
                 background: transparent;
                 font-weight: 600;
                 margin-right: -115px;
-              "
-            />
+              " />
           </div>
 
           <mat-divider class="my-3"></mat-divider>
@@ -225,18 +205,12 @@
           <mat-divider style="margin-top: 30px"></mat-divider>
           <h3 class="m-b-0 p-t-20 f-s-18">
             Grand Total:
-            <input
-              type="text"
-              [value]="invoiceData().grand_total_price"
-              matInput
-              readonly
-              style="
+            <input type="text" [value]="invoiceData().grand_total_price" matInput readonly style="
                 border: 0;
                 background-color: transparent;
                 margin-right: -140px;
                 font-size: inherit;
-              "
-            />
+              " />
           </h3>
         </div>
       </div>

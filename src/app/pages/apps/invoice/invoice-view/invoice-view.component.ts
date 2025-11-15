@@ -7,7 +7,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ViewInvoiceResponse } from 'src/app/interface/api-response';
+import { StatusBadgeComponent } from 'src/app/components/status-badge/status-badge.component';
+import {  LucideAngularModule  ,House } from 'lucide-angular';
+
+
 // import * as html2pdf from 'html2pdf.js';
+
 declare const require: any;
 const html2pdf = require('html2pdf.js');
 
@@ -16,6 +21,7 @@ const html2pdf = require('html2pdf.js');
   templateUrl: './invoice-view.component.html',
   styleUrls: ['./invoice-view.component.scss'],
   standalone: true,
+  
   imports: [
     MaterialModule,
     CommonModule,
@@ -23,14 +29,25 @@ const html2pdf = require('html2pdf.js');
     RouterModule,
     ReactiveFormsModule,
     TablerIconsModule,
+    StatusBadgeComponent ,
+    LucideAngularModule
   ],
 })
 export class AppInvoiceViewComponent {
+<<<<<<< HEAD
   // Protected properties
   public items = computed(() => this.invoiceData().items);
   public invoiceData = signal<ViewInvoiceResponse>({
+=======
+readonly house = House;
+
+  @Input() id = '';
+  displayedColumns: string[] = ['itemName', 'unitPrice', 'unit', 'total'];
+  private service = inject(ServiceInvoiceService);
+  items = computed(() => this.invoiceData().items);
+  invoiceData = signal<ViewInvoiceResponse>({
+>>>>>>> dev
     id: '',
-    order_status: 'pending',
     order_date: '',
     from_business_name: '',
     from_bank_name: '',
@@ -56,7 +73,15 @@ export class AppInvoiceViewComponent {
     grand_total_price: 0,
     items: [],
   });
+<<<<<<< HEAD
   public invoiceIndex = signal<string>('');
+=======
+  invoiceIndex = '';
+  private route = inject(ActivatedRoute);
+/*
+ testStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'shipped' , 'pending' , 'delivered'] as const;
+testIndex = 0;*/
+>>>>>>> dev
 
   // Private properties
   private service = inject(ServiceInvoiceService);
@@ -78,6 +103,24 @@ export class AppInvoiceViewComponent {
         this.invoiceData.set(res);
       });
     }
+/*
+    this.invoiceData.set({
+      ...this.invoiceData(),
+      order_status: 'paid',
+    });
+
+    setInterval(() => {
+      this.invoiceData.set({
+        ...this.invoiceData(),
+        order_status: this.testStatuses[this.testIndex],
+      });
+      this.testIndex = (this.testIndex + 1) % this.testStatuses.length;
+    }, 2000);
+
+  
+
+*/
+
   }
 
   // Public methods

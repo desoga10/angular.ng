@@ -1,4 +1,4 @@
-import { Component, input, output, inject } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { ViewportScroller } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
@@ -41,18 +41,17 @@ interface features {
   templateUrl: './landingpage.component.html',
 })
 export class AppLandingpageComponent {
-  // Public properties
-  public showToggle = input<boolean>(true);
-  public toggleMobileNav = output<void>();
-  public toggleMobileFilterNav = output<void>();
-  public toggleCollapsed = output<void>();
+  @Input() showToggle = true;
+  @Output() toggleMobileNav = new EventEmitter<void>();
+  @Output() toggleMobileFilterNav = new EventEmitter<void>();
+  @Output() toggleCollapsed = new EventEmitter<void>();
 
-  // Private properties
-  private settings = inject(CoreService);
-  private scroller = inject(ViewportScroller);
-  private options = this.settings.getOptions();
+  options = this.settings.getOptions();
 
-  constructor() {}
+  constructor(
+    private settings: CoreService,
+    private scroller: ViewportScroller
+  ) {}
 
   // scroll to demos
   gotoDemos() {

@@ -82,28 +82,14 @@
       <div class="row m-y-24 p-t-24">
         <div class="col-sm-4">
           <mat-form-field appearance="outline" class="w-100 hide-hint m-y-24">
-            <input
-              placeholder="Enter Amount to Convert"
-              type="number"
-              matInput
-              class="form-control"
-              [(ngModel)]="amountValueExchangeRate"
-              [ngModelOptions]="{ standalone: true }"
-            />
+            <input placeholder="Enter Amount to Convert" type="number" matInput class="form-control"
+              [(ngModel)]="amountValueExchangeRate" [ngModelOptions]="{standalone: true}" />
           </mat-form-field>
         </div>
         <div class="col-sm-4">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 hide-hint m-y-24"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100 hide-hint m-y-24" color="primary">
             <mat-label>From Currency</mat-label>
-            <mat-select
-              [(ngModel)]="fromValueExchangeRate"
-              [ngModelOptions]="{ standalone: true }"
-              required
-            >
+            <mat-select [(ngModel)]="fromValueExchangeRate" [ngModelOptions]="{standalone: true}" required>
               @for (currency of currencies(); track currency.code) {
               <mat-option [value]="currency.code">
                 {{ currency.name }} ({{ currency.code }})
@@ -113,56 +99,36 @@
           </mat-form-field>
         </div>
         <div class="col-sm-4">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 hide-hint m-y-24"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100 hide-hint m-y-24" color="primary">
             <mat-label>To Currency</mat-label>
-            <mat-select
-              [(ngModel)]="toValueExchangeRate"
-              [ngModelOptions]="{ standalone: true }"
-              required
-            >
-              @for(currency of currencies();track currency.code){
-              <mat-option [value]="currency.code" selected>
+            <mat-select [(ngModel)]="toValueExchangeRate" [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let currency of currencies()" [value]="currency.code" selected>
                 {{ currency.name }} ({{ currency.code }})
               </mat-option>
-              }
             </mat-select>
           </mat-form-field>
         </div>
         @if (this.resultExchangeRate()) {
-        <div>
-          <b
-            >{{ this.amountValueExchangeRate() }}
-            {{ this.fromCurrencyExchangeRate() }} =
-            {{ this.resultExchangeRate() }} {{ this.toValueExchangeRate() }}
-          </b>
-        </div>
+        <div> <b>{{this.amountValueExchangeRate()}} {{this.fromCurrencyExchangeRate()}} =
+            {{this.resultExchangeRate()}} {{this.toValueExchangeRate()}} </b></div>
         }
       </div>
     </div>
 
     <div class="text-right m-t-30">
+
       <button
-        [disabled]="
-          this.amountValueExchangeRate() === '' ||
-          this.fromValueExchangeRate() === '' ||
-          this.toValueExchangeRate() === ''
-        "
-        (click)="onSubmitExchangeRate()"
-        type="submit"
-        color="primary"
-        mat-flat-button
-      >
+        [disabled]="this.amountValueExchangeRate() === '' || this.fromValueExchangeRate() === '' || this.toValueExchangeRate() === ''"
+        (click)="onSubmitExchangeRate()" type="submit" color="primary" mat-flat-button>
         Convert Currency
       </button>
-      <mat-divider style="margin-top: 30px"></mat-divider>
+      <mat-divider style="margin-top: 30px;"></mat-divider>
+
     </div>
   </mat-card-content>
 </mat-card>
 <!-- Exchange Rate API Ends -->
+
 
 <!-- Oanda Currency -->
 <mat-card class="cardWithShadow">
@@ -170,5 +136,6 @@
     <div id="oanda_widget_wrapper">
       <div id="oanda_ecc_container"></div>
     </div>
+
   </mat-card-content>
 </mat-card>

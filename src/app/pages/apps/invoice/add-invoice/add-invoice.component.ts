@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, effect } from '@angular/core';
 import {
   Validators,
   FormControl,
@@ -11,6 +11,7 @@ import {
 import { ServiceInvoiceService } from '../serviceinvoice.service';
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
+import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ToastrService } from 'ngx-toastr';
 import { LucideAngularModule } from 'lucide-angular';
@@ -26,6 +27,7 @@ interface OrderStatus {
   standalone: true,
   imports: [
     MaterialModule,
+    CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -34,35 +36,32 @@ interface OrderStatus {
   ],
 })
 export class AppAddInvoiceComponent {
-  // Public properties
-  public addInvoiceForm!: FormGroup;
-  public loading = signal<boolean>(false);
-  public phoneNumber = signal<string>('^(+d{1,3}[- ]?)?d{10}$');
-  public currencies = signal<{ code: string; name: string }[]>([]);
-  public orders = signal<OrderStatus[]>([
+  private invoiceService = inject(ServiceInvoiceService);
+  private fb = inject(FormBuilder);
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
+  addInvoiceForm!: FormGroup;
+  loading = signal(false);
+  itemDetailsSignal = signal<any[]>([]);
+  phoneNumber = '^(+d{1,3}[- ]?)?d{10}$';
+  currencies = signal<{ code: string; name: string }[]>([]);
+
+  orders: OrderStatus[] = [
     { value: 'pending', viewValue: 'Pending' },
     { value: 'shipped', viewValue: 'Shipped' },
     { value: 'delivered', viewValue: 'Delivered' },
-  ]);
+  ];
+
   // Computed signals
-  public readonly unitTotals = computed(() =>
+  unitTotals = computed(() =>
     this.itemDetailsSignal().map(
       (item) => (item.item_unit_price || 0) * (item.item_units || 0)
     )
   );
 
-  public readonly grandTotal = computed(() =>
+  grandTotal = computed(() =>
     this.unitTotals().reduce((acc: any, curr) => acc + curr, 0.0)
   );
-
-  // Private properties
-  private invoiceService = inject(ServiceInvoiceService);
-  private fb = inject(FormBuilder);
-  private toastr = inject(ToastrService);
-  private router = inject(Router);
-  private itemDetailsSignal = signal<any[]>([]);
-
-  // Constructor
   constructor() {
     this.addInvoiceForm = this.fb.group({
       order_status: [''],
@@ -104,17 +103,21 @@ export class AppAddInvoiceComponent {
     });
   }
 
-  // Life cycle hooks
   ngOnInit(): void {
     this.getAllCurrencies();
   }
 
-  // Public methods
-  public itemDetails(): FormArray {
+  getAllCurrencies() {
+    this.invoiceService.getCurrencies().subscribe((data) => {
+      this.currencies.set(data);
+    });
+  }
+
+  itemDetails(): FormArray {
     return this.addInvoiceForm.get('item_details') as FormArray;
   }
 
-  public addDetails() {
+  addDetails() {
     const itemDetail = this.fb.group({
       item_description: new FormControl(''),
       item_unit_price: new FormControl(''),
@@ -124,11 +127,11 @@ export class AppAddInvoiceComponent {
     this.itemDetails().push(itemDetail);
   }
 
-  public removeDetails(i: number) {
+  removeDetails(i: number) {
     this.itemDetails().removeAt(i);
   }
 
-  public async onSubmit() {
+  async onSubmit() {
     if (this.addInvoiceForm.valid) {
       const formValue = this.addInvoiceForm.value;
       this.loading.set(true); // disable the button
@@ -160,12 +163,5 @@ export class AppAddInvoiceComponent {
         'Form Incomplete'
       );
     }
-  }
-
-  // Private methods
-  private getAllCurrencies() {
-    this.invoiceService.getCurrencies().subscribe((data) => {
-      this.currencies.set(data);
-    });
   }
 }

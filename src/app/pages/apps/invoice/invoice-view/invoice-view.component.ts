@@ -34,11 +34,6 @@ const html2pdf = require('html2pdf.js');
   ],
 })
 export class AppInvoiceViewComponent {
-<<<<<<< HEAD
-  // Protected properties
-  public items = computed(() => this.invoiceData().items);
-  public invoiceData = signal<ViewInvoiceResponse>({
-=======
 readonly house = House;
 
   @Input() id = '';
@@ -46,7 +41,6 @@ readonly house = House;
   private service = inject(ServiceInvoiceService);
   items = computed(() => this.invoiceData().items);
   invoiceData = signal<ViewInvoiceResponse>({
->>>>>>> dev
     id: '',
     order_date: '',
     from_business_name: '',
@@ -73,34 +67,25 @@ readonly house = House;
     grand_total_price: 0,
     items: [],
   });
-<<<<<<< HEAD
-  public invoiceIndex = signal<string>('');
-=======
   invoiceIndex = '';
   private route = inject(ActivatedRoute);
 /*
  testStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'shipped' , 'pending' , 'delivered'] as const;
 testIndex = 0;*/
->>>>>>> dev
 
-  // Private properties
-  private service = inject(ServiceInvoiceService);
-  private route = inject(ActivatedRoute);
-  private id = signal<string>('');
-
-  // Lifecycle hooks
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.id.set(params['id']);
+      this.id = params['id'];
     });
 
     this.route.queryParams.subscribe((query) => {
-      this.invoiceIndex.set(query['index']);
+      this.invoiceIndex = query['index'];
     });
-
-    if (this.id()) {
-      this.service.getInvoiceById(Number(this.id())).then((res) => {
+    console.log(this.id);
+    if (this.id) {
+      this.service.getInvoiceById(Number(this.id)).then((res) => {
         this.invoiceData.set(res);
+        console.log(this.invoiceData());
       });
     }
 /*
@@ -123,8 +108,7 @@ testIndex = 0;*/
 
   }
 
-  // Public methods
-  public downloadPDF(): void {
+  downloadPDF(): void {
     const html2pdf = require('html2pdf.js');
 
     // Hide the buttons temporarily

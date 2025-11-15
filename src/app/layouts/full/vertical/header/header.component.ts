@@ -6,8 +6,6 @@ import {
   ViewEncapsulation,
   inject,
   effect,
-  input,
-  output,
 } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -43,13 +41,11 @@ interface apps {
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-  // Public properties
-  public showToggle = input<boolean>(true);
-  public toggleChecked = input<boolean>(false);
-  public toggleMobileNav = output<void>();
-  public toggleMobileFilterNav = output<void>();
-  public toggleCollapsed = output<void>();
-
+  @Input() showToggle = true;
+  @Input() toggleChecked = false;
+  @Output() toggleMobileNav = new EventEmitter<void>();
+  @Output() toggleMobileFilterNav = new EventEmitter<void>();
+  @Output() toggleCollapsed = new EventEmitter<void>();
   private auth = inject(AuthService);
   private router = inject(Router);
   private core = inject(CoreService);
@@ -122,8 +118,8 @@ export class HeaderComponent {
   templateUrl: 'search-dialog.component.html',
 })
 export class AppSearchDialogComponent {
-  public searchText: string = '';
-  public navItems = navItems;
+  searchText: string = '';
+  navItems = navItems;
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
 

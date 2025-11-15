@@ -27,13 +27,19 @@ import { ServiceInvoiceService } from '../serviceinvoice.service';
   ],
 })
 export class AppEditInvoiceComponent {
-  // Public properties
-  public invoiceForm!: FormGroup;
-  public invoiceId!: number;
-  public loading = signal<boolean>(false);
-  public currencies = signal<{ code: string; name: string }[]>([]);
-  public orders = signal<string[]>(['Draft', 'Sent', 'Paid', 'Overdue']);
-  public paymentFields = [
+  route = inject(ActivatedRoute);
+  router = inject(Router);
+  invoiceService = inject(ServiceInvoiceService);
+  fb = inject(FormBuilder);
+  invoiceForm!: FormGroup;
+
+  invoiceId!: number;
+
+  loading = signal(false);
+  currencies = signal<{ code: string; name: string }[]>([]);
+  orders = ['Draft', 'Sent', 'Paid', 'Overdue'];
+
+  paymentFields = [
     { label: 'Bank Account Name', control: 'from_bank_account_name' },
     { label: 'Bank Account Number', control: 'from_bank_account_number' },
     { label: 'Sort Code', control: 'sort_code' },
@@ -44,12 +50,6 @@ export class AppEditInvoiceComponent {
     { label: 'Beneficiary Name', control: 'beneficiary_name' },
     { label: 'Bank Address', control: 'bank_address' },
   ];
-
-  // Private properties
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private invoiceService = inject(ServiceInvoiceService);
-  private fb = inject(FormBuilder);
 
   ngOnInit() {
     this.invoiceId = +this.route.snapshot.paramMap.get('id')!;
@@ -94,13 +94,13 @@ export class AppEditInvoiceComponent {
     return this.invoiceForm?.get('item_details') as FormArray;
   }
 
-  private loadCurrencies() {
+  loadCurrencies() {
     this.invoiceService
       .getCurrencies()
       .subscribe((data) => this.currencies.set(data));
   }
 
-  public addDetails() {
+  addDetails() {
     this.itemDetails.push(
       this.fb.group({
         item_description: ['', Validators.required],
@@ -110,7 +110,7 @@ export class AppEditInvoiceComponent {
     );
   }
 
-  public removeDetails(index: number) {
+  removeDetails(index: number) {
     if (this.itemDetails.length > 1) {
       this.itemDetails.removeAt(index);
     } else {
@@ -123,7 +123,7 @@ export class AppEditInvoiceComponent {
     }
   }
 
-  public unitTotals(): number[] {
+  unitTotals(): number[] {
     if (!this.itemDetails || !this.itemDetails.controls) {
       return [];
     }
@@ -134,7 +134,7 @@ export class AppEditInvoiceComponent {
     });
   }
 
-  public grandTotal = computed(() =>
+  grandTotal = computed(() =>
     this.unitTotals().reduce((acc, curr) => acc + curr, 0)
   );
 

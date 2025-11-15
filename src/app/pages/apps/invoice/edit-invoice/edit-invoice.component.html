@@ -3,30 +3,13 @@
     <mat-card-content class="p-24">
       <div class="row justify-content-between m-b-24">
         <div class="col-sm-4 d-flex align-items-center"></div>
-        <div class="col-sm-8 text-right">
-          <a
-            routerLink="/apps/invoice"
-            mat-stroked-button
-            color="warn"
-            class="m-r-10"
-          >
+        <div class="col-sm-8 text-right"> <a routerLink="/apps/invoice" mat-stroked-button color="warn" class="m-r-10">
             Cancel
           </a>
-          <button
-            type="submit"
-            color="primary"
-            mat-flat-button
-            [disabled]="loading() || invoiceForm.invalid"
-          >
-            @if(loading()){
-            <mat-progress-spinner
-              diameter="20"
-              mode="indeterminate"
-              color="accent"
-              style="margin-right: 8px"
-            ></mat-progress-spinner>
-            }
-            {{ loading() ? "Updating..." : "Update Invoice" }}
+          <button type="submit" color="primary" mat-flat-button [disabled]="loading() || invoiceForm.invalid">
+            <mat-progress-spinner *ngIf="loading()" diameter="20" mode="indeterminate" color="accent"
+              style="margin-right: 8px;"></mat-progress-spinner>
+            {{ loading() ? 'Updating...' : 'Update Invoice' }}
           </button>
         </div>
       </div>
@@ -35,12 +18,10 @@
 
       <div class="row p-y-24 justify-content-between">
         <div class="col-sm-4">
-          <span class="f-w-600 f-s-15 mat-body-1 d-block m-b-8"
-            >Order Status:</span
-          >
+          <span class="f-w-600 f-s-15 mat-body-1 d-block m-b-8">Order Status:</span>
           <mat-form-field appearance="outline" class="w-100 theme-select">
             <mat-select formControlName="order_status">
-              @for (order of orders(); track order) {
+              @for (order of orders; track order) {
               <mat-option [value]="order">
                 {{ order }}
               </mat-option>
@@ -51,12 +32,7 @@
         <div class="col-sm-6 d-flex align-items-center justify-content-end">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Order Date</mat-label>
-            <input
-              formControlName="order_date"
-              type="date"
-              matInput
-              placeholder="Order Date"
-            />
+            <input formControlName="order_date" type="date" matInput placeholder="Order Date" />
           </mat-form-field>
         </div>
       </div>
@@ -128,19 +104,12 @@
       <mat-divider></mat-divider>
       <h2>Payment Details</h2>
       <div class="row m-y-24 p-t-24">
-        @for(field of paymentFields; track field.control){
-        <div class="col-sm-6">
+        <div class="col-sm-6" *ngFor="let field of paymentFields">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>{{ field.label }}</mat-label>
-            <input
-              [formControlName]="field.control"
-              matInput
-              [placeholder]="field.label"
-            />
+            <input [formControlName]="field.control" matInput [placeholder]="field.label" />
           </mat-form-field>
         </div>
-        }
-
         <div class="col-sm-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Currency</mat-label>
@@ -168,87 +137,47 @@
           <div class="row m-y-24 p-t-24" [formGroupName]="$index">
             <div class="col-sm-4">
               <mat-form-field appearance="outline" class="w-100">
-                <input
-                  type="text"
-                  matInput
-                  placeholder="item description"
-                  formControlName="item_description"
-                />
+                <input type="text" matInput placeholder="item description" formControlName="item_description" />
               </mat-form-field>
             </div>
             <div class="col-sm-4">
               <mat-form-field appearance="outline" class="w-100">
-                <input
-                  type="number"
-                  matInput
-                  min="0.01"
-                  placeholder="unit price"
-                  formControlName="item_unit_price"
-                />
+                <input type="number" matInput min="0.01" placeholder="unit price" formControlName="item_unit_price" />
               </mat-form-field>
             </div>
             <div class="col-sm-4">
               <mat-form-field appearance="outline" class="w-100">
-                <input
-                  type="number"
-                  matInput
-                  min="1"
-                  placeholder="units"
-                  formControlName="item_units"
-                />
+                <input type="number" matInput min="1" placeholder="units" formControlName="item_units" />
               </mat-form-field>
             </div>
 
             <div class="d-flex align-items-center">
               @if(itemDetails.controls.length > 1) {
-              <button
-                type="button"
-                (click)="removeDetails($index)"
-                color="warn"
-                mat-mini-fab
-              >
+              <button type="button" (click)="removeDetails($index)" color="warn" mat-mini-fab>
                 <mat-icon>remove</mat-icon>
               </button>
               }
             </div>
 
             <p class="m-t-8">Unit Total:</p>
-            <input
-              type="text"
-              matInput
-              [value]="
-                unitTotals()[$index]
-                  | currency : invoiceForm.get('currency')?.value || 'USD'
-              "
-              readonly
-              style="border: 0; background-color: transparent"
-            />
+            <input type="text" matInput
+              [value]="unitTotals()[$index] | currency: (invoiceForm.get('currency')?.value || 'USD')" readonly
+              style="border:0; background-color: transparent;" />
           </div>
           }
         </div>
         <div class="d-flex justify-content-start m-t-10">
-          <button
-            type="button"
-            mat-mini-fab
-            color="primary"
-            (click)="addDetails()"
-          >
+          <button type="button" mat-mini-fab color="primary" (click)="addDetails()">
             <mat-icon>add</mat-icon>
           </button>
-          <span class="m-l-10 f-s-15 f-w-600 d-flex align-items-center"
-            >Add Item</span
-          >
+          <span class="m-l-10 f-s-15 f-w-600 d-flex align-items-center">Add Item</span>
         </div>
 
-        <mat-divider style="margin-top: 30px"></mat-divider>
+        <mat-divider style="margin-top: 30px;"></mat-divider>
         <div class="text-right m-t-30">
-          <h3 class="m-b-0 p-t-20 f-s-18">
-            Grand Total:
+          <h3 class="m-b-0 p-t-20 f-s-18">Grand Total:
             <span class="f-s-24 f-w-700 m-l-10">
-              {{
-                grandTotal()
-                  | currency : invoiceForm.get("currency")?.value || "USD"
-              }}
+              {{ grandTotal() | currency: (invoiceForm.get('currency')?.value || 'USD') }}
             </span>
           </h3>
         </div>

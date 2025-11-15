@@ -1,5 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { ConverterService } from '../converter.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,16 +9,14 @@ import { ServiceInvoiceService } from '../../invoice/serviceinvoice.service';
 @Component({
   selector: 'app-converter',
   standalone: true,
-  imports: [MaterialModule, MatButtonModule, FormsModule],
+  imports: [MaterialModule, CommonModule, MatButtonModule, FormsModule],
   templateUrl: './converter.component.html',
   styleUrl: './converter.component.scss',
 })
 export class AppConverterComponent {
-  // Public properties
-  //Private properties
-  private currencyService = inject(ConverterService);
-  private invoiceService = inject(ServiceInvoiceService);
   selectedCategory = 'All';
+  currencyService = inject(ConverterService);
+  invoiceService = inject(ServiceInvoiceService);
   amountValueFrankFurther = signal('');
   fromValueFrankFurther = signal('');
   toValueFrankFurther = signal('');
@@ -68,9 +67,43 @@ export class AppConverterComponent {
     'ZAR',
   ];
 
-  // Lifecycle hooks
   ngOnInit(): void {
     this.getAllCurrencies();
+  }
+
+  getAllCurrencies() {
+    this.invoiceService.getCurrencies().subscribe((data) => {
+      this.currencies.set(data);
+      console.log(this.currencies());
+    });
+  }
+
+  onSubmitFrankFurther() {
+    this.currencyService.conversionParameters(
+      this.amountValueFrankFurther(),
+      this.fromValueFrankFurther(),
+      this.toValueFrankFurther()
+    );
+
+    this.currencyService.frankConvertCurrency().subscribe((response) => {
+      this.resultFrankFurther.set(response.rates[this.toValueFrankFurther()]);
+      this.fromCurrencyFrankFurther.set(response.base);
+      this.toCurrencyFrankFurther.set(this.toValueFrankFurther());
+    });
+  }
+
+  onSubmitExchangeRate() {
+    this.currencyService.conversionParameters(
+      this.amountValueExchangeRate(),
+      this.fromValueExchangeRate(),
+      this.toValueExchangeRate()
+    );
+
+    this.currencyService.exchangeRateConvertCurrency().subscribe((response) => {
+      this.resultExchangeRate.set(response.conversion_result);
+      this.fromCurrencyExchangeRate.set(response.base_code);
+      this.toCurrencyExchangeRate.set(response.target_code);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -91,42 +124,5 @@ export class AppConverterComponent {
       script.async = true;
       container.appendChild(script);
     }
-  }
-
-  // Public methods
-  public onSubmitFrankFurther() {
-    this.currencyService.conversionParameters(
-      this.amountValueFrankFurther(),
-      this.fromValueFrankFurther(),
-      this.toValueFrankFurther()
-    );
-
-    this.currencyService.frankConvertCurrency().subscribe((response) => {
-      this.resultFrankFurther.set(response.rates[this.toValueFrankFurther()]);
-      this.fromCurrencyFrankFurther.set(response.base);
-      this.toCurrencyFrankFurther.set(this.toValueFrankFurther());
-    });
-  }
-
-  public onSubmitExchangeRate() {
-    this.currencyService.conversionParameters(
-      this.amountValueExchangeRate(),
-      this.fromValueExchangeRate(),
-      this.toValueExchangeRate()
-    );
-
-    this.currencyService.exchangeRateConvertCurrency().subscribe((response) => {
-      this.resultExchangeRate.set(response.conversion_result);
-      this.fromCurrencyExchangeRate.set(response.base_code);
-      this.toCurrencyExchangeRate.set(response.target_code);
-    });
-  }
-
-  // Private methods
-  private getAllCurrencies() {
-    this.invoiceService.getCurrencies().subscribe((data) => {
-      this.currencies.set(data);
-      console.log(this.currencies());
-    });
   }
 }

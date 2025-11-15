@@ -1,6 +1,5 @@
 <mat-card class="cardWithShadow" id="invoiceContent">
   <mat-card-content class="p-24">
-
     <span>
       <!-- <div class="row m-b-24">
         <div class="col-sm-4 d-flex align-items-center">
@@ -31,35 +30,36 @@
       <mat-divider></mat-divider>
 
       <div class="row p-y-24">
-       <!--<div class="col-sm-6">
+        <!--<div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1"> Order Status: </span>
           <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2 order_status" [ngClass]="(displayStatus || invoiceData.order_status)?.toLowerCase()">
             {{this.displayStatus || this.invoiceData().order_status}},
-            
+
           </h6>
-      
+
         </div> -->
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Order Status:</span>
           <div>
-        <!--<app-status-badge [status]="invoiceData().order_status" size="large"></app-status-badge> -->
-        <ng-container *ngIf="['paid','unpaid','overdue','draft','pending','shipped','delivered'].includes((invoiceData().order_status ?? '').trim().toLowerCase()); else normalText">
-          <app-status-badge [status]="invoiceData().order_status!" size="large"></app-status-badge>
-        </ng-container>
-      
-    <ng-template #normalText>
-         <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2 order_status">
-            {{ invoiceData().order_status }}
-          </h6>
-        </ng-template> 
-        
+            <!--<app-status-badge [status]="invoiceData().order_status" size="large"></app-status-badge> -->
+            <ng-container
+              *ngIf="['paid','unpaid','overdue','draft','pending','shipped','delivered'].includes((invoiceData().order_status ?? '').trim().toLowerCase()); else normalText">
+              <app-status-badge [status]="invoiceData().order_status!" size="large"></app-status-badge>
+            </ng-container>
+
+            <ng-template #normalText>
+              <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2 order_status">
+                {{ invoiceData().order_status }}
+              </h6>
+            </ng-template>
+
+          </div>
         </div>
-        </div>
-      
+
         <div class="col-sm-6 text-right">
           <span class="f-w-600 f-s-15 mat-body-1"> Order Date: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().order_date | date}}
+            {{ this.invoiceData().order_date | date }}
           </h6>
         </div>
       </div>
@@ -68,31 +68,31 @@
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1"> Bill From: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().from_business_name}}
+            {{ this.invoiceData().from_business_name }}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().from_email}}
+            {{ this.invoiceData().from_email }}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().from_address}}
+            {{ this.invoiceData().from_address }}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().from_phone_number}}
+            {{ this.invoiceData().from_phone_number }}
           </h6>
         </div>
         <div class="col-sm-6 text-right">
           <span class="f-w-600 f-s-15 mat-body-1"> Bill To: </span>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().to_client_name}}
+            {{ this.invoiceData().to_client_name }}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().to_email}}
+            {{ this.invoiceData().to_email }}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().from_address}}
+            {{ this.invoiceData().from_address }}
           </h6>
           <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2">
-            {{this.invoiceData().to_phone_number}}
+            {{ this.invoiceData().to_phone_number }}
           </h6>
         </div>
       </div>
@@ -103,72 +103,72 @@
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Bank Account Name:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().from_bank_account_name || 'N/A' }}
+            {{ invoiceData().from_bank_account_name || "N/A" }}
           </h6>
         </div>
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Bank Account Number:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().from_bank_account_number || 'N/A' }}
+            {{ invoiceData().from_bank_account_number || "N/A" }}
           </h6>
         </div>
 
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Currency:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().currency || 'N/A' }}
+            {{ invoiceData().currency || "N/A" }}
           </h6>
         </div>
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Sort Code:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().sort_code || 'N/A' }}
+            {{ invoiceData().sort_code || "N/A" }}
           </h6>
         </div>
 
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">SWIFT:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().swift || 'N/A' }}
+            {{ invoiceData().swift || "N/A" }}
           </h6>
         </div>
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">IBAN:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().iban || 'N/A' }}
+            {{ invoiceData().iban || "N/A" }}
           </h6>
         </div>
 
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Routing Number:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().routing_number || 'N/A' }}
+            {{ invoiceData().routing_number || "N/A" }}
           </h6>
         </div>
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Account Type:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().account_type || 'N/A' }}
+            {{ invoiceData().account_type || "N/A" }}
           </h6>
         </div>
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Beneficiary Name:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().beneficiary_name || 'N/A' }}
+            {{ invoiceData().beneficiary_name || "N/A" }}
           </h6>
         </div>
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Bank Address:</span>
           <h6 class="m-t-5 m-b-10 f-w-500 f-s-14 mat-body-2">
-            {{ invoiceData().bank_address || 'N/A' }}
+            {{ invoiceData().bank_address || "N/A" }}
           </h6>
         </div>
       </div>
 
       <div>
         <h2>Item Details</h2>
-        @if (invoiceData().items.length > 0) {
-        @for (item of invoiceData().items; track item) {
+        @if (invoiceData().items.length > 0) { @for (item of
+        invoiceData().items; track item) {
         <div class="row m-y-24 p-t-24">
           <div class="col-sm-4">
             <mat-form-field appearance="outline" class="w-100">
@@ -188,22 +188,29 @@
 
           <div class="col-12 text-right">
             <p class="f-w-600 m-b-0">Unit Total:</p>
-            <input type="text" matInput [value]="item.unit_total_price" readonly
-              style="border: 0; background: transparent; font-weight: 600; margin-right: -115px;" />
+            <input type="text" matInput [value]="item.unit_total_price" readonly style="
+                border: 0;
+                background: transparent;
+                font-weight: 600;
+                margin-right: -115px;
+              " />
           </div>
 
           <mat-divider class="my-3"></mat-divider>
         </div>
-        }
-        } @else {
+        } } @else {
         <p class="p-3 text-muted">No items available for this invoice.</p>
         }
         <div class="text-right m-t-30">
-          <mat-divider style="margin-top: 30px;"></mat-divider>
+          <mat-divider style="margin-top: 30px"></mat-divider>
           <h3 class="m-b-0 p-t-20 f-s-18">
             Grand Total:
-            <input type="text" [value]="invoiceData().grand_total_price" matInput readonly
-              style="border:0;background-color: transparent;margin-right: -140px;font-size: inherit;" />
+            <input type="text" [value]="invoiceData().grand_total_price" matInput readonly style="
+                border: 0;
+                background-color: transparent;
+                margin-right: -140px;
+                font-size: inherit;
+              " />
           </h3>
         </div>
       </div>

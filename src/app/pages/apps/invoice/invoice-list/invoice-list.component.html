@@ -3,107 +3,155 @@
     <div class="row justify-content-between">
       <div class="col-sm-4">
         <mat-form-field appearance="outline" class="w-100 hide-hint">
-          <input matInput placeholder="Search Invoice" [formControl]="searchControl"
-           />
-           <button *ngIf="searchControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="searchControl.setValue('')">
-      <mat-icon>close</mat-icon>
-    </button>
+          <input
+            matInput
+            placeholder="Search Invoice"
+            [formControl]="searchControl"
+          />
+          @if(searchControl.value){
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="searchControl.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          }
+
           <mat-icon matSuffix>
             <i-tabler name="search" class="icon-20"></i-tabler>
           </mat-icon>
         </mat-form-field>
       </div>
-      <div class="col-sm-4 d-flex align-items-center justify-content-end mt-xs-12 mt-lg-0">
-        <a mat-button [routerLink]="['/apps/addInvoice']" mat-flat-button color="primary">Add Invoice</a>
+      <div
+        class="col-sm-4 d-flex align-items-center justify-content-end mt-xs-12 mt-lg-0"
+      >
+        <a
+          mat-button
+          [routerLink]="['/apps/addInvoice']"
+          mat-flat-button
+          color="primary"
+          >Add Invoice</a
+        >
       </div>
     </div>
   </mat-card-content>
 </mat-card>
 
-<div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 400px;">
+@if(loading()){
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="height: 400px"
+>
   <div class="text-center">
     <mat-spinner diameter="50" aria-label="Loading invoices"></mat-spinner>
-    <p style="margin-top: 16px; color: #666; font-size: 14px;">Loading invoices...</p>
+    <p style="margin-top: 16px; color: #666; font-size: 14px">
+      Loading invoices...
+    </p>
   </div>
 </div>
-
-<mat-card *ngIf="error && !loading" class="cardWithShadow" style="border-left: 4px solid #f44336;">
-  <mat-card-content style="color: #d32f2f;">
-    <strong>⚠️ Error:</strong> {{ error }}
-    <button mat-button color="primary" (click)="fetchUserInvoices()" style="margin-left: 16px;">
+} @if(error() && !loading()){
+<mat-card class="cardWithShadow" style="border-left: 4px solid #f44336">
+  <mat-card-content style="color: #d32f2f">
+    <strong>⚠️ Error:</strong> {{ error() }}
+    <button
+      mat-button
+      color="primary"
+      (click)="fetchUserInvoices()"
+      style="margin-left: 16px"
+    >
       Retry
     </button>
   </mat-card-content>
 </mat-card>
-
-<div class="mat-elevation-z8" *ngIf="!loading && !error">
-
-
-  <div *ngIf="invoices.length === 0" class="d-flex justify-content-center align-items-center" style="height: 300px;">
+} @if(!loading() && !error()){
+<div class="mat-elevation-z8">
+  @if(invoices().length === 0){
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="height: 300px"
+  >
     <div class="text-center">
-      <i-tabler name="inbox" class="icon-60" style="opacity: 0.5; font-size: 60px; color: #999;"></i-tabler>
-      <p style="margin-top: 16px; color: #999; font-size: 16px;">No invoices found</p>
+      <i-tabler
+        name="inbox"
+        class="icon-60"
+        style="opacity: 0.5; font-size: 60px; color: #999"
+      ></i-tabler>
+      <p style="margin-top: 16px; color: #999; font-size: 16px">
+        No invoices found
+      </p>
     </div>
   </div>
-
-
-  <ng-container *ngIf="invoices.length > 0">
+  }@else {
+  <ng-container>
     <table mat-table [dataSource]="dataSource">
-
       <!-- Position Column -->
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> # </th>
-        <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
       </ng-container>
 
       <!-- Order Date Column -->
       <ng-container matColumnDef="order_date">
-        <th mat-header-cell *matHeaderCellDef> Order Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.order_date}} </td>
+        <th mat-header-cell *matHeaderCellDef>Order Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.order_date }}</td>
       </ng-container>
 
       <!-- Due Date Column -->
       <ng-container matColumnDef="due_date">
-        <th mat-header-cell *matHeaderCellDef> Due Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.due_date}} </td>
+        <th mat-header-cell *matHeaderCellDef>Due Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.due_date }}</td>
       </ng-container>
 
       <!-- Order Status Column -->
       <ng-container matColumnDef="order_status">
-        <th mat-header-cell *matHeaderCellDef> Order Status </th>
-        <td mat-cell *matCellDef="let element"> {{element.order_status}} </td>
+        <th mat-header-cell *matHeaderCellDef>Order Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.order_status }}</td>
       </ng-container>
 
       <!-- Total Column -->
       <ng-container matColumnDef="grand_total_price">
-        <th mat-header-cell *matHeaderCellDef> Total </th>
-        <td mat-cell *matCellDef="let element"> {{element.grand_total_price}} </td>
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.grand_total_price }}
+        </td>
       </ng-container>
 
       <!-- Actions Column -->
       <ng-container matColumnDef="view_options">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element; let i = index">
           <mat-form-field class="example-user-input">
             <mat-label>Select Option</mat-label>
             <mat-select>
-              <mat-option [routerLink]="['/apps/viewInvoice', element.id]" [queryParams]="{ index: i + 1 }">
+              <mat-option
+                [routerLink]="['/apps/viewInvoice', element.id]"
+                [queryParams]="{ index: i + 1 }"
+              >
                 View
               </mat-option>
-              <mat-option (click)="deleteInvoice(element.id)">Delete</mat-option>
+              <mat-option (click)="deleteInvoice(element.id)"
+                >Delete</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </td>
       </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
       <tr class="text-center text-success" *matNoDataRow>
-      <td colspan="4">No results found.</td>
-    </tr>
+        <td colspan="4">No results found.</td>
+      </tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    <mat-paginator
+      [pageSizeOptions]="[10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
     </mat-paginator>
   </ng-container>
-
+  }
 </div>
+}

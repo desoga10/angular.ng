@@ -1,43 +1,38 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal, computed } from '@angular/core';
 import { AppSettings, defaults as defaultSettings } from '../config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoreService {
-  get notify(): Observable<Record<string, any>> {
-    return this.notify$.asObservable();
-  }
-
   private htmlElement!: HTMLHtmlElement;
-  private currentOptions: AppSettings;
 
-  private notify$ = new BehaviorSubject<AppSettings>(defaultSettings);
+  private optionsSignal = signal<AppSettings>(defaultSettings);
+
+  readonly options = computed(() => this.optionsSignal());
 
   constructor() {
     this.htmlElement = document.querySelector('html')!;
+
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    this.currentOptions = {
+    const newSettings: AppSettings = {
       ...defaultSettings,
       theme: savedTheme ?? defaultSettings.theme,
     };
 
-    this.applyThemeClass(this.currentOptions.theme);
-    this.notify$.next(this.currentOptions);
+    this.applyThemeClass(newSettings.theme);
+    this.optionsSignal.set(newSettings);
   }
 
   getOptions(): AppSettings {
-    return this.currentOptions;
+    return this.optionsSignal();
   }
 
-  get options$(): Observable<AppSettings> {
-    return this.notify$.asObservable();
-  }
+  optionsSignal$ = this.optionsSignal.asReadonly();
 
   setOptions(options: Partial<AppSettings>): void {
-    this.currentOptions = { ...this.currentOptions, ...options };
-    this.notify$.next(this.currentOptions);
+    const updated = { ...this.optionsSignal(), ...options };
+    this.optionsSignal.set(updated);
 
     if (options.theme) {
       localStorage.setItem('theme', options.theme);
@@ -46,7 +41,8 @@ export class CoreService {
   }
 
   toggleTheme(): void {
-    const newTheme = this.currentOptions.theme === 'dark' ? 'light' : 'dark';
+    const current = this.optionsSignal();
+    const newTheme = current.theme === 'dark' ? 'light' : 'dark';
     this.setOptions({ theme: newTheme });
   }
 
@@ -56,11 +52,10 @@ export class CoreService {
   }
 
   getLanguage(): string {
-    return this.currentOptions.language;
+    return this.optionsSignal().language;
   }
 
   setLanguage(lang: string): void {
-    this.currentOptions = { ...this.currentOptions, language: lang };
-    this.notify$.next(this.currentOptions);
+    this.setOptions({ language: lang });
   }
 }

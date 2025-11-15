@@ -163,3 +163,15 @@ $utility in $rtlutilities {
     background-color: blue;
     
   }
+  .order_status.pending::before {
+    background-color: #ffc107;
+  }
+  
+  .order_status.shipped::before {
+    background-color: #17a2b8;
+  }
+  
+  .order_status.delivered::before {
+    background-color: #28a745;
+  }
+  

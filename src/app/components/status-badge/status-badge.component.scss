@@ -17,7 +17,7 @@
   
   /* Status-specific styles */
   .paid {
-    background-color: #28a745; /* green */
+    background-color: #28a700; /* green */
     color: white;
    
   }
@@ -31,11 +31,29 @@
     background-color: #dc3545; /* red */
     color: white;
   }
+
+  .pending {
+    background-color: #dc3545; /* red */
+    color: white;
+  }
   
   .draft {
     background-color: #6c757d; /* gray */
     color: white;
   }
+  
+  
+  .shipped {
+    background-color: #ffc107; /* yellow/orange */
+    color: #333;
+  }
+  
+  .delivered {
+    background-color: #28a745; /* green */
+    color: white;
+  }
+
+
   lucide-icon {
    
     display: inline-block;

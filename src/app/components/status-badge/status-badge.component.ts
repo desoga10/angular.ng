@@ -13,7 +13,7 @@ import {LucideAngularModule, Check, Clock, TriangleAlert, FileText } from 'lucid
   styleUrls: ['./status-badge.component.scss'],
 })
 export class StatusBadgeComponent {
-  @Input() status: 'paid' | 'unpaid' | 'overdue' | 'draft' = 'draft';
+  @Input() status: 'paid' | 'unpaid' | 'overdue' | 'draft'| 'pending' | 'shipped' | 'delivered' = 'draft';
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
  // readonly icons = { Check, Clock, TriangleAlert, FileText };
 
@@ -26,7 +26,7 @@ export class StatusBadgeComponent {
   }
   
   // List of statuses that get icons
-  private iconStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'sent'] as const;
+  private iconStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'sent', 'pending' ,'shipped' , 'delivered'] as const;
 
   get showAsBadge(): boolean {
     return this.iconStatuses.includes(this.status?.toLowerCase() as any);
@@ -37,7 +37,10 @@ export class StatusBadgeComponent {
       paid: 'check',
       unpaid: 'clock',
       overdue: 'triangle-alert',
-      draft: 'file-text'
+      draft: 'file-text',
+      pending: 'triangle-alert',
+      shipped: 'clock',
+      delivered :'check'
     };
     return icons[this.status] ;
   }

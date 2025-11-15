@@ -69,10 +69,9 @@ readonly house = House;
   });
   invoiceIndex = '';
   private route = inject(ActivatedRoute);
-
-  testStatuses = ['paid', 'unpaid', 'overdue', 'draft'] as const;
-testIndex = 0; 
-
+/*
+ testStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'shipped' , 'pending' , 'delivered'] as const;
+testIndex = 0;*/
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -89,9 +88,23 @@ testIndex = 0;
         console.log(this.invoiceData());
       });
     }
+/*
+    this.invoiceData.set({
+      ...this.invoiceData(),
+      order_status: 'paid',
+    });
 
-    
+    setInterval(() => {
+      this.invoiceData.set({
+        ...this.invoiceData(),
+        order_status: this.testStatuses[this.testIndex],
+      });
+      this.testIndex = (this.testIndex + 1) % this.testStatuses.length;
+    }, 2000);
 
+  
+
+*/
 
   }
 

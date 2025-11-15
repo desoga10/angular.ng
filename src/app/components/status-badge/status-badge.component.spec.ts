@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./status-badge.component.scss']
 })
 export class StatusBadgeComponent {
-  @Input() status: 'paid' | 'unpaid' | 'overdue' | 'draft' = 'draft';
+  @Input() status: 'paid' | 'unpaid' | 'overdue' | 'draft'  = 'draft';
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
 
   getIcon(): string {
@@ -14,9 +14,10 @@ export class StatusBadgeComponent {
       paid: 'check-circle',
       unpaid: 'clock',
       overdue: 'alert-circle',
-      draft: 'file-text'
+      draft: 'file-text',
+      
     };
-    return icons[this.status];
+    return icons[this.status] ;
   }
 
   get iconSize(): number {

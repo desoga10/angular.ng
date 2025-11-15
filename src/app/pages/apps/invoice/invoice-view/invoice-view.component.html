@@ -42,16 +42,16 @@
         <div class="col-sm-6">
           <span class="f-w-600 f-s-15 mat-body-1">Order Status:</span>
           <div>
-         <!--<app-status-badge [status]="invoiceData().order_status" size="large"></app-status-badge> -->
-         <ng-container *ngIf="['paid','unpaid','overdue','draft'].includes(invoiceData().order_status ?? ''); else normalText">
+        <!--<app-status-badge [status]="invoiceData().order_status" size="large"></app-status-badge> -->
+        <ng-container *ngIf="['paid','unpaid','overdue','draft','pending','shipped','delivered'].includes((invoiceData().order_status ?? '').trim().toLowerCase()); else normalText">
           <app-status-badge [status]="invoiceData().order_status!" size="large"></app-status-badge>
         </ng-container>
       
-        <ng-template #normalText>
-          <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2 order_status">
+    <ng-template #normalText>
+         <h6 class="m-b-0 f-w-500 f-s-14 mat-body-2 order_status">
             {{ invoiceData().order_status }}
           </h6>
-        </ng-template>
+        </ng-template> 
         
         </div>
         </div>

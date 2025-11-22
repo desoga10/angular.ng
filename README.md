@@ -184,5 +184,5 @@ Made with ❤️ by [desoga10](https://github.com/desoga10) and [contributors](h
 
 * **Project URL**: <https://angular.ng/>
 =======
-Join our community on [Discord](https://discord.gg/WDQPgdwm)!
+Join our community on [Discord](https://discord.gg/SsWck5GJ)!
 **Star ⭐ this repository if you find it helpful!**

@@ -77,6 +77,9 @@ readonly house = House;
   });
   invoiceIndex = '';
   private route = inject(ActivatedRoute);
+/*
+ testStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'shipped' , 'pending' , 'delivered'] as const;
+testIndex = 0;*/
 
 taxAmountToShow = computed(() =>
   this.taxEnabledLoaded() && this.userTaxEnabled() ? this.invoiceData().tax_amount : 0

@@ -5,7 +5,6 @@ First off, thank you for considering contributing to Angular.ng! It's people lik
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
-- [Development Workflow](#development-workflow)
 - [How Can I Contribute?](#how-can-i-contribute)
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Features](#suggesting-features)
@@ -16,7 +15,7 @@ First off, thank you for considering contributing to Angular.ng! It's people lik
 - [Commit Message Guidelines](#commit-message-guidelines)
 - [Database Changes](#database-changes)
 - [Testing](#testing)
-- [Questions?](#questions)
+- [Support](#support)
 
 ## Code of Conduct
 
@@ -28,29 +27,6 @@ This project and everyone participating in it is governed by our Code of Conduct
 - Focus on what is best for the community
 - Show empathy towards other community members
 - Accept constructive criticism gracefully
-
-## Development Workflow
-
-We use a **two-branch workflow** to ensure stability in production:
-
-### Branch Structure
-```
-main (production) ← https://angular.ng/
-  ↑
-dev (staging) ← where PRs are merged
-  ↑
-feature branches ← your contributions
-```
-
-### How It Works
-1. **`dev` branch** - This is our staging/development branch. All pull requests should target this branch.
-2. **`main` branch** - This is our production branch. Only tested and approved changes from `dev` are merged here.
-
-### Deployment URLs
-- **Production:** https://angular.ng/ (from `main` branch)
-- **Staging:** Auto-deployed preview URL from `dev` branch (check Vercel deployments)
-
-**Important:** Always create your pull requests against the `dev` branch, not `main`. This allows us to test changes in a staging environment before they go live.
 
 ## How Can I Contribute?
 
@@ -124,9 +100,9 @@ Unsure where to begin? Look for issues labeled:
 2. Wait for a maintainer to assign it to you (this avoids duplicate work)
 3. Fork the repository
 4. Follow the [Development Setup](#development-setup) instructions
-5. Create your feature branch from `dev` (not `main`)
+5. Create your feature branch
 6. Make your changes
-7. Submit a pull request to the `dev` branch
+7. Submit a pull request
 
 ### Pull Requests
 
@@ -134,7 +110,7 @@ Unsure where to begin? Look for issues labeled:
 - Ensure your code follows our [Coding Standards](#coding-standards)
 - Update documentation if needed
 - Test your changes thoroughly
-- Make sure your branch is up to date with `dev` (not `main`)
+- Make sure your branch is up to date with `dev`
 
 **PR Guidelines:**
 1. **Target the `dev` branch** - All PRs must be made against `dev`, not `main`
@@ -176,98 +152,171 @@ Add screenshots for UI changes.
 
 ## Development Setup
 
-### Prerequisites
+### Quick Start (Recommended - 2 Minutes!)
+
+We provide a **shared development Supabase instance** so you can start contributing immediately without creating your own Supabase account!
+
+#### Prerequisites
 - Node.js (v18 or higher)
 - Angular CLI (`npm install -g @angular/cli`)
 - Git
-- Your own Supabase project (see README.md)
 
-### Setup Steps
+#### Setup Steps
 
-1. **Fork and clone:**
-   ```bash
+1. **Fork and clone the repository:**
+```bash
    git clone https://github.com/desoga10/angular.ng.git
    cd angular.ng
-   ```
+```
 
 2. **Checkout the dev branch:**
-   ```bash
+```bash
    git checkout dev
-   ```
+```
 
 3. **Install dependencies:**
-   ```bash
+```bash
    npm install
-   ```
+```
 
-4. **Create environments folder:**
-   ```bash
-   ng g environments
-   ```
+4. **Generate environments folder (if not exists):**
+```bash
+   ng generate environments
+```
 
-5. **Configure Supabase:**
-   - Create a Supabase project at https://supabase.com/
-   - Copy your API URL and anon key
-   - Update `src/environments/environment.development.ts`
+5. **Configure the shared development environment:**
 
-6. **Set up the database schema:**
+   Update `src/environments/environment.development.ts` with these credentials:
+```typescript
+   export const environment = {
+     production: false,
+     supabaseUrl: 'https://oayxnmdianrhxwcdmcpr.supabase.co',
+     supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9heXhubWRpYW5yaHh3Y2RtY3ByIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0NDAzMTEsImV4cCI6MjA1NjAxNjMxMX0.5VIcR_Q5ghplYboM-LLXJ2dEV6ghiZQ77cDOURu76jY'
+   };
+```
 
-   The project includes SQL schema files in the `docs/` folder that contain all necessary table definitions:
-   - `docs/user-schema.sql` - User authentication tables
-   - `docs/invoice-schema.sql` - Invoice management tables
-   - `docs/invoice-items-schema.sql` - Invoice line items tables
-   - `docs/seeder.sql` - Mock data for testing and development
+   ⚠️ **Important Notes:**
+   - These are **shared development credentials** - safe to use for contributing
+   - The database is already set up with sample data
+   - Your data is protected by Row Level Security (RLS)
+   - You can only see and modify YOUR OWN invoices
+   - Create a test account using format: `test+yourname@example.com`
 
-   **To set up your database:**
+6. **Start the development server:**
+```bash
+   ng serve
+```
 
-   **Option 1: Using Supabase Dashboard (Recommended for beginners)**
-   - Go to your Supabase project dashboard
-   - Navigate to **SQL Editor**
-   - Open each schema file and run them **in this exact order**:
-     1. `user-schema.sql` - Copy contents, paste into SQL Editor, click **Run**
-     2. `invoice-schema.sql` - Copy contents, paste into SQL Editor, click **Run**
-     3. `invoice-items-schema.sql` - Copy contents, paste into SQL Editor, click **Run**
-     4. `seeder.sql` - Copy contents, paste into SQL Editor, click **Run** (this adds sample data)
+7. **Open your browser:**
+   Navigate to `http://localhost:4200`
 
-   **Option 2: Using Supabase CLI**
-   ```bash
-   # Make sure you're in the project root
+8. **Create a test account:**
+   - Use email format: `test+yourname@example.com`
+   - Use any password (this is a dev environment)
+   - Start creating test invoices!
+
+**That's it! You're ready to contribute!** 🎉
+
+---
+
+### Alternative: Local Supabase Development
+
+If you prefer to run Supabase locally or need to work on database schema changes, you can set up a local instance.
+
+#### Prerequisites
+- [Docker Desktop](https://docker.com/products/docker-desktop) installed and running
+- Supabase CLI: `npm install -g supabase`
+
+#### Local Setup Steps
+
+1. **Initialize Supabase:**
+```bash
+   supabase init
+```
+
+2. **Start local Supabase:**
+```bash
+   supabase start
+```
+   This will spin up local Supabase containers (may take a few minutes first time).
+
+3. **Run database migrations:**
+   The schema files in `docs/` need to be applied:
+```bash
+   # In Supabase Studio (http://localhost:54323)
+   # Go to SQL Editor and run these files in order:
+   # 1. docs/user-schema.sql
+   # 2. docs/invoice-schema.sql
+   # 3. docs/invoice-items-schema.sql
+   # 4. docs/seeder.sql
+```
+
+4. **Update environment file:**
+   Update `src/environments/environment.development.ts`:
+```typescript
+   export const environment = {
+     production: false,
+     supabaseUrl: 'http://localhost:54321',
+     supabaseKey: 'your-local-anon-key' // Shown in terminal after supabase start
+   };
+```
+
+5. **Useful commands:**
+```bash
+   # Stop Supabase
+   supabase stop
+
+   # Reset database
    supabase db reset
 
-   # Run each schema file in order
-   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/user-schema.sql
-   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/invoice-schema.sql
-   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/invoice-items-schema.sql
-   psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/seeder.sql
-   ```
+   # Check status
+   supabase status
+```
 
-   **Option 3: Manual execution via SQL Editor**
-   ```bash
-   # In your Supabase SQL Editor, run these in order:
-   cat docs/user-schema.sql           # Copy and execute
-   cat docs/invoice-schema.sql        # Copy and execute
-   cat docs/invoice-items-schema.sql  # Copy and execute
-   cat docs/seeder.sql                # Copy and execute
-   ```
+---
 
-   **⚠️ Important Notes:**
-   - The schema files **must** be run in the order listed above
-   - The `seeder.sql` file should be run **last** after all tables are created
-   - Running the seeder will populate your database with sample invoices, users, and invoice items
-   - This mock data is essential for testing features locally without creating data manually
+### When to Use Which Setup?
 
-7. **Run the development server:**
-   ```bash
-   ng serve
-   ```
+| Scenario | Use Shared Instance | Use Local Instance |
+|----------|-------------------|-------------------|
+| Quick bug fix | ✅ | |
+| Frontend changes | ✅ | |
+| UI/UX improvements | ✅ | |
+| Documentation | ✅ | |
+| Database schema changes | | ✅ |
+| RLS policy modifications | | ✅ |
+| Testing migrations | | ✅ |
+| Major backend work | | ✅ |
 
-8. **Create a feature branch from dev:**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+---
+
+### Shared Instance Guidelines
+
+When using the shared development instance:
+
+✅ **Do:**
+- Create your own test account (`test+yourname@example.com`)
+- Test your features thoroughly
+- Clean up excessive test data when done
+- Be respectful of the shared resource
+- Report any issues you encounter
+
+❌ **Don't:**
+- Use real email addresses
+- Store sensitive or personal data
+- Spam the database with excessive data
+- Attempt to access other users' data
+- Share the credentials outside the project
+
+**Security:**
+- The shared instance uses Row Level Security (RLS)
+- You can only see and modify your own data
+- The anon key is public and safe to share
+- Production uses different, private credentials
+
+---
 
 ### Building for Production
-
 ```bash
 ng build --configuration production
 ```
@@ -295,7 +344,6 @@ function x(a: any) {
 }
 ```
 
-### Component Structure
 ```typescript
 @Component({
   selector: 'app-feature',
@@ -406,9 +454,13 @@ The project uses Supabase (PostgreSQL) for data storage. All database schema def
 - **`docs/invoice-items-schema.sql`** - Invoice line items and related tables
 - **`docs/seeder.sql`** - Sample data for testing and development
 
-### Setting Up Your Database
+### Shared Development Instance
 
-When you first set up the project, you must run these schema files in your Supabase instance in the exact order listed above. The seeder file provides mock data so you can immediately start testing features without manually creating invoices and users. See the [Development Setup](#development-setup) section for detailed instructions.
+The shared development instance already has all schemas applied and sample data loaded. You can start using it immediately!
+
+### Local Development Instance
+
+If you're running Supabase locally, you'll need to apply these schema files in your local instance in the exact order listed above. The seeder file provides mock data so you can immediately start testing features.
 
 ### Working with Mock Data
 
@@ -424,52 +476,47 @@ This mock data helps you:
 - Test edge cases with different invoice states
 - Develop UI components with realistic data
 
-**To reset your database with fresh mock data:**
-```bash
-# Re-run the seeder file in Supabase SQL Editor
-# Or using psql:
-psql -h db.<your-project-ref>.supabase.co -U postgres -d postgres -f docs/seeder.sql
-```
-
 ### Making Database Changes
 
 If your contribution requires changes to the database schema:
 
-1. **Modify the appropriate schema file(s)** in the `docs/` folder
+1. **Use local Supabase instance** for testing schema changes
+
+2. **Modify the appropriate schema file(s)** in the `docs/` folder
    - Update `user-schema.sql` for user-related tables
    - Update `invoice-schema.sql` for invoice tables
    - Update `invoice-items-schema.sql` for invoice items tables
 
-2. **Document your changes clearly:**
-   ```sql
+3. **Document your changes clearly:**
+```sql
    -- Add new column to invoices table
    ALTER TABLE public.invoices
    ADD COLUMN due_date TIMESTAMP WITH TIME ZONE;
 
    -- Add index for better query performance
    CREATE INDEX idx_invoices_due_date ON public.invoices(due_date);
-   ```
+```
 
-3. **Update Row Level Security (RLS) policies if needed:**
-   ```sql
+4. **Update Row Level Security (RLS) policies if needed:**
+```sql
    -- Update RLS policy for new column
    CREATE POLICY "Users can view invoices with due dates"
        ON public.invoices FOR SELECT
        USING (auth.uid() = user_id);
-   ```
+```
 
-4. **Include in your PR:**
+5. **Include in your PR:**
    - Modified schema file(s)
    - Clear explanation of why the change is needed
    - Migration notes for existing databases
    - Updated `seeder.sql` file if your changes affect sample data
    - Any additional seed data required for testing the new feature
 
-5. **Test your schema changes:**
-   - Drop and recreate your local database
-   - Run all schema files in order
+6. **Test your schema changes:**
+   - Test locally first
    - Verify the application works with the new schema
    - Test with sample data
+   - Ensure RLS policies work correctly
 
 ### Schema Best Practices
 
@@ -559,15 +606,21 @@ describe('CurrencyConverterComponent', () => {
 });
 ```
 
-## Questions?
+## Support
 
-Don't hesitate to ask questions! You can:
-- Open an issue with the `question` label
-- Start a discussion on GitHub Discussions
-- Reach out to maintainers via email (thecodeangle@gmail.com)
+Need help or have questions?
+
+- 🧑‍🤝‍🧑 Join our [Discord](https://discord.gg/4GB4kny4) community
+- 📖 Check our [documentation](https://github.com/desoga10/angular.ng/wiki)
+- 🐛 [Report a bug](https://github.com/desoga10/angular.ng/issues/new?template=bug_report.md)
+- 💡 [Request a feature](https://github.com/desoga10/angular.ng/issues/new?template=feature_request.md)
+- 💬 [Start a discussion](https://github.com/desoga10/angular.ng/discussions)
+- 📧 Email: [thecodeangle@gmail.com]
 
 **Remember:** There are no stupid questions. We were all beginners once!
 
 ---
+
+Made with ❤️ by [desoga10](https://github.com/desoga10) and [contributors](https://github.com/desoga10/angular.ng/graphs/contributors)
 
 Thank you for contributing to Angular.ng! Your time and effort help make this project better for everyone. 🎉

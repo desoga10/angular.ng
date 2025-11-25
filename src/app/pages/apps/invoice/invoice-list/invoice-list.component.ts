@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -17,6 +17,7 @@ export interface PeriodicElement {
   order_status: string;
   grand_total_price: number;
 }
+
 
 @Component({
   selector: 'app-invoice-list',
@@ -52,9 +53,14 @@ export class AppInvoiceListComponent {
   invoices: any[] = [];
   loading = true;
   error: string | null = null;
+  searchControl = new FormControl('');
 
   ngOnInit() {
     this.fetchUserInvoices();
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
   }
 
   async fetchUserInvoices() {
@@ -88,4 +94,8 @@ export class AppInvoiceListComponent {
       });
     }
   }
+  applyFilter(value: string | null): void {
+    this.dataSource.filter = (value ?? '').trim().toLowerCase();
+  }
+
 }

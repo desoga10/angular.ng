@@ -16,4 +16,21 @@ a[mat-flat-button] {
   }
 }
 
+.totals-container {
+  width: 200px;
+  margin-left: auto;
+  font-size: 16px;
+  
+}
+
+.totals-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+  
+}
+
+.total {
+  font-size: 18px;
+}
 

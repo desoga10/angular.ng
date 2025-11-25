@@ -187,7 +187,7 @@
           </div>
 
           <div class="col-12 text-right">
-            <p class="f-w-600 m-b-0">Unit Total:</p>
+          <!--<p class="f-w-600 m-b-0">Unit Total:</p>-->
             <input type="text" matInput [value]="item.unit_total_price" readonly
               style="border: 0; background: transparent; font-weight: 600; margin-right: -115px;" />
           </div>
@@ -198,14 +198,49 @@
         } @else {
         <p class="p-3 text-muted">No items available for this invoice.</p>
         }
-        <div class="text-right m-t-30">
+       <!-- <div class="text-right m-t-30">
           <mat-divider style="margin-top: 30px;"></mat-divider>
           <h3 class="m-b-0 p-t-20 f-s-18">
-            Grand Total:
-            <input type="text" [value]="invoiceData().grand_total_price" matInput readonly
+             Grand Total:
+             <input type="text" [value]="invoiceData().grand_total_price" matInput readonly
               style="border:0;background-color: transparent;margin-right: -140px;font-size: inherit;" />
           </h3>
+        </div> -->
+
+        <div class="text-right m-t-30 totals-container" [hidden]="!userTaxEnabled()">
+          
+        
+          <!-- Subtotal -->
+          <h4 class="m-b-5 " *ngIf="taxEnabledLoaded() && userTaxEnabled()">
+            Subtotal:
+            <input type="text"
+                   [value]="subtotal() | number:'1.2-2'"
+                   matInput readonly
+                   style="border:0;background-color: transparent;margin-right: -110px;font-size: inherit;" />
+          </h4>
+        
+          <!-- Tax -->
+          <h4 class="m-b-5 " *ngIf="taxEnabledLoaded() && userTaxEnabled()">
+            {{ taxLabel() }}:
+            <input type="text"
+                   [value]="taxAmountToShow() | number:'1.2-2'"
+                   matInput readonly
+                   style="border:0;background-color: transparent;margin-right: -110px;font-size: inherit;" />
+          </h4>
+        
+         
         </div>
+      
+        <!--<hr />-->
+        <mat-divider style="margin-top: 30px;"></mat-divider>
+        <!-- Total -->
+        <h3 class="m-b-0 p-t-20 f-s-18  text-right m-t-30 totals-container">
+          Grand Total:
+          <input type="text"
+                 [value]="invoiceData().grand_total_price | number:'1.2-2'"
+                 matInput readonly
+                 style="border:0;background-color: transparent;margin-right: -140px;font-size: inherit;" />
+        </h3>
       </div>
     </span>
   </mat-card-content>

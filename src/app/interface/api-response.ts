@@ -12,7 +12,11 @@ export interface ExchangeRateCurrencyData {
   conversion_rate: number;
   conversion_result: number;
 }
-
+export interface UserTaxSettings {
+  tax_name: string;
+  tax_rate: number;
+  tax_enable?: boolean;
+}
 export interface UsersAccountSettingData {
   id?: string;
   username: string;
@@ -20,6 +24,9 @@ export interface UsersAccountSettingData {
   country: string;
   phone_number: string;
   address: string;
+  tax_name?: string;
+  tax_rate?: number;
+  tax_enable?: boolean;
 }
 
 export interface InvoiceItem {
@@ -28,6 +35,7 @@ export interface InvoiceItem {
   unit_total_price: number;
   item_description: string;
 }
+
 
 export interface AddNewInvoice {
   id: string;
@@ -73,6 +81,9 @@ export interface ViewInvoiceResponse {
   to_phone_number: string;
   due_date: string;
   grand_total_price: number;
+  tax_name: string;
+  tax_rate: number;
+  tax_amount: number;
   items: InvoiceItem[];
   invoice?: {
     order_status?: string;

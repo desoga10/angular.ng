@@ -58,3 +58,7 @@ CREATE POLICY "User can view their own invoice"
   FOR SELECT
   TO authenticated
   USING (auth.uid() = user_id);
+
+ALTER TABLE invoices
+ADD COLUMN tax_rate DECIMAL(5,2) DEFAULT 0,
+ADD COLUMN tax_amount DECIMAL(10,2) DEFAULT 0;

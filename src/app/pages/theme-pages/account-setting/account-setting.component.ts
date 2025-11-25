@@ -10,6 +10,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { AccountSettingService } from './account-setting.service';
 import { UsersAccountSettingData } from 'src/app/interface/api-response';
+import { TaxService } from 'src/app/services/tax.service';
+
+
 import {
   FormBuilder,
   FormGroup,
@@ -40,7 +43,10 @@ export class AppAccountSettingComponent {
   user = signal<UsersAccountSettingData[]>([]);
   userId = signal('');
   private fb = inject(FormBuilder);
+  private taxService = inject(TaxService);
   userForm!: FormGroup;
+
+  
 
   constructor() {
     this.userForm = this.fb.group({
@@ -49,42 +55,76 @@ export class AppAccountSettingComponent {
       address: ['', Validators.required],
       country: ['', Validators.required],
       phone_number: ['', Validators.required],
+      taxEnabled:[''],
+      taxName: ['Tax'],
+      taxRate: [0],
     });
   }
 
   ngOnInit() {
     this.countryList = this.countryService.getCountries();
-    this.listUserData();
 
-    this.countryService.fetchCurrentUserSettings().then((res) => {
-      if (res && res.length > 0) {
-        const user = res[0];
+    // ★ Wrap async data fetch in try/catch to prevent blank page
+    (async () => {
+      try {
+        const res = await this.countryService.fetchCurrentUserSettings();
+        if (res && res.length > 0) {
+          const user = res[0];
+          this.userForm.patchValue({
+            username: user.username || '',
+            full_name: user.full_name || '',
+            address: user.address || '',
+            country: user.country || '',
+            phone_number: user.phone_number || '',
+            taxName: user.tax_name || 'Tax',  // ★ map from snake_case to form
+            taxRate: user.tax_rate || 0,      // ★ map from snake_case to form
+            taxEnabled: user.tax_enable ?? true,               // ★ default on
+          });
+
+          this.user.set(res);
+          this.userId.set(res[0].id || '');
+        } else {
+          console.warn('No user settings found, using defaults'); // ★ fallback
+        }
+      } catch (err) {
+        console.error('Error fetching user settings:', err); // ★ log error
+        // ★ fallback defaults to avoid blank page
         this.userForm.patchValue({
-          username: user.username,
-          full_name: user.full_name,
-          address: user.address,
-          country: user.country,
-          phone_number: user['phone_number'],
+          username: '',
+          full_name: '',
+          address: '',
+          country: '',
+          phone_number: '',
+          taxName: 'Tax',
+          taxRate: 0,
+          taxEnabled: true,
         });
       }
-    });
+    })();
+
+    // ★ Load user list safely
+    this.listUserData();
   }
 
   listUserData() {
     this.countryService
-      .fetchCurrentUserSettings()
-      .then((res: UsersAccountSettingData[] | null) => {
-        if (res !== null) {
-          this.user.set(res);
-          this.userId.set(res[0].id || '');
-        } else {
-          alert('No user settings found');
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    .fetchCurrentUserSettings()
+    .then((res: UsersAccountSettingData[] | null) => {
+      if (res !== null && res.length > 0) { // ★ check for null and empty
+        this.user.set(res);
+        this.userId.set(res[0].id || '');
+      } else {
+        console.warn('No user settings found'); // ★ don't break page
+      }
+    })
+    .catch((err) => {
+      console.error('Error fetching user data:', err); // ★ log instead of alert
+    });
   }
+  
+  
+
+
 
   updateUserData() {
     const userData: UsersAccountSettingData = {
@@ -94,10 +134,27 @@ export class AppAccountSettingComponent {
       address: this.userForm.get('address')?.value,
       country: this.userForm.get('country')?.value,
       phone_number: this.userForm.get('phone_number')?.value,
+      tax_name: this.userForm.get('taxName')?.value,
+      tax_rate: this.userForm.get('taxRate')?.value,
+      tax_enable: this.userForm.get('taxEnabled')?.value, 
     };
+    
+
 
     this.countryService.updateUserSettings(userData).then(() => {
       this.listUserData();
     });
   }
+
+  toggleTaxEnabled() {
+    const enabled = this.userForm.get('taxEnabled')?.value ?? true;
+    this.taxService.updateUserTaxEnabled(enabled).subscribe({
+      next: () => console.log('Tax toggle updated in DB'),
+      error: (err: any) => console.error('Failed to update tax toggle', err),
+    });
+  }
+
+
+
+
 }

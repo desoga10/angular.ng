@@ -9,7 +9,8 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { ViewInvoiceResponse } from 'src/app/interface/api-response';
 import { StatusBadgeComponent } from 'src/app/components/status-badge/status-badge.component';
 import {  LucideAngularModule  ,House } from 'lucide-angular';
-
+import { TaxService } from 'src/app/services/tax.service';
+import { UserTaxSettings } from 'src/app/interface/api-response';
 
 // import * as html2pdf from 'html2pdf.js';
 
@@ -39,7 +40,11 @@ readonly house = House;
   @Input() id = '';
   displayedColumns: string[] = ['itemName', 'unitPrice', 'unit', 'total'];
   private service = inject(ServiceInvoiceService);
+  private taxService = inject(TaxService);
+
   items = computed(() => this.invoiceData().items);
+  userTaxEnabled = signal(true); // default, will fetch real value later
+  taxEnabledLoaded = signal(false);
   invoiceData = signal<ViewInvoiceResponse>({
     id: '',
     order_date: '',
@@ -65,10 +70,23 @@ readonly house = House;
     to_phone_number: '',
     due_date: '',
     grand_total_price: 0,
+    tax_name: 'Tax',
+  tax_rate: 0,
+  tax_amount: 0,
     items: [],
   });
   invoiceIndex = '';
   private route = inject(ActivatedRoute);
+
+taxAmountToShow = computed(() =>
+  this.taxEnabledLoaded() && this.userTaxEnabled() ? this.invoiceData().tax_amount : 0
+);
+
+  subtotal = computed(() =>  this.taxEnabledLoaded() && this.userTaxEnabled() 
+  ? this.invoiceData().grand_total_price - this.invoiceData().tax_amount 
+   : this.invoiceData().grand_total_price);
+  taxLabel = computed(() => `${this.invoiceData().tax_name || 'Tax'} (${this.invoiceData().tax_rate || 0}%)`);
+
 /*
  testStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'shipped' , 'pending' , 'delivered'] as const;
 testIndex = 0;*/
@@ -88,6 +106,22 @@ testIndex = 0;*/
         console.log(this.invoiceData());
       });
     }
+    this.taxService.getUserTaxSettings().subscribe({
+      next: (settings: UserTaxSettings & { tax_enable?: boolean }) => {
+        this.userTaxEnabled.set(settings.tax_enable ?? true);
+        console.log("DEBUG tax_enable from API:", settings.tax_enable);
+        this.taxEnabledLoaded.set(true);
+      },
+      error: (err) => {
+        console.error(err);
+        this.userTaxEnabled.set(true);
+      }
+    });
+
+
+    
+
+
 /*
     this.invoiceData.set({
       ...this.invoiceData(),

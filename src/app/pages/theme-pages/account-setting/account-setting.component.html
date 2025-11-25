@@ -11,7 +11,8 @@
             </div>
             Account
           </ng-template>
-          <mat-card-content>
+        <!-- <mat-card-content> --> 
+          <div class="tab-content" >
             <div class="row">
               <div class="col-12">
                 <div class="b-1 rounded p-30">
@@ -56,11 +57,36 @@
                         <input matInput type="text" formControlName="address" />
                       </mat-form-field>
                     </div>
+                   
+                    <div class="col-12 m-t-24">
+                      <mat-card-title>Tax Settings</mat-card-title>
+
+                       <mat-slide-toggle formControlName="taxEnabled" class="m-t-10">
+                        Enable Tax
+                        </mat-slide-toggle>
+                    
+
+                      <div [hidden]="!userForm.get('taxEnabled')?.value" class="m-t-12"> 
+                        <mat-label class="f-w-600 m-b-8 d-block">Tax Name</mat-label>
+                        <mat-form-field appearance="outline" class="w-100">
+                        <input matInput type="text" formControlName="taxName">
+                       </mat-form-field>
+
+                       <mat-label class="f-w-600 m-b-8 d-block">Tax Rate</mat-label>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <input matInput type="number" formControlName="taxRate" min="0" max="100">
+                      </mat-form-field>
+                    </div> 
+                    
+                  
+                  </div>
+                 
                   </div>
                 </div>
               </div>
             </div>
-          </mat-card-content>
+        <!-- </mat-card-content> -->
+          </div>
         </mat-tab>
       </mat-tab-group>
       <div class="text-right p-24 p-t-0">

@@ -89,3 +89,4 @@ create trigger create_user_trigger
 after insert on auth.users
 for each row
 execute procedure public.user_profile();
+

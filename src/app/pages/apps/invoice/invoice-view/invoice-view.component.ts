@@ -96,10 +96,6 @@ export class AppInvoiceViewComponent {
       }%)`
   );
 
-  /*
- testStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'shipped' , 'pending' , 'delivered'] as const;
-testIndex = 0;*/
-
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.id = params['id'];

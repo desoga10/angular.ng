@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-status-badge',
   templateUrl: './status-badge.component.html',
-  styleUrls: ['./status-badge.component.scss']
+  styleUrls: ['./status-badge.component.scss'],
 })
 export class StatusBadgeComponent {
   @Input() status: 'paid' | 'unpaid' | 'overdue' | 'draft' | 'pending' | 'shipped' | 'delivered' = 'draft';
@@ -20,14 +20,14 @@ export class StatusBadgeComponent {
       delivered: 'check-circle',
       
     };
-    return icons[this.status] ;
+    return icons[this.status];
   }
 
   get iconSize(): number {
     const sizes = {
       small: 16,
       medium: 20,
-      large: 24
+      large: 24,
     };
     return sizes[this.size];
   }

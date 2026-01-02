@@ -37,7 +37,7 @@ interface OrderStatus {
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule,
-    LucideAngularModule
+    LucideAngularModule,
   ],
 })
 export class AppAddInvoiceComponent {
@@ -85,12 +85,12 @@ export class AppAddInvoiceComponent {
       from_business_name: ['', Validators.required],
       from_email: ['', [Validators.email]],
       from_address: [''],
-      from_phone_number: [null],
+      from_phone_number: [''],
       from_invoice_number: [''],
       to_client_name: ['', Validators.required],
       to_email: ['', [Validators.email]],
       to_address: [''],
-      to_phone_number: [null],
+      to_phone_number: [''],
       due_date: [''],
       subtotal_price: [0],  
       grand_total_price: [0/*this.grandTotal()*/],
@@ -109,7 +109,6 @@ export class AppAddInvoiceComponent {
       tax_name: ['VAT'],
       tax_rate: [0],
       tax_amount: [0], // will be calculated
-
     });
     this.addDetails();
     // Sync signal after form is ready
@@ -117,11 +116,9 @@ export class AppAddInvoiceComponent {
       this.itemDetailsSignal.set(val);
       this.updateTotals();
     });
-
-    
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.getAllCurrencies();
    /* this.loadUserTaxSettings();*/
    this.taxService.getUserTaxSettings().subscribe({
@@ -150,8 +147,8 @@ export class AppAddInvoiceComponent {
       this.currencies.set(data);
     });
   }
-   
- /* loadUserTaxSettings() {
+
+  /* loadUserTaxSettings() {
     this.taxService.getUserTaxSettings().subscribe((settings: any) => {
       this.addInvoiceForm.patchValue({
         tax_name: settings.tax_name || 'VAT',
@@ -207,8 +204,8 @@ export class AppAddInvoiceComponent {
      // 1️⃣ Get subtotal (existing grand_total_price WITHOUT tax)
     //const subtotal = formValue.grand_total_price || 0;
 
-    // 2️⃣ Tax settings from your form
-   /* const taxName = formValue.taxName;
+      // 2️⃣ Tax settings from your form
+      /* const taxName = formValue.taxName;
     const taxRate = formValue.taxRate;*/
     const { tax_name, tax_rate ,taxEnabled, ...rest} = formValue;
 
@@ -231,11 +228,30 @@ export class AppAddInvoiceComponent {
   //  ...formValue
   //};
 
+      // 3️⃣ Final calculation using TaxService
+      //  const { taxAmount, grandTotal } = this.taxService.calculate(
+      //   subtotal,
+      //  { tax_name /*: taxName*/, tax_rate/*: taxRate */}
+      // );
 
+      const payload = {
+        ...rest,
+        tax_name /*: taxName*/,
+        tax_rate /*: taxRate*/,
+        // tax_amount: taxAmount,
+        //  grand_total_price: grandTotal, // NOW INCLUDES TAX
+        tax_amount: this.addInvoiceForm.get('tax_amount')?.value,
+        grand_total_price: this.addInvoiceForm.get('grand_total_price')?.value,
+      };
+      // const payload = {
+      //  ...formValue
+      //};
 
       this.loading.set(true); // disable the button
       try {
-        const result = await this.invoiceService.submitInvoiceWithItems(payload);
+        const result = await this.invoiceService.submitInvoiceWithItems(
+          payload
+        );
         //Show success toast
         this.toastr.success('Invoice created successfully!', 'Success');
 
@@ -244,7 +260,7 @@ export class AppAddInvoiceComponent {
         this.itemDetails().clear();
         // this.addDetails();
         this.router.navigate(['/apps/invoice']);
-        } catch (err) {
+      } catch (err) {
         //Show error toast
         this.toastr.error(
           'Failed to create invoice. Please try again.',

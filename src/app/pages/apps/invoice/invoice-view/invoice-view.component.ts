@@ -96,6 +96,19 @@ export class AppInvoiceViewComponent {
       }%)`
   );
 
+taxAmountToShow = computed(() =>
+  this.taxEnabledLoaded() && this.userTaxEnabled() ? this.invoiceData().tax_amount : 0
+);
+
+  subtotal = computed(() =>  this.taxEnabledLoaded() && this.userTaxEnabled() 
+  ? this.invoiceData().grand_total_price - this.invoiceData().tax_amount 
+   : this.invoiceData().grand_total_price);
+  taxLabel = computed(() => `${this.invoiceData().tax_name || 'Tax'} (${this.invoiceData().tax_rate || 0}%)`);
+
+/*
+ testStatuses = ['paid', 'unpaid', 'overdue', 'draft', 'shipped' , 'pending' , 'delivered'] as const;
+testIndex = 0;*/
+
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.id = params['id'];

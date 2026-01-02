@@ -182,4 +182,7 @@ Need help or have questions?
 
 Made with ❤️ by [desoga10](https://github.com/desoga10) and [contributors](https://github.com/desoga10/angular.ng/graphs/contributors)
 
+* **Project URL**: <https://angular.ng/>
+=======
+Join our community on [Discord](https://discord.gg/SsWck5GJ)!
 **Star ⭐ this repository if you find it helpful!**

@@ -16,6 +16,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { ToastrService } from 'ngx-toastr';
 import { LucideAngularModule } from 'lucide-angular';
 import { TaxService } from 'src/app/services/tax.service';
+import { UserTaxSettings } from 'src/app/interface/api-response';
 
 
 interface OrderStatus {
@@ -24,11 +25,6 @@ interface OrderStatus {
   tax_enabled?: boolean;
 }
 
-interface UserTaxSettings {
-  tax_name: string;
-  tax_rate: number;
-  tax_enabled?: boolean;
-}
 
 @Component({
   selector: 'app-add-invoice',
@@ -55,6 +51,7 @@ export class AppAddInvoiceComponent {
   itemDetailsSignal = signal<any[]>([]);
   phoneNumber = '^(+d{1,3}[- ]?)?d{10}$';
   currencies = signal<{ code: string; name: string }[]>([]);
+  userTaxEnabled = signal(true);
 
   orders: OrderStatus[] = [
     { value: 'pending', viewValue: 'Pending' },
@@ -69,9 +66,18 @@ export class AppAddInvoiceComponent {
     )
   );
 
-  grandTotal = computed(() =>
+
+ subtotal = computed(() =>
     this.unitTotals().reduce((acc: any, curr) => acc + curr, 0.0)
+   );
+
+   
+
+  /*   grandTotal = computed(() =>
+   this.unitTotals().reduce((acc: any, curr) => acc + curr, 0.0)
   );
+*/
+
   constructor() {
     this.addInvoiceForm = this.fb.group({
       order_status: [''],
@@ -86,6 +92,7 @@ export class AppAddInvoiceComponent {
       to_address: [''],
       to_phone_number: [null],
       due_date: [''],
+      subtotal_price: [0],  
       grand_total_price: [0/*this.grandTotal()*/],
       from_bank_account_name: [''],
       from_bank_account_number: [''],
@@ -122,13 +129,15 @@ export class AppAddInvoiceComponent {
       this.addInvoiceForm.patchValue({
         tax_name: settings.tax_name ?? 'VAT',
         tax_rate: settings.tax_rate ?? 0,
-        taxEnabled: settings.tax_enabled ?? true 
+        taxEnabled: settings.tax_enable ?? true 
       });
+      this.userTaxEnabled.set(settings.tax_enable ?? true);
       this.updateTotals();
     },
     error: (err) => {
       console.error('Error fetching tax settings:', err);
       this.addInvoiceForm.patchValue({ tax_name: 'VAT', tax_rate: 0 });
+      this.userTaxEnabled.set(true);
       this.updateTotals();
     }
   });
@@ -175,17 +184,20 @@ export class AppAddInvoiceComponent {
   }
   updateTotals() {
    /* const subtotal = this.grandTotal();*/
-     const subtotal = typeof this.grandTotal === 'function' ? this.grandTotal() : this.grandTotal;
-    const { tax_name, tax_rate } = this.addInvoiceForm.value;
+    // const subtotal = typeof this.grandTotal === 'function' ? this.grandTotal() : this.grandTotal;
+    const subtotal = this.subtotal();  
+    
+    const { tax_name, tax_rate, taxEnabled  } = this.addInvoiceForm.value;
    /* const settings = {
       tax_rate: this.addInvoiceForm.get('tax_rate')?.value || 0,
       tax_name: this.addInvoiceForm.get('tax_name')?.value || '',
     };*/
 
    
-    const { taxAmount, grandTotal } = this.taxService.calculate(subtotal, /*settings*/{ tax_name, tax_rate });
+    const { taxAmount, grandTotal } = this.taxService.calculate(subtotal, /*settings*/{ tax_name, tax_rate }, taxEnabled );
     this.addInvoiceForm.get('tax_amount')?.setValue(taxAmount, { emitEvent: false });
     this.addInvoiceForm.get('grand_total_price')?.setValue(grandTotal, { emitEvent: false });
+
   }
 
   async onSubmit() {
@@ -193,7 +205,7 @@ export class AppAddInvoiceComponent {
       const formValue = this.addInvoiceForm.value;
 
      // 1️⃣ Get subtotal (existing grand_total_price WITHOUT tax)
-    const subtotal = formValue.grand_total_price || 0;
+    //const subtotal = formValue.grand_total_price || 0;
 
     // 2️⃣ Tax settings from your form
    /* const taxName = formValue.taxName;
@@ -201,18 +213,23 @@ export class AppAddInvoiceComponent {
     const { tax_name, tax_rate ,taxEnabled, ...rest} = formValue;
 
     // 3️⃣ Final calculation using TaxService
-    const { taxAmount, grandTotal } = this.taxService.calculate(
-      subtotal,
-      { tax_name /*: taxName*/, tax_rate/*: taxRate */}
-    );
+  //  const { taxAmount, grandTotal } = this.taxService.calculate(
+   //   subtotal,
+    //  { tax_name /*: taxName*/, tax_rate/*: taxRate */}
+   // );
     
-    const payload = {
-      ...rest,
-      tax_name/*: taxName*/,
-      tax_rate/*: taxRate*/,
-      tax_amount: taxAmount,
-      grand_total_price: grandTotal, // NOW INCLUDES TAX
-    };
+   const payload = {
+     ...rest,
+     tax_name/*: taxName*/,
+     tax_rate/*: taxRate*/,
+    // tax_amount: taxAmount,
+   //  grand_total_price: grandTotal, // NOW INCLUDES TAX
+   tax_amount: this.addInvoiceForm.get('tax_amount')?.value,
+        grand_total_price: this.addInvoiceForm.get('grand_total_price')?.value
+   };
+  // const payload = {
+  //  ...formValue
+  //};
 
 
 

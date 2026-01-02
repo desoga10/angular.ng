@@ -236,10 +236,43 @@
             {{ loading() ? 'Creating...' : 'Create Invoice' }}
           </button>
           <mat-divider style="margin-top: 30px;"></mat-divider>
-          <h3 class="m-b-0 p-t-20 f-s-18">Grand Total:
+
+          <div class="text-right m-t-30 totals-container">
+
+            <!-- Subtotal -->
+            <h4 class="m-b-5">
+              Subtotal:
+              <input type="text"
+                     [value]="subtotal() | number:'1.2-2'"
+                     matInput readonly
+                     style="border:0;background-color: transparent;margin-right: -110px;font-size: inherit;" />
+            </h4>
+
+            <!-- Tax -->
+            <h4 class="m-b-5">
+              {{ addInvoiceForm.get('tax_name')?.value }} ({{ addInvoiceForm.get('tax_rate')?.value || 0 }}%):
+              <input type="text"
+                     [value]="addInvoiceForm.get('tax_amount')?.value | number:'1.2-2'"
+                     matInput readonly
+                     style="border:0;background-color: transparent;margin-right: -110px;font-size: inherit;" />
+            </h4>
+
+            <mat-divider style="margin-top: 30px;"></mat-divider>
+           
+
+            <h3 class="m-b-0 p-t-20 f-s-18">
+              Grand Total:
+            </h3>
+            <input type="text"
+                   [value]="addInvoiceForm.get('grand_total_price')?.value | number:'1.2-2'"
+                   matInput readonly
+                   style="border:0;margin-right: -177px;background-color: transparent;font-size: x-large;" />
+          </div>
+
+          <!-- <h3 class="m-b-0 p-t-20 f-s-18">Grand Total:
           </h3>
           <input type="text" [value]="grandTotal()" matInput min="1" formControlName="grand_total_price" readonly
-            style="border:0;margin-right: -177px;background-color: transparent;font-size: x-large;" />
+            style="border:0;margin-right: -177px;background-color: transparent;font-size: x-large;" />  -->
         </div>
       </div>
     </mat-card-content>

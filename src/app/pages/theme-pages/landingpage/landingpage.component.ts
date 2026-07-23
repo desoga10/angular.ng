@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { ViewportScroller } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { RouterLink } from '@angular/router';
+import { ContributorsComponent } from './contributors/contributors.component';
 
 interface apps {
   id: number;
@@ -37,10 +38,10 @@ interface features {
 @Component({
   selector: 'app-landingpage',
   standalone: true,
-  imports: [MaterialModule, TablerIconsModule, RouterLink],
+  imports: [MaterialModule, TablerIconsModule, RouterLink, ContributorsComponent],
   templateUrl: './landingpage.component.html',
 })
-export class AppLandingpageComponent {
+export class AppLandingpageComponent implements OnInit {
   @Input() showToggle = true;
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
@@ -50,8 +51,11 @@ export class AppLandingpageComponent {
 
   constructor(
     private settings: CoreService,
-    private scroller: ViewportScroller
-  ) {}
+    private scroller: ViewportScroller,
+  ) { }
+
+  ngOnInit(): void {
+  }
 
   // scroll to demos
   gotoDemos() {
@@ -74,4 +78,5 @@ export class AppLandingpageComponent {
       link: '/apps/invoice',
     },
   ];
+
 }

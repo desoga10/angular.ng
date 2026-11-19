@@ -87,8 +87,9 @@
   <button mat-fab extended color="inherit" [matMenuTriggerFor]="profilemenu" aria-label="Notifications"
     class="d-flex justify-content-center profile-btn-dd">
     <div class="d-flex align-items-center gap-4">
-      <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover icon-35 profile-dd" width="35" />
-
+      <div class="profile-initials profile-initials-sm">
+        {{ getUserInitials() }}
+      </div>
       <i data-icon="solar:alt-arrow-down-bold" class="iconify f-s-8"></i>
     </div>
   </button>
@@ -96,7 +97,9 @@
 
     <div class="p-x-32 p-y-16">
       <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
-        <img src="/assets/images/profile/user-1.jpg" class="rounded-circle" width="56" />
+       <div class="profile-initials profile-initials-lg">
+  {{ getUserInitials() }}
+</div>
         @if (this.user() ) {
         <div class="m-l-16">
           <h6 class="f-s-14 f-w-600 m-0 mat-subtitle-1 d-flex align-items-center">

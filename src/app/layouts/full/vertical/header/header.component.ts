@@ -109,6 +109,27 @@ export class HeaderComponent {
   ];
 
   user = this.auth.user;
+
+  getUserInitials(): string {
+    const fullName =
+      this.user()?.user_metadata?.full_name ??
+      this.user()?.user_metadata?.username ??
+      '';
+
+    const nameParts = fullName.trim().split(/\s+/).filter(Boolean);
+
+    if (nameParts.length === 0) {
+      return '';
+    }
+
+    if (nameParts.length === 1) {
+      return nameParts[0].charAt(0).toUpperCase();
+    }
+
+    return (
+      nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0)
+    ).toUpperCase();
+  }
 }
 
 @Component({

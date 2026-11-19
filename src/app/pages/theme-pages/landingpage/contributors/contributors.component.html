@@ -1,0 +1,52 @@
+<div class="container spacer">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-sm-11">
+            <h2 class="section-title text-center">
+                Contributors who helped build it
+            </h2>
+            <p class="f-s-16 m-t-12 m-b-0 text-center mat-body-1">
+                Thanks to everyone who shaped the tools, interface, and project experience.
+            </p>
+        </div>
+    </div>
+
+    <div class="row m-t-30">
+        @if (isLoadingContributors()) {
+        <div class="col-12 d-flex justify-content-center">
+            <mat-spinner diameter="40"></mat-spinner>
+        </div>
+        } @else if (contributorsLoadFailed()) {
+        <div class="col-12 text-center">
+            <span class="mat-body-1 f-s-14">
+                Unable to load contributors from GitHub right now.
+            </span>
+        </div>
+        } @else {
+        @for(contributor of contributors(); track contributor.id) {
+        <div class="col-lg-3 col-sm-6 m-b-24">
+            <mat-card class="cardWithShadow">
+                <mat-card-content class="p-24 text-center">
+                    <a [href]="contributor.profileUrl" target="_blank" rel="noopener noreferrer"
+                        class="text-decoration-none text-reset">
+                        <img [src]="contributor.imgSrc" [alt]="contributor.name" class="rounded-circle object-cover"
+                            width="64" height="64" />
+                        <h5 class="f-s-16 f-w-600 m-t-16 m-b-4 mat-subtitle-1">
+                            {{ contributor.name }}
+                        </h5>
+                        <span class="mat-body-1 f-s-14">
+                            {{ contributor.contributions }} contributions
+                        </span>
+                    </a>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        } @empty {
+        <div class="col-12 text-center">
+            <span class="mat-body-1 f-s-14">
+                No contributors found on GitHub yet.
+            </span>
+        </div>
+        }
+        }
+    </div>
+</div>
